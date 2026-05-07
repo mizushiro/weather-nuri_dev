@@ -1,0 +1,81 @@
+﻿ <!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>회원가입</title>
+
+  <link rel="stylesheet" href="../../resources/css/ui.base.css">
+</head>
+
+<body data-content-bg="F7F8FB">
+<div class="base-wrap sub-content-layout" data-type="sub4">
+  <!-- /html/header.html -->
+  <header class="header" data-id="header"></header>
+
+  <main class="join-area" data-type="join">
+    <ol class="join-step-area">
+      <li class="join-step-item" data-state="">
+        <span class="join-step-number">1</span>
+        <i class="icon-aspect-join1-on" data-size="24"></i>
+        <span class="join-step-item-title">이용약관</span>
+      </li>
+      <li class="join-step-item" data-state="">
+        <span class="join-step-number">2</span>
+        <i class="icon-aspect-join2-on" data-size="24"></i>
+        <span class="join-step-item-title">정보입력</span>
+      </li>
+      <li class="join-step-item" data-state="selected">
+        <span class="join-step-number">3</span>
+        <i class="icon-aspect-join3-on" data-size="24"></i>
+        <span class="join-step-item-title">가입완료</span>
+      </li>
+    </ol>
+    <div class="join-content-box" data-h="auto">
+      <div class="id-pw-type mt-80">
+        <div class="ui-flex" data-align-items="center" data-justify-content="center">
+          <div class="icon-round-box" data-bg="light-gray" data-size="140">
+            <i class="icon-aspect-join3-on" data-size="80"></i>
+          </div>
+        </div>
+        <h1 class="text-24-800 m-text-22-800 mt-40 m-mt-30" data-text-color="black" data-text-align="center">회원가입 완료</h1>
+        <p class="mt-10 text-14-700" data-text-color="sora" data-text-align="center">
+          기후와 환경 정보를 빠르고 간편하게 확인해보세요.
+        </p>
+        <div class="join-btn-group mt-30 m-mt-80">
+          <button type="button" class="btn-base" data-size="46" data-color="gray2" data-round="4">
+            <span class="btn-text" data-font-size="16-800">취소</span>
+          </button>
+          <button type="button" class="btn-base" data-size="46" data-color="primary" data-round="4">
+            <span class="btn-text" data-font-size="16-800">다음</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="ui-footer" data-id="footer"></footer>
+
+
+</div>
+
+<div class="area-dropdown" data-area="body"></div>
+<div class="area-tooltip" data-area="body"></div>
+<div class="area-dialog" data-area="body"></div>
+<div class="area-toast" data-area="body"></div>
+<!-- javascript -->
+<script type="module">
+  /* 준비 ---------------------------------------------- */
+  import { UX } from '../../resources/js/uiuxu.common.js';
+  UX.init();
+
+</script>
+</body>
+</html>

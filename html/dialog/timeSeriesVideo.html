@@ -1,0 +1,40 @@
+<div class="ui-dialog map-modal" data-style="base" role="dialog" aria-hidden="true" data-dialog="timeSeriesVideo"
+	aria-labelledby="timeSeriesVideo-label" aria-describedby="timeSeriesVideo-decs">
+	<div class="ui-dialog--wrap" role="document" tabindex="-1" data-dialog-item="wrap" data-style="full">
+		<div class="ui-dialog--header">
+			<h1 id="timeSeriesVideo-label" class="ui-dialog--header-title">시계열 동영상</h1>
+			<button type="button" aria-label="창닫기" data-dialog-button="close">
+				<i class="icon-aspect-close3-w" data-size="24"></i>
+			</button>
+		</div>
+		<div class="ui-dialog--main" data-dialog-item="main">
+			<div class="map-modal-area">
+ 				지동
+			</div>
+			<div class="player-box">
+				<div class="player-control-btn">
+					<button type="button" class="btn-control" data-behavior="pause">
+						<i class="icon-aspect-pause"></i>
+					</button>
+					<button type="button" class="btn-control" data-behavior="play">
+						<i class="icon-aspect-play"></i>
+					</button>
+					<button type="button" class="btn-control" data-behavior="stop">
+						<i class="icon-aspect-stop"></i>
+					</button>
+				</div>
+				<div class="player-slider-area">
+					<div class="slider-item" data-rangeslider="timePlayRange">
+						<div class="slider-wrapper">
+							<input type="range" id="timePlayRange" min="0" max="10">
+						</div>
+					</div>
+				</div>
+				<p class="player-desc">
+					<b data-result="timePlayRange">1988년 12월</b><br>
+					과거 재분석자료 200hpa
+				</p>
+			</div>
+		</div>
+	</div>
+</div>

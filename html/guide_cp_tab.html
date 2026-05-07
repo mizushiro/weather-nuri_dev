@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="../resources/css/ui.base.css">
+</head>
+
+<body>
+<div class="base-wrap">
+	<main class="guide-page-content">
+		<div class="guide-item-wrap" style="padding: 5rem;">
+
+
+			<div data-tab="tab1" data-tab-style="small-box-type">
+				<div role="tablist">
+					<button type="button" role="tab">
+						<span>tab 1</span>
+					</button>
+					<button type="button" role="tab">
+						<span>tab 2</span>
+					</button>
+					<button type="button" role="tab">
+						<span>tab 3</span>
+					</button>
+					<button type="button" role="tab">
+						<span>tab 4</span>
+					</button>
+					<button type="button" role="tab">
+						<span>tab 5</span>
+					</button>
+				</div>
+			</div>
+			<div data-tab-wrap="tab1"></div>
+
+			
+		</div>
+
+	</main>
+</div>
+
+<!-- zIndex 100: dropdown -->
+<div class="area-dropdown"></div>
+<!-- zIndex 200: tooltip  -->
+<div class="area-tooltip"></div>
+<!-- zIndex 300: modal -->
+<div class="area-dialog" data-area="body"></div>
+<!-- toast -->
+<div class="area-toast"></div>
+
+
+<script type="module">
+	// 세팅 ----------------------------------------------
+  import { UX } from '../resources/js/uiuxu.common.js';
+  UX.init();
+
+
+  // 선언 ----------------------------------------------
+  UI.exe.tab1 = new UX.Tab({
+		id: 'tab1',
+		selected: 1,
+		data: [
+			{ src: './tab/tab1.html', },
+			{ src: './tab/tab2.html',
+				callback: () => {
+					console.log('tab 2 open');
+					UI.exe.tab2.init()
+				}
+			},
+			{ src: './tab/tab3.html', },
+			{ src: './tab/tab1.html', },
+			{ src: './tab/tab3.html', },
+		],
+	});
+
+	UI.exe.tab2 = new UX.Tab({
+		id: 'tab2',
+		selected: 1,
+		group: {
+			src: './tab/tab_group.html',
+		},
+		data: [
+			{ callback: () => { console.log('tab2 > tab1 open');}},
+			{ callback: () => { console.log('tab2 > tab2 open');}},
+		],
+	});
+
+
+  // 실행 ----------------------------------------------
+	UI.exe.tab1.init()
+</script>
+</body>
+
+</html>

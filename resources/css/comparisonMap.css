@@ -1,0 +1,361 @@
+.comparisonMap {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  width: 100%;
+  height: 100%;
+  /* transition: grid-template-columns 0.05s linear; */
+}
+.comparisonMap-map {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+.comparisonMap-handle {
+  width: 1px;
+  height: 100%;
+  background-color: #000;
+  cursor: ew-resize;
+  position: relative;
+  z-index: 1;
+}
+.comparisonMap-handle-btn:hover {
+  background-color: #006DE6;
+}
+.comparisonMap-handle-btn:active {
+  background-color: #002249;
+}
+.comparisonMap-handle-btn{
+  width: 4.2rem;
+  height: 4.2rem;
+  background-color: #0475F4;
+  border: .3rem solid #FFF; 
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='mask0_58_2529' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='0' y='0' width='20' height='20'%3E%3Crect width='20' height='20' fill='%23D9D9D9'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_58_2529)'%3E%3Cpath d='M6 14L2 10L6 6L7.0625 7.0625L4.875 9.25H15.125L12.9375 7.0625L14 6L18 10L14 14L12.9375 12.9375L15.125 10.75H4.875L7.0625 12.9375L6 14Z' fill='white'/%3E%3C/g%3E%3C/svg%3E%0A");
+  background-size: 2rem 2rem;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.map-options {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.full-map-top-area,
+.full-map-left-area,
+.full-map-right-area,
+.full-map-bottom {
+  z-index: 1;
+}
+
+.full-map-area{
+  width: 100%;
+  height: 100%;
+}
+
+[data-toggle-target="map-compare"][data-toggle-state="selected"].full-map-left-area {
+  top: 17.8rem;
+}
+.full-map-left-area .full-map-right-group2 {
+  align-items: start;
+}
+.full-map-left-area .legend-gauge .legend-unit {
+  left: 2.2rem;
+}
+.ui-range.is-vertical .ui-range-txt {
+  width: 3.2rem;
+}
+.full-map-left-area .ui-range.is-vertical .ui-range-txt {
+  top: calc(100% + 2.2rem);
+  text-align: center;
+  bottom:auto;
+}
+.full-map-left-area .ui-range.is-vertical .ui-range-txt::after {
+  left: -.3rem;
+  right:auto;
+  transform: rotate(-45deg);
+}
+.full-map-left-area .legend-gauge,
+.full-map-left-area .rangedual-box {
+  flex-direction: row-reverse;
+}
+
+.full-map-left-area .full-map-right-group2,
+.full-map-top-area[data-toggle-target="map-compare"][data-toggle-state="selected"], 
+.full-map-bottom-area[data-toggle-target="map-compare"][data-toggle-state="selected"],
+[data-toggle-target="map-compare"][data-toggle-state="selected"] .full-map-box,
+[data-toggle-target="map-compare"] .comparisonMap{
+  display: none;
+}
+
+
+[data-toggle-target="map-compare"][data-toggle-state="selected"].full-map-left-area .full-map-right-group2 {
+  display: flex;
+
+}
+[data-toggle-target="map-compare"][data-toggle-state="selected"] .comparisonMap{
+  display: grid;
+}
+
+.comparisonMap .comparisonMap-map-selects {
+  position: absolute;
+  top:4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap:0.8rem;
+  align-items: center;
+}
+.comparisonMap-map-selects hr {
+  width: 1px;
+  height: 1.8rem;
+  background: #DBE3F7;
+}
+
+.form-fake-select {
+  padding: 0 3.7rem 0 1.7rem;
+  color:#19213D;
+  font-weight: 700;
+  background-color: #F4F8FF;
+  border-radius: 2.1rem;
+  height: 4.3rem;
+  border:0;
+  background-repeat: no-repeat;
+  background-size: 2rem 2rem;
+  background-position: right 1.1rem center;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='mask0_58_2864' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='0' y='0' width='20' height='20'%3E%3Crect width='20' height='20' fill='%23D9D9D9'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_58_2864)'%3E%3Cpath d='M9.71876 12.6978C9.62848 12.663 9.54862 12.6109 9.47917 12.5415L5.52084 8.58317C5.36806 8.43039 5.29514 8.25331 5.30209 8.05192C5.30903 7.85053 5.38889 7.67345 5.54167 7.52067C5.69445 7.36789 5.87153 7.2915 6.07292 7.2915C6.27431 7.2915 6.45139 7.36789 6.60417 7.52067L10 10.9373L13.4167 7.52067C13.5694 7.36789 13.7465 7.29498 13.9479 7.30192C14.1493 7.30887 14.3264 7.38873 14.4792 7.5415C14.6319 7.69428 14.7083 7.87137 14.7083 8.07275C14.7083 8.27414 14.6319 8.45123 14.4792 8.604L10.5208 12.5415C10.4514 12.6109 10.3715 12.663 10.2813 12.6978C10.191 12.7325 10.0972 12.7498 10 12.7498C9.90278 12.7498 9.80903 12.7325 9.71876 12.6978Z' fill='%2319213D'/%3E%3C/g%3E%3C/svg%3E%0A");
+}
+
+.full-map-bottom-area {
+  position: absolute;
+  bottom: 4rem;
+  left:2rem;
+  right: 2rem;
+}
+
+.timeRange {
+  user-select: none;
+  position: relative;
+  height: 4.4rem;
+  z-index:1;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  background-color: rgba(24,29,43,0.6);
+  border-radius: 0.4rem;
+}
+.timeRange-play {
+  width: 4.8rem;
+  border-top-left-radius:0.4rem;
+  border-bottom-left-radius:0.4rem;
+  background-color: rgba(24,29,43,0.8);
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='mask0_58_2259' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='0' y='0' width='24' height='24'%3E%3Crect width='24' height='24' fill='%23D9D9D9'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_58_2259)'%3E%3Cpath d='M8 17.1752V6.8252C8 6.54186 8.1 6.30436 8.3 6.1127C8.5 5.92103 8.73333 5.8252 9 5.8252C9.08333 5.8252 9.17083 5.8377 9.2625 5.8627C9.35417 5.8877 9.44167 5.9252 9.525 5.9752L17.675 11.1502C17.825 11.2502 17.9375 11.3752 18.0125 11.5252C18.0875 11.6752 18.125 11.8335 18.125 12.0002C18.125 12.1669 18.0875 12.3252 18.0125 12.4752C17.9375 12.6252 17.825 12.7502 17.675 12.8502L9.525 18.0252C9.44167 18.0752 9.35417 18.1127 9.2625 18.1377C9.17083 18.1627 9.08333 18.1752 9 18.1752C8.73333 18.1752 8.5 18.0794 8.3 17.8877C8.1 17.696 8 17.4585 8 17.1752Z' fill='white'/%3E%3C/g%3E%3C/svg%3E%0A");
+  background-position: 50% 50%;
+  background-size: 2.4rem 2.4rem;
+  background-repeat: no-repeat;
+}
+.timeRange-play[data-toggle-state="selected"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cmask id='mask0_5023_7' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='0' y='0' width='24' height='24'%3E%3Crect width='24' height='24' fill='%23D9D9D9'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_5023_7)'%3E%3Cpath d='M6 7C6 6.44772 6.44772 6 7 6H9C9.55228 6 10 6.44772 10 7V17C10 17.5523 9.55228 18 9 18H7C6.44772 18 6 17.5523 6 17V7Z' fill='white'/%3E%3Cpath d='M14 7C14 6.44772 14.4477 6 15 6H17C17.5523 6 18 6.44772 18 7V17C18 17.5523 17.5523 18 17 18H15C14.4477 18 14 17.5523 14 17V7Z' fill='white'/%3E%3C/g%3E%3C!-- Code injected by live-server --%3E%3Cscript%3E // %3C!%5BCDATA%5B %3C-- For SVG support if ('WebSocket' in window) %7B (function () %7B function refreshCSS() %7B var sheets = %5B%5D.slice.call(document.getElementsByTagName('link')); var head = document.getElementsByTagName('head')%5B0%5D; for (var i = 0; i %3C sheets.length; ++i) %7B var elem = sheets%5Bi%5D; var parent = elem.parentElement %7C%7C head; parent.removeChild(elem); var rel = elem.rel; if (elem.href && typeof rel != 'string' %7C%7C rel.length == 0 %7C%7C rel.toLowerCase() == 'stylesheet') %7B var url = elem.href.replace(/(&%7C%5C%3F)_cacheOverride=%5Cd+/, ''); elem.href = url + (url.indexOf('%3F') %3E= 0 %3F '&' : '%3F') + '_cacheOverride=' + (new Date().valueOf()); %7D parent.appendChild(elem); %7D %7D var protocol = window.location.protocol === 'http:' %3F 'ws://' : 'wss://'; var address = protocol + window.location.host + window.location.pathname + '/ws'; var socket = new WebSocket(address); socket.onmessage = function (msg) %7B if (msg.data == 'reload') window.location.reload(); else if (msg.data == 'refreshcss') refreshCSS(); %7D; if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) %7B console.log('Live reload enabled.'); sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true); %7D %7D)(); %7D else %7B console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.'); %7D // %5D%5D%3E%3C/script%3E%3C/svg%3E");
+}
+.timeRange-bar{ 
+  display: flex;
+  align-self: start;
+  position: relative;
+}
+.timeRange-line {
+  position: absolute;
+  top:0;
+  left:0;
+  right: 0;
+  background-color: #000;
+  height: .3rem;
+  border-top-right-radius: 0.4rem;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: repeat(25, 1fr);
+  z-index:1;
+  pointer-events: none;
+}
+.timeRange-line::after {
+  content:"";
+  display: block;
+  position: absolute;
+  left:0;
+  top:0;
+  width: calc(100% / 25);
+  height: 0.3rem;
+  background-color: #0475F4;
+}
+.timeRange-hour {
+  position: relative;
+  display: grid;
+  height: 0.6rem;
+  grid-template-columns: repeat(6, 1fr);
+}
+.comparisonMap .timeRange-hour b{opacity: 0;}
+.comparisonMap .timeRange-hour:nth-child(2) b,
+.comparisonMap .timeRange-hour:nth-child(5) b,
+.comparisonMap .timeRange-hour:nth-child(8) b,
+.comparisonMap .timeRange-hour:nth-child(11) b,
+.comparisonMap .timeRange-hour:nth-child(14) b,
+.comparisonMap .timeRange-hour:nth-child(17) b,
+.comparisonMap .timeRange-hour:nth-child(20) b,
+.comparisonMap .timeRange-hour:nth-child(23) b{
+  opacity: 1;
+}
+.time-180 .timeRange-hour b{opacity: 0;}
+.time-180 .timeRange-hour:nth-child(2) b,
+.time-180 .timeRange-hour:nth-child(5) b,
+.time-180 .timeRange-hour:nth-child(8) b,
+.time-180 .timeRange-hour:nth-child(11) b,
+.time-180 .timeRange-hour:nth-child(14) b,
+.time-180 .timeRange-hour:nth-child(17) b,
+.time-180 .timeRange-hour:nth-child(20) b,
+.time-180 .timeRange-hour:nth-child(23) b{
+  opacity: 1;
+}
+.timeRange-hour>hr{
+  border-top:0;
+  margin: 0;
+  width: 1px;
+  height: .5rem;
+  background-color: #000;
+}
+.timeRange-hour>hr:first-child{
+  height: .9rem;
+}
+.comparisonMap .timeRange-hour>b {
+  font-size: 1rem;
+}
+.timeRange-hour>b{
+  position: absolute;
+  left:-1.8rem; 
+  top:1.5rem;
+  color:#fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: 3.6rem;
+  text-align: center;
+
+}
+.timeRange-range{
+  position: absolute;
+  top:0;
+  left:6.5rem;
+  right: 6.5rem;
+  height: 4.4rem;
+  border:0; 
+  margin:0;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  -webkit-appearance: none;
+  /* 기본 핸들 숨기기 */
+}
+.timeRange-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.timeRange-range::-moz-range-thumb {
+  width: 0;
+  height: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.timeRange-range::-ms-thumb {
+  width: 0;
+  height: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.timeRange-fake-input {
+  position: absolute;
+  top:0;
+  left: calc(100% / 25);
+  right: calc(100% / 25);
+  height: 4.4rem;
+  pointer-events: none;
+  z-index: 2;
+
+}
+.timeRange-fake-track {
+  position: absolute;
+  top: 0;
+  left:0;
+  width: 0;
+  height: .3rem;
+  background-color: #0475F4;
+  border-radius: 0.3rem;
+}
+.timeRange-today {
+  position: absolute;
+  top: -4.3rem;
+  right: 0;
+  color:#000;
+  font-size: 1rem;
+  font-weight: 700;
+  width: 8.4rem;
+  background-color: #0475F4;
+  border-radius: 0.6rem;
+  padding:0.2rem;
+  transform: translateX(4.2rem);
+}
+.timeRange-today::before {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -0.3rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: #0475F4;
+}
+.timeRange-today-text {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  height: 3.2rem;
+  border-radius: 0.6rem;
+}
+.timeRange-fake-handle {
+  position: absolute;
+  width: 6rem;
+  top:0.9rem;
+  left:0;
+  height: 2.7rem;
+  background: #0475F4;
+  border-radius: 1.4rem;
+  transform: translateX(-3rem);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0 0 0;
+}
+.timeRange-fake-handle b {
+  color:#fff;
+  font-size: 1.2rem;
+  font-weight: 700;
+}

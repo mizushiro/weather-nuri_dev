@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="../resources/css/ui.base.css">
+</head>
+
+<body>
+<div class="base-wrap">
+  <main class="guide-page-content">
+    <div style="padding: 2.4rem;">
+       <div data-dropdown="climateFactors">
+        <button type="button" data-dropdown-button="climateFactors" data-dropdown-h="40" data-theme="dark">
+          <i class="icon-aspect-sunny-snowing" data-size="24"></i>
+          <span data-dropdown-text>기후요소</span>
+        </button>
+      </div>
+    </div>
+   
+  </main>
+</div>
+
+<!-- zIndex 100: dropdown -->
+<div class="area-dropdown" data-area="body">
+  
+</div>
+
+<!-- zIndex 200: tooltip  -->
+<div class="area-tooltip"></div>
+<!-- zIndex 300: modal -->
+<div class="area-dialog" data-area="body"></div>
+<!-- toast -->
+<div class="area-toast"></div>
+
+
+<script type="module">
+  // 세팅 ----------------------------------------------
+  import { UX } from '../resources/js/uiuxu.common.js';
+  UX.init();
+
+
+  // 선언 ----------------------------------------------
+  UI.exe.dropdown.climateFactors = new UX.Dropdown({
+		id: 'climateFactors',
+    src: './dropdown/climateFactors.html',
+    srcCallback:() => {
+      console.log('climateFactors load')
+    },
+    callback: () => {
+      //내부 라디오버튼 선택인 경우
+    },
+  });
+
+
+  // 실행 ----------------------------------------------
+  UI.exe.dropdown.climateFactors.init();
+
+</script>
+</body>
+
+</html>

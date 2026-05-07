@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component | Guide </title>
+  <link rel="stylesheet" href="../resources/css/ui.base.css">
+
+  <style>
+    .guide-page-content {padding:2rem}
+    .guide-item-wrap {display:flex;align-items:center;flex-wrap:wrap;gap:.4rem;margin-bottom:1.6rem}
+    .guide-item-wrap.type-col {flex-direction:column;}
+    .guide-item-wrap.type-col .form-input-box,
+    .guide-item-wrap.type-col > div {width:100%}
+    .guide-item-wrap.gap-20 {gap:.8rem 2rem}
+    .guide-item {display:flex;flex-direction:column;gap:.4rem;font-size:1.2rem;color:#111;font-weight:500;align-items:center;}
+    .guide-item.dark {background-color:#111;color:#fff}
+    .guide-item span {text-align:center}
+    .guide-title {font-size:2.4rem;font-weight:800;margin-bottom:1.2rem}
+    .guide-sub-title {height:3.6rem;background-color:#F3F9FE;padding:0 1.6rem;display:flex;align-items:center;margin-bottom:.8rem;font-size:1.6rem;font-weight:500;border-radius:.4rem}
+    .guide-group ~ .guide-group {margin-top:3.6rem}
+    .form-fake-button-group {margin-bottom:1.6rem}
+    .mt-36 {margin-top:3.6rem}
+    .tooltip-pink-box,
+    .tooltip-blue-box,
+    .tooltip-gradation-box {position:relative !important;}
+    .form-input-tooltip-area .tooltip-pink-box {position:absolute !important;}
+  </style>
+</head>
+
+<body>
+<div class="base-wrap">
+  <main class="guide-page-content">
+    <div class="guide-group">
+      <p class="guide-title">Component</p>
+
+      <!-- Dialog -->
+      <p class="guide-sub-title">Dialog Component</p>
+      <div class="guide-item-wrap">
+        <button type="button" data-test-id="modal1" onclick="UI.exe.modal1.show()">center</button>|
+        <button type="button" data-test-id="modal2" onclick="UI.exe.modal2.show()">bottom</button>|
+        <button type="button" data-test-id="modal3" onclick="UI.exe.modal3.show()">top</button>|
+        <button type="button" data-test-id="modal4" onclick="UI.exe.modal4.show()">left</button>|
+        <button type="button" data-test-id="modal5" onclick="UI.exe.modal5.show()">right</button>|
+        <button type="button" data-test-id="modal6" onclick="UI.exe.modal6.show()">fullType[입체전체필터1]</button>|
+        <button type="button" data-test-id="modal6" onclick="UI.exe.modal7.show()">fullType[입체전체필터2]</button>|
+      </div>
+      <div class="guide-item-wrap">
+        <button type="button" data-test-id="alert1" onclick="UI.exe.alert1.show()">alert</button>
+      </div>
+      <div class="guide-item-wrap">
+        <button type="button" data-test-id="toast1" onclick="UI.exe.toast1.show()">toast1</button>|
+        <button type="button" data-test-id="toast1" onclick="UI.exe.toast2.show()">toast2</button>
+      </div>
+
+      <!-- Accordion -->
+      <p class="guide-sub-title">Accordion Component</p>
+      <div class="guide-item-wrap">
+
+        <div data-accordion="acco1" data-style="bottom-line-type">
+          <div data-accordion-item="acco1">
+            <h3 data-accordion-head="acco1">
+              <button type="button" data-accordion-button="acco1"></button>
+              <b data-accordion-title="acco1" aria-hidden="true">title 1</b>
+              <i class="icon-aspect-expand-circle" data-size="20"></i>
+            </h3>
+            <div data-accordion-body="acco1">
+              <div class="py-10 px-16">
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd
+              </div>
+            </div>
+          </div>
+
+          <div data-accordion-item="acco1">
+            <h3 data-accordion-head="acco1">
+              <button type="button" data-accordion-button="acco1"></button>
+              <b data-accordion-title="acco1" aria-hidden="true">title 2</b>
+              <i class="icon-aspect-expand-circle" data-size="20"></i>
+            </h3>
+            <div data-accordion-body="acco1">
+              <div class="py-10 px-16">
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd
+              </div>
+            </div>
+          </div>
+
+          <div data-accordion-item="acco1">
+            <h3 data-accordion-head="acco1">
+              <button type="button" data-accordion-button="acco1"></button>
+              <b data-accordion-title="acco1" aria-hidden="true">title 3</b>
+              <i class="icon-aspect-expand-circle" data-size="20"></i>
+            </h3>
+            <div data-accordion-body="acco1">
+              <div class="py-10 px-16">
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div data-accordion="acco2" data-style="normal-type">
+          <div data-accordion-item="acco2">
+            <h3 data-accordion-head="acco2">
+              <button type="button" data-accordion-button="acco2"></button>
+              <b data-accordion-title="acco2" aria-hidden="true">title 1</b>
+              <i class="icon-aspect-expand-circle" data-size="20"></i>
+            </h3>
+            <div data-accordion-body="acco2">
+              <div class="pb-10 px-16">
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd
+              </div>
+            </div>
+          </div>
+
+          <div data-accordion-item="acco2">
+            <h3 data-accordion-head="acco2">
+              <button type="button" data-accordion-button="acco2"></button>
+              <b data-accordion-title="acco2" aria-hidden="true">title 2</b>
+              <i class="icon-aspect-expand-circle" data-size="20"></i>
+            </h3>
+            <div data-accordion-body="acco2">
+              <div class="pb-10 px-16">
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd<br>
+                ddddd
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- tooltip -->
+      <p class="guide-sub-title">Tooltip Component</p>
+      <div class="guide-item-wrap">
+        <div style="margin-right: 8rem;">
+          <em class="tooltip" tabindex="0">
+            <span class="offscreen" data-ps="top-left">대한항공</span>
+            <span aria-hidden="true">hover 툴팁</span>
+          </em>
+        </div>
+        <button type="button" class="tooltip" data-tooltip="click" aria-describedby="tooltip1">click 툴팁</button>
+        <button type="button" class="tooltip" data-tooltip="click" aria-describedby="tooltip2">click 툴팁2</button>
+      </div>
+    </div>
+
+    <!-- dialog 영역 : main -->
+    <div class="area-dialog" data-area="main"></div>
+  </main>
+  <footer class="footer" data-id="footer"></footer>
+</div>
+
+<!-- zIndex 100: dropdown -->
+<div class="area-dropdown">
+  <div data-dropdown-panel="dropdown1" aria-hidden="true">
+    <div data-dropdown-section="dropdown2">
+      <div data-selection="rd1"></div>
+    </div>
+  </div>
+</div>
+
+<!-- zIndex 200: tooltip  -->
+<div class="area-tooltip">
+  <div role="tooltip" id="tooltip1" aria-hidden="true">
+    <div class="offscreen" data-ps="right-top">
+      <dl>
+        <dt>날씨</dt>
+        <dd>는 옛 브라우저 호환성을 고려한 방식이며, <a href="#"> 최신 브라우저에서는</a> window.scrollY만으로 충분합니다.</dd>
+      </dl>
+      <button type="button" data-tooltip-close="tooltip1">닫기</button>
+    </div>
+  </div>
+
+  <div role="tooltip" id="tooltip2" aria-hidden="true">
+    <div class="offscreen" data-ps="top-left">
+      <dl>
+        <dt>날씨222</dt>
+        <dd>는 옛 브라우저 호환성을 고려한 방식이며, 대부분의 최신 브라우저에서는 window.scrollY만으로 충분합니다.</dd>
+      </dl>
+      <button type="button" data-tooltip-close="tooltip2">닫기</button>
+    </div>
+  </div>
+</div>
+
+<!-- zIndex 300: modal -->
+<div class="area-dialog" data-area="body">
+  <div class="ui-dialog" role="dialog" aria-hidden="true"
+       data-dialog="modalname2"
+       aria-labelledby="modalname2-label"
+       aria-describedby="modalname2-decs">
+    <div class="ui-dialog--wrap" role="document" tabindex="-1" data-dialog-item="wrap">
+      <div class="ui-dialog--header">
+        <h1 id="modalname2-label">제목2</h1>
+        <p id="modalname2-decs">간략한 소개 및 기능에 대한 설명</p>
+        <button type="button" aria-label="창닫기" data-dialog-button="close">닫기</button>
+      </div>
+      <div class="ui-dialog--main" data-dialog-item="main">
+        .........<br>
+        .........<br>
+        .........
+      </div>
+      <div class="ui-dialog--footer">
+        <button type="button" data-dialog-button="close">취소</button>
+        <button type="button">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- toast -->
+<div class="area-toast"></div>
+
+<!-- script -->
+<script type="module">
+  /* 준비 ---------------------------------------------- */
+  import { UX } from '../resources/js/uiuxu.common.js';
+  UX.init();
+
+
+  /* 선언 ---------------------------------------------- */
+  // accordion
+  UI.exe.acco1 = new UX.Accordion({
+    id: 'acco1',
+    expanded: 'acco1-0',
+  });
+  UI.exe.acco2 = new UX.Accordion({
+    id: 'acco2',
+    expanded: 'acco2-0',
+  });
+
+  // dialog
+  UI.exe.modal1 = new UX.Dialog({
+    area: document.querySelector('.area-dialog[data-area="body"]'),
+    id: 'modalname1',
+    ps: 'center',
+    src: './dialog/modal.html',
+    extend: false,
+    loadCallback: () => {
+      console.log('modal1 loadCallback')
+    },
+  });
+  UI.exe.modal2 = new UX.Dialog({
+    id: 'modalname2',
+    ps: 'bottom',
+    src: null,
+    extend: true,
+    loadCallback: () => {
+      console.log('modal2 loadCallback')
+    },
+  });
+  UI.exe.modal3 = new UX.Dialog({
+    area: document.querySelector('.area-dialog[data-area="main"]'),
+    id: 'modalname3',
+    ps: 'top',
+    src: './dialog/modal3.html',
+    extend: false,
+    loadCallback: () => {
+      console.log('modal3 loadCallback')
+    },
+  });
+  UI.exe.modal4 = new UX.Dialog({
+    area: document.querySelector('.area-dialog[data-area="body"]'),
+    id: 'modalname4',
+    ps: 'left',
+    src: './dialog/modal4.html',
+    extend: false,
+    loadCallback: () => {
+      console.log('modal4 loadCallback')
+    },
+  });
+  UI.exe.modal5 = new UX.Dialog({
+    area: document.querySelector('.area-dialog[data-area="body"]'),
+    id: 'modalname5',
+    ps: 'right',
+    src: './dialog/modal5.html',
+    extend: false,
+    loadCallback: () => {
+      console.log('modal5 loadCallback')
+    },
+  });
+  UI.exe.modal6 = new UX.Dialog({
+    area: document.querySelector('.area-dialog[data-area="body"]'),
+    id: 'filter6-1',
+    ps: 'center',
+    src: './dialog/filter6-1.html',
+    extend: false,
+    full: true,
+    loadCallback: () => {
+      console.log('modal6 loadCallback')
+      UI.exe.filterTab = new UX.Tab({
+        id: 'filterTab',
+        selected: 1,
+        group: {
+          src: './tab/filter-tab-group.html',
+        },
+        
+      });
+      UI.exe.filterTab.init()
+    },
+  });
+  UI.exe.modal7 = new UX.Dialog({
+    area: document.querySelector('.area-dialog[data-area="body"]'),
+    id: 'filter6-2',
+    ps: 'center',
+    src: './dialog/filter6-2.html',
+    extend: false,
+    full: true,
+    loadCallback: () => {
+      console.log('modal6 loadCallback')
+      UI.exe.filterTab2 = new UX.Tab({
+        id: 'filterTab2',
+        selected: 1,
+        group: {
+          src: './tab/filter-tab-group2.html',
+        },
+
+      });
+      UI.exe.filterTab2.init()
+    },
+  });
+  UI.exe.alert1 = new UX.Dialog({
+    area: document.querySelector('.area-dialog[data-area="body"]'),
+    id: 'alert1',
+    type: 'system',
+    title: `<b>제목</b>영역입니다.`,
+    message: `<strong>공지</strong>입니다.`,
+    confirmText: '확인',
+    confirmCallback: () => {
+      console.log('확인 콜백');
+    },
+    cancelText: '취소',
+    cancelCallback: ()=> {
+      console.log('취소 콜백');
+      UI.exe.alert1.hide()
+    },
+  });
+
+  UI.exe.toast1 = new UX.Dialog({
+    area: document.querySelector('.area-toast'),
+    id: 'toast1',
+    ps: 'bottom',
+    type: 'toast',
+    message: `<strong>토스트 메세지</strong>입니다.`,
+  });
+
+  UI.exe.toast2 = new UX.Dialog({
+    area: document.querySelector('.area-toast'),
+    id: 'toast2',
+    ps: 'bottom',
+    type: 'toast',
+    message: `<strong>2222 토스트 메세지</strong>입니다.`,
+  });
+
+
+  /* 실행 ---------------------------------------------- */
+  // tooltip
+  const tooltip = new UX.Tooltip('[data-tooltip="click"]');
+  // accordion
+  UI.exe.acco1.init();
+  UI.exe.acco2.init();
+ 
+
+</script>
+</body>
+
+</html>

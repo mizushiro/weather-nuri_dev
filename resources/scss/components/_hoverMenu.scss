@@ -1,0 +1,29 @@
+// [data-hover-nav-button]:focus ~ [data-hover-nav-item]{
+//   display: block !important;
+//   opacity: 1;
+// }
+[data-hover-nav-item][data-state="on"] > [data-hover-nav-item] {
+  display: block;
+  animation-name: navShow;
+  animation-duration: 100ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+[data-hover-nav-item][data-state="off"] > [data-hover-nav-item] {
+  display: block;
+  animation-name: navHide;
+  animation-duration: 100ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+@keyframes navShow {
+  0% {opacity: 0; transform: translate(-50%, 1rem);}
+  100% {opacity: 1; transform: translate(-50%, 0rem);}
+}
+@keyframes navHide {
+  0% {opacity: 1; transform: translate(-50%, 0rem);}
+  99% {opacity: 0; transform: translate(-50%, 1rem);}
+  100% {opacity: 0; display: none;}
+}

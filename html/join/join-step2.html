@@ -1,0 +1,117 @@
+﻿ <!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>회원가입</title>
+
+  <link rel="stylesheet" href="../../resources/css/ui.base.css">
+</head>
+
+<body data-content-bg="F7F8FB">
+<div class="base-wrap sub-content-layout" data-type="sub4">
+  <!-- /html/header.html -->
+  <header class="header" data-id="header"></header>
+
+  <main class="join-area" data-type="join">
+    <ol class="join-step-area">
+      <li class="join-step-item" data-state="">
+        <span class="join-step-number">1</span>
+        <i class="icon-aspect-join1-on" data-size="24"></i>
+        <span class="join-step-item-title">이용약관</span>
+      </li>
+      <li class="join-step-item" data-state="selected">
+        <span class="join-step-number">2</span>
+        <i class="icon-aspect-join2-on" data-size="24"></i>
+        <span class="join-step-item-title">정보입력</span>
+      </li>
+      <li class="join-step-item" data-state="">
+        <span class="join-step-number">3</span>
+        <i class="icon-aspect-join3-on" data-size="24"></i>
+        <span class="join-step-item-title">가입완료</span>
+      </li>
+    </ol>
+    <div class="join-content-box" data-h="auto">
+      <div class="id-pw-type mt-40">
+        <h1 class="text-32-800 m-text-22-800" data-text-color="black" data-text-align="center">정보입력</h1>
+        <div class="mt-50 ui-flex" data-direction="col" data-gap="20">
+          <div class="ui-flex" data-direction="col" data-gap="10">
+            <label for="in-id" class="text-14-800" data-text-color="black">아이디</label>
+            <div class="ui-flex" data-gap="6">
+              <input type="text" id="in-id" class="form-element-input" data-width="full" data-size="46" placeholder="영문, 숫자 조합 4~12자" />
+              <button type="button" class="btn-base ui-shrink-0" data-color="line-gray3" data-round="4" data-size="40" onclick="UI.exe.alert1.show()">
+                <span class="btn-text" data-font-size="14-700">중복확인</span>
+              </button>
+            </div>
+          </div>
+          <div class="ui-flex" data-direction="col" data-gap="10">
+            <label for="new-pw" class="text-14-800" data-text-color="black">비밀번호</label>
+            <input type="password" id="new-pw" class="form-element-input" data-width="full" data-size="46" placeholder="문자, 숫자, 특수문자 조합 9~16자" />
+          </div>
+          <div class="ui-flex" data-direction="col" data-gap="10">
+            <label for="new-pw2" class="text-14-800" data-text-color="black">비밀번호 확인</label>
+            <input type="password" id="new-pw2" class="form-element-input" data-width="full" data-size="46" placeholder="문자, 숫자, 특수문자 조합 9~16자" />
+          </div>
+          <div class="ui-flex" data-direction="col" data-gap="10">
+            <span class="text-14-800" data-text-color="black">인증</span>
+            <div class="join-certify-btn-group">
+              <button type="button" class="btn-base" data-size="46" data-style="kakao" data-width="full">
+                <i class="icon-kakao"></i>
+                <span class="btn-text">카카오 간편인증</span>
+              </button>
+              <button type="button" class="btn-base" data-size="46" data-style="naver" data-width="full">
+                <i class="icon-naver"></i>
+                <span class="btn-text">네이버 간편인증</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="join-btn-group mt-68">
+          <button type="button" class="btn-base" data-size="46" data-color="gray2" data-round="4">
+            <span class="btn-text" data-font-size="16-800">취소</span>
+          </button>
+          <button type="button" class="btn-base" data-size="46" data-color="primary" data-round="4">
+            <span class="btn-text" data-font-size="16-800">다음</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="ui-footer" data-id="footer"></footer>
+
+
+</div>
+
+<div class="area-dropdown" data-area="body"></div>
+<div class="area-tooltip" data-area="body"></div>
+<div class="area-dialog" data-area="body"></div>
+<div class="area-toast" data-area="body"></div>
+<!-- javascript -->
+<script type="module">
+  /* 준비 ---------------------------------------------- */
+  import { UX } from '../../resources/js/uiuxu.common.js';
+  UX.init();
+
+  UI.exe.alert1 = new UX.Dialog({
+    area: document.querySelector('.area-dialog[data-area="body"]'),
+    id: 'alert1',
+    type: 'system',
+    message: `<p class="text-16-800" data-text-color="black">사용가능한 아이디 입니다.</p>`,
+    confirmText: '확인',
+    confirmCallback: () => {
+      console.log('확인 콜백');
+      UI.exe.alert1.hide()
+    },
+  });
+
+</script>
+</body>
+</html>

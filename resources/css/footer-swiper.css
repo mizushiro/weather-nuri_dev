@@ -1,0 +1,242 @@
+/* Footer Swiper Styles */
+.main-footer {
+  position: relative;
+  width: 100%;
+  max-width: 1420px;
+  margin: 0 auto;
+}
+
+/* Footer Agency Section */
+.footer-agency-section {
+  margin: 40px 0;
+  position: relative;
+}
+
+.footer-agency-section .swiper {
+  width: 100%;
+  padding: 20px 0;
+  overflow: hidden;
+}
+
+.footer-agency-section .swiper-slide {
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-agency-section .swiper-slide a {
+  display: block;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-agency-section .swiper-slide a:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+.footer-agency-section .swiper-slide img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Navigation Buttons - Figma Style */
+.footer-agency-prev,
+.footer-agency-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: #ffffff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  font-size: 0;
+}
+
+.footer-agency-prev:hover,
+.footer-agency-next:hover {
+  border-color: #5f79c2;
+  background: #f8f9ff;
+}
+
+.footer-agency-prev.swiper-button-disabled,
+.footer-agency-next.swiper-button-disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.footer-agency-prev {
+  left: -50px;
+}
+
+.footer-agency-next {
+  right: -50px;
+}
+
+/* Custom arrow icons */
+.footer-agency-prev::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 8px solid #666;
+  margin-left: -2px;
+}
+
+.footer-agency-next::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 8px solid #666;
+  margin-right: -2px;
+}
+
+.footer-agency-prev:hover::after {
+  border-right-color: #5f79c2;
+}
+
+.footer-agency-next:hover::after {
+  border-left-color: #5f79c2;
+}
+
+/* Swiper Controls */
+.swiper-controls {
+  position: absolute;
+  top: 50%;
+  right: -100px;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.swiper-control-btn {
+  width: 36px;
+  height: 36px;
+  background: #ffffff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.swiper-control-btn:hover {
+  border-color: #5f79c2;
+  background: #f8f9ff;
+}
+
+.swiper-control-btn.active {
+  background: #5f79c2;
+  border-color: #5f79c2;
+}
+
+.swiper-control-btn.active .icon-pause,
+.swiper-control-btn.active .icon-play {
+  color: white;
+}
+
+/* Icons */
+.icon-pause::before {
+  content: '⏸';
+  font-size: 14px;
+  color: #666;
+}
+
+.icon-play::before {
+  content: '▶';
+  font-size: 12px;
+  color: #666;
+  margin-left: 2px;
+}
+
+.swiper-control-btn:hover .icon-pause::before,
+.swiper-control-btn:hover .icon-play::before {
+  color: #5f79c2;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .footer-agency-prev {
+    left: -30px;
+  }
+  
+  .footer-agency-next {
+    right: -30px;
+  }
+  
+  .swiper-controls {
+    right: -80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-agency-section {
+    margin: 20px 0;
+  }
+  
+  .footer-agency-section .swiper-slide img {
+    height: 50px;
+  }
+  
+  .footer-agency-prev {
+    left: 10px;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .footer-agency-next {
+    right: 10px;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .swiper-controls {
+    position: static;
+    transform: none;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .swiper-control-btn {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-agency-section .swiper-slide img {
+    height: 40px;
+  }
+  
+  .footer-agency-prev,
+  .footer-agency-next {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .footer-agency-prev::after {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 6px solid #666;
+  }
+  
+  .footer-agency-next::after {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid #666;
+  }
+}
