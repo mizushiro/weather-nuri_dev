@@ -119,6 +119,10 @@ body[data-content-bg="F7F8FB"] {background-color:#F7F8FB}
   .scroll-style::-webkit-scrollbar {height:1rem;width:1rem;}
   .scroll-style::-webkit-scrollbar-track {border-radius:999em;background-color:transparent}
   .scroll-style::-webkit-scrollbar-thumb {width:.6rem;border-radius:999em;background-color:rgba(0,0,0,.2);background-clip:content-box;border:.2rem solid transparent}
+
+  .scroll-style2::-webkit-scrollbar {height:1.2rem;width:1.2rem;}
+  .scroll-style2::-webkit-scrollbar-track {border-radius:999em;background-color:#E9ECEF}
+  .scroll-style2::-webkit-scrollbar-thumb {width:.6rem;border-radius:999em;background-color:#C4C6C8;background-clip:content-box;border:.3rem solid transparent}
 }
 
 /* flex */
@@ -178,6 +182,7 @@ body[data-content-bg="F7F8FB"] {background-color:#F7F8FB}
 [class*="icon-aspect-"][data-size="26"] {width:2.6rem}
 [class*="icon-aspect-"][data-size="28"] {width:2.8rem}
 [class*="icon-aspect-"][data-size="30"] {width:3rem}
+[class*="icon-aspect-"][data-size="32"] {width:3.2rem}
 [class*="icon-aspect-"][data-size="36"] {width:3.6rem}
 [class*="icon-aspect-"][data-size="40"] {width:4rem}
 [class*="icon-aspect-"][data-size="42"] {width:4.2rem}
@@ -225,6 +230,31 @@ body[data-content-bg="F7F8FB"] {background-color:#F7F8FB}
 .icon-aspect-dropdown {background-image:url("../images/icon/icon-aspect-dropdown.svg")}
 .icon-aspect-logo {background-image:url("../images/icon/icon-aspect-logo.svg")}
 .icon-aspect-arrow-range-w {background-image:url("../images/icon/icon-aspect-arrow-range-w.svg")}
+.icon-aspect-star {background-image:url("../images/icon/icon-aspect-star.svg")}
+.icon-aspect-star-on {background-image:url("../images/icon/icon-aspect-star-on.svg")}
+.icon-aspect-wind {background-image:url("../images/icon/icon-aspect-wind.svg")}
+
+.icon-aspect-NB01 {background-image:url("../images/weather/NB01.png")} /* 맑은 */
+.icon-aspect-NB02 {background-image:url("../images/weather/NB02.png")} /* 구름많은(낮) */
+.icon-aspect-NB03 {background-image:url("../images/weather/NB03.png")} /* 흐림 */
+.icon-aspect-NB04 {background-image:url("../images/weather/NB04.png")} /* 비 */
+.icon-aspect-NB05 {background-image:url("../images/weather/NB05.png")} /* 눈 */
+.icon-aspect-NB06 {background-image:url("../images/weather/NB06.png")} /* 비 또는 눈 */
+.icon-aspect-NB07 {background-image:url("../images/weather/NB07.png")} /* 눈 또는 비 */
+.icon-aspect-NB08 {background-image:url("../images/weather/NB08.png")} /* 낙뢰 */
+.icon-aspect-NB09 {background-image:url("../images/weather/NB09.png")} /* 연무 */
+.icon-aspect-NB10 {background-image:url("../images/weather/NB10.png")} /* 안개 */
+.icon-aspect-NB11 {background-image:url("../images/weather/NB11.png")} /* 황사 */
+.icon-aspect-NB12 {background-image:url("../images/weather/NB12.png")} /* 맑음(밤) */
+.icon-aspect-NB13 {background-image:url("../images/weather/NB13.png")} /* 구름많음(밤) */
+.icon-aspect-NB14 {background-image:url("../images/weather/NB14.png")} /* 소나기 */
+.icon-aspect-NB15 {background-image:url("../images/weather/NB15.png")} /* 가끔 비, 한때 비 */
+.icon-aspect-NB16 {background-image:url("../images/weather/NB16.png")} /* 가끔 눈, 한때 눈 */
+.icon-aspect-NB17 {background-image:url("../images/weather/NB17.png")} /* 가끔 비 또는 눈, 한때 비 또는 눈 */
+.icon-aspect-NB18 {background-image:url("../images/weather/NB18.png")} /* 가끔 눈 또는 비, 한때 눈 또는 비 */
+.icon-aspect-NB19 {background-image:url("../images/weather/NB19.png")} /* 빗방울 */
+.icon-aspect-NB20 {background-image:url("../images/weather/NB20.png")} /* 눈날림 */
+.icon-aspect-NB21 {background-image:url("../images/weather/NB21.png")} /* 박무 */
 
 /* img */
 .sh-logo {background:url("../images/common/sh-logo.svg") no-repeat 50% 50%;background-size:contain;width:8.8rem;height:3rem;display:block}
@@ -318,7 +348,9 @@ input:-moz-placeholder {color:#949494}
 .btn-round-icon-box {border-radius:99em;border:.2rem solid #27355A;display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;flex-shrink:0}
 .btn-round-icon-box[data-fill="white10"] {background-color:rgba(255,255,255,.1);border:none}
 .btn-round-icon-box[data-fill="F7F8FB"] {background-color:#F7F8FB;border:none}
+.btn-round-icon-box[data-fill="F4F7FF"] {background-color:#F4F7FF;border:none}
 .btn-round-icon-box[data-size="40"] {width:4rem}
+.btn-round-icon-box[data-size="36"] {width:3.6rem}
 .btn-round-icon-box[data-size="32"] {width:3.2rem}
 .btn-round-icon-box[data-size="30"] {width:3rem}
 .btn-round-icon-box[data-size="22"] {width:2.2rem}

@@ -1,4 +1,6 @@
 @charset "utf-8";
+.base-wrap{position:relative;display:grid;grid-template-columns:1fr 0;gap:0;width: 100%;transition:grid-template-columns 0.2s;}
+.base-wrap[data-toggle-target="side-content"][data-toggle-state="selected"]{grid-template-columns: 1fr 86rem;transition:grid-template-columns 0.3s;}
 [data-nav-state="on"] .header {z-index:1000;}
 .header {background-color:#2B3244;position:sticky;top:0;height:8rem;border-bottom:.1rem solid #1F2330;padding:0 4rem 0 2rem;display:flex;align-items:center;z-index:10;}
 .image-logo {background:url("../images/common/image-logo.svg") no-repeat 50% 50%;aspect-ratio:1/1;width:4.6rem;background-size:contain;display:inline-block}

@@ -49,6 +49,9 @@ export class ComparisonMap {
 export class TimeRangeHistory {
     
   constructor(opt) {
+    this.max = 24 * 60;
+    this.trackOffset = 60;
+    this.trackMax = this.max + this.trackOffset;
     this.id = opt.id;
     this.wrap = document.querySelector(`.timeRange[data-time-range="${this.id}"]`);
     this.input = this.wrap.querySelector('.timeRange-range');
@@ -82,6 +85,7 @@ export class TimeRangeHistory {
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>21:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>22:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>23:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /></div>
     </div>
     <div class="timeRange-fake-input">
       <div class="timeRange-fake-handle">
@@ -101,25 +105,25 @@ export class TimeRangeHistory {
     this.fakeTodayText.textContent = `${new Date(this.date).getMonth() + 1}월 ${new Date(this.date).getDate()}일`;
 
 
-    // point 처리: 숫자면 배열로 변환, 마지막 값 1380(23*60) 초과시 1380으로 보정
+    // point 처리: 숫자면 배열로 변환, 마지막 값 1440(24*60) 초과시 1440으로 보정
     let pointClass = '';
     if (typeof opt.point === 'number') {
       const interval = opt.point;
       this.points = [];
-      for (let i = 0; i <= 23 * 60; i += interval) {
+      for (let i = 0; i <= this.max; i += interval) {
         this.points.push(i);
       }
-      if (this.points[this.points.length - 1] < 23 * 60) {
-        this.points.push(23 * 60);
+      if (this.points[this.points.length - 1] < this.max) {
+        this.points.push(this.max);
       }
-      if (this.points[this.points.length - 1] > 23 * 60) {
-        this.points[this.points.length - 1] = 23 * 60;
+      if (this.points[this.points.length - 1] > this.max) {
+        this.points[this.points.length - 1] = this.max;
       }
       pointClass = `time-${interval}`;
     } else if (Array.isArray(opt.point)) {
       this.points = opt.point.slice();
-      if (this.points[this.points.length - 1] > 23 * 60) {
-        this.points[this.points.length - 1] = 23 * 60;
+      if (this.points[this.points.length - 1] > this.max) {
+        this.points[this.points.length - 1] = this.max;
       }
       if (opt.point.length === 1 && typeof opt.point[0] === 'number') {
         pointClass = `time-${opt.point[0]}`;
@@ -127,7 +131,7 @@ export class TimeRangeHistory {
         pointClass = '';
       }
     } else {
-      this.points = [0, 180, 360, 540, 720, 900, 1080, 1260, 1380];
+      this.points = [0, 180, 360, 540, 720, 900, 1080, 1260, 1440];
       pointClass = 'time-180';
     }
 
@@ -152,6 +156,7 @@ export class TimeRangeHistory {
     } else {
       this.value = opt.value || 0;
     }
+    this.displayValue = this._logicalToDisplay(this.value);
     // upperLimit 옵션 처리 (실제 선택 제한용)
     if (opt.upperLimit) {
       if (Array.isArray(opt.upperLimit) && opt.upperLimit.length === 2) {
@@ -160,9 +165,11 @@ export class TimeRangeHistory {
         this.upperLimit = Number(opt.upperLimit);
       }
     } else {
-      this.upperLimit = 23 * 60; // 제한 없으면 23:00
+      this.upperLimit = this.max; // 제한 없으면 24:00
     }
-    this.max = 23 * 60; // 트랙은 항상 0~1380(23:00)
+    if (this.upperLimit > this.max) {
+      this.upperLimit = this.max;
+    }
     // this._initRange();
     // this._updateFakeHandle();
     // this._updateValueBox();
@@ -177,20 +184,20 @@ export class TimeRangeHistory {
     if (typeof point === 'number') {
       const interval = point;
       this.points = [];
-      for (let i = 0; i <= 23 * 60; i += interval) {
+      for (let i = 0; i <= this.max; i += interval) {
         this.points.push(i);
       }
-      if (this.points[this.points.length - 1] < 23 * 60) {
-        this.points.push(23 * 60);
+      if (this.points[this.points.length - 1] < this.max) {
+        this.points.push(this.max);
       }
-      if (this.points[this.points.length - 1] > 23 * 60) {
-        this.points[this.points.length - 1] = 23 * 60;
+      if (this.points[this.points.length - 1] > this.max) {
+        this.points[this.points.length - 1] = this.max;
       }
       pointClass = `time-${interval}`;
     } else if (Array.isArray(point)) {
       this.points = point.slice();
-      if (this.points[this.points.length - 1] > 23 * 60) {
-        this.points[this.points.length - 1] = 23 * 60;
+      if (this.points[this.points.length - 1] > this.max) {
+        this.points[this.points.length - 1] = this.max;
       }
       if (point.length === 1 && typeof point[0] === 'number') {
         pointClass = `time-${point[0]}`;
@@ -198,7 +205,7 @@ export class TimeRangeHistory {
         pointClass = '';
       }
     } else {
-      this.points = [0, 180, 360, 540, 720, 900, 1080, 1260, 1380];
+      this.points = [0, 180, 360, 540, 720, 900, 1080, 1260, 1440];
       pointClass = 'time-180';
     }
     // .timeRange에 time-xxx 클래스 추가 (기존 time-xxx 제거)
@@ -211,15 +218,36 @@ export class TimeRangeHistory {
   }
   _startPlay() {
     if (this._playTimer) return;
+    const sortedPoints = [...new Set(this.points)]
+      .map((p) => Number(p))
+      .filter((p) => !Number.isNaN(p))
+      .sort((a, b) => a - b);
+
+    // 완료 상태(마지막 값)에서 재생 버튼을 다시 누르면 시작점으로 초기화
+    if (this.value >= this.upperLimit) {
+      const resetPoint = sortedPoints.find((p) => p < this.upperLimit) ?? sortedPoints[0] ?? 0;
+      this.setValue(resetPoint);
+    }
+
     this.playBtn.setAttribute('data-toggle-state', 'selected');
     this._playTimer = setInterval(() => {
-      let next = this.value + this.step;
+      let next = sortedPoints.find((p) => p > this.value);
+      if (next === undefined) {
+        next = this.upperLimit;
+      }
       if (next > this.upperLimit) {
         next = this.upperLimit;
       }
       this.setValue(next);
       if (next >= this.upperLimit) {
         this._stopPlay();
+        // 재생으로 24:00 도달 후 종료되면 핸들은 00:00 위치로 이동
+        if (this.value === this.max) {
+          this.displayValue = this.trackOffset;
+          this.input.value = this.displayValue;
+          this._updateFakeHandle();
+          this._updateValueBox();
+        }
       }
     }, this.playTime);
   }
@@ -233,25 +261,31 @@ export class TimeRangeHistory {
   }
 
   _initRange() {
-    // 0~1380분, step 적용 (트랙은 항상 전체)
+    // 23-00-...-24 순환축(0~1500분), step 적용
     this.input.min = 0;
-    this.input.max = this.max; // 항상 전체 트랙
+    this.input.max = this.trackMax;
     this.input.step = this.step;
-    this.input.value = Math.min(this.value, this.max);
+    this.input.value = Math.min(this.displayValue, this.trackMax);
     // input 이벤트 중복 방지
     if (this._inputHandler) {
       this.input.removeEventListener('input', this._inputHandler);
     }
     this._inputHandler = (e) => {
-      let v = Number(e.target.value);
+      let display = Number(e.target.value);
+      let logical = this._displayToLogical(display);
       // step 단위로 이동 시 upperLimit보다 적게 남아도 마지막 이동에서 upperLimit로 snap
       // (예: 900→1080, step=180, upperLimit=1000이면 900→1000으로 이동)
-      if (v < this.upperLimit && v + this.step > this.upperLimit) {
-        v = this.upperLimit;
+      if (logical < this.upperLimit && logical + this.step > this.upperLimit) {
+        logical = this.upperLimit;
       }
-      if (v > this.upperLimit) v = this.upperLimit;
-      this.value = v;
-      this.input.value = v;
+      if (logical > this.upperLimit) logical = this.upperLimit;
+      // 드래그 중에는 마우스 위치를 그대로 유지하고, mouseup에서만 최종 위치 보정
+      if (this._displayToLogical(display) !== logical) {
+        display = this._logicalToDisplay(logical);
+      }
+      this.value = logical;
+      this.displayValue = display;
+      this.input.value = display;
       this._updateFakeHandle();
       this._updateValueBox();
       this.onChange(this.value, this._formatTime(this.value));
@@ -263,25 +297,56 @@ export class TimeRangeHistory {
       this.input.removeEventListener('mouseup', this._mouseupHandler);
     }
     this._mouseupHandler = (e) => {
-      let v = Number(this.input.value);
+      const display = Number(this.input.value);
+      const logical = this._displayToLogical(display);
       // point 배열에서 가장 가까운 값으로 스냅
       let closest = this.points.reduce((prev, curr) =>
-        Math.abs(curr - v) < Math.abs(prev - v) ? curr : prev
+        Math.abs(curr - logical) < Math.abs(prev - logical) ? curr : prev
       );
-      this.setValue(closest);
+      if (closest > this.upperLimit) {
+        closest = this.upperLimit;
+      }
+      const snappedDisplay = this._resolveDisplayFromLogical(closest, display);
+      this.value = closest;
+      this.displayValue = snappedDisplay;
+      this.input.value = snappedDisplay;
+      this._updateFakeHandle();
+      this._updateValueBox();
+      this.onChange(this.value, this._formatTime(this.value));
     };
     this.input.addEventListener('mouseup', this._mouseupHandler);
   }
   _updateValueBox() {
     if (!this.valueBox) return;
-    this.valueBox.textContent = this._formatTime(this.value);
+    // UI 표시 규칙: 최종값 24:00(1440분)은 00:00으로 노출
+    this.valueBox.textContent = this.value === this.max ? '00:00' : this._formatTime(this.value);
   }
   _updateFakeHandle() {
     if (!this.fakeHandle) return;
     // 백분율 위치 계산
-    const percent = (this.value - this.input.min) / (this.input.max - this.input.min) * 100;
+    const percent = (this.displayValue - this.input.min) / (this.input.max - this.input.min) * 100;
     this.fakeHandle.style.left = `calc(${percent}% )`;
     this.fakeTrack.style.width = `${percent}%`;
+  }
+
+  _displayToLogical(displayVal) {
+    if (displayVal >= this.trackMax) return this.max;
+    const shifted = displayVal - this.trackOffset;
+    return shifted < 0 ? shifted + this.max : shifted;
+  }
+
+  _logicalToDisplay(logicalVal) {
+    if (logicalVal >= this.max) return this.trackMax;
+    return logicalVal + this.trackOffset;
+  }
+
+  _resolveDisplayFromLogical(logicalVal, referenceDisplay) {
+    // mouseup 최종 보정 규칙
+    // 1) 최종값이 24:00이면 항상 00:00 위치로 이동
+    if (logicalVal === this.max) return this.trackOffset;
+    // 2) 최종값이 23:00이면 항상 뒤쪽(22-23-24 구간)의 23:00 위치로 이동
+    if (logicalVal === this.max - 60) return this.trackMax - this.trackOffset;
+    return this._logicalToDisplay(logicalVal);
   }
 
   _formatTime(val) {
@@ -295,8 +360,9 @@ export class TimeRangeHistory {
     this.step = step;
     this.input.step = step;
     // step 변경 시 현재 값도 step에 맞게 보정
-    this.input.value = Math.round(this.value / step) * step;
-    this.value = Number(this.input.value);
+    this.value = Math.round(this.value / step) * step;
+    this.displayValue = this._logicalToDisplay(this.value);
+    this.input.value = this.displayValue;
     this._updateFakeHandle();
     this._updateValueBox();
     this.onChange(this.value, this._formatTime(this.value));
@@ -306,7 +372,8 @@ export class TimeRangeHistory {
     let v = val;
     if (v > this.upperLimit) v = this.upperLimit;
     this.value = v;
-    this.input.value = v;
+    this.displayValue = this._logicalToDisplay(v);
+    this.input.value = this.displayValue;
     this._updateFakeHandle();
     this._updateValueBox();
     this.onChange(this.value, this._formatTime(this.value));
@@ -340,6 +407,9 @@ export class TimeRangeHistory {
     } else {
       this.upperLimit = Number(upperLimit);
     }
+    if (this.upperLimit > this.max) {
+      this.upperLimit = this.max;
+    }
     if (this.value > this.upperLimit) {
       this.setValue(this.upperLimit);
     }
@@ -361,8 +431,9 @@ export class TimeRangeHistory {
     this.step = step;
     this.input.step = step;
     // step 변경 시 현재 값도 step에 맞게 보정
-    this.input.value = Math.round(this.value / step) * step;
-    this.value = Number(this.input.value);
+    this.value = Math.round(this.value / step) * step;
+    this.displayValue = this._logicalToDisplay(this.value);
+    this.input.value = this.displayValue;
     this._initRange();
     this._updateFakeHandle();
     this._updateValueBox();
@@ -376,7 +447,8 @@ export class TimeRangeHistory {
     }
     if (v > this.upperLimit) v = this.upperLimit;
     this.value = v;
-    this.input.value = v;
+    this.displayValue = this._logicalToDisplay(v);
+    this.input.value = this.displayValue;
     this._updateFakeHandle();
     this._updateValueBox();
     this.onChange(this.value, this._formatTime(this.value));
