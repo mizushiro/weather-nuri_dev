@@ -52,6 +52,7 @@ export class TimeRangeHistory {
     this.max = 24 * 60;
     this.trackOffset = 60;
     this.trackMax = this.max + this.trackOffset;
+    this.timeScale = 3;
     this.id = opt.id;
     this.wrap = document.querySelector(`.timeRange[data-time-range="${this.id}"]`);
     this.input = this.wrap.querySelector('.timeRange-range');
@@ -62,29 +63,29 @@ export class TimeRangeHistory {
     const makeHtml = `<div class="timeRange-line">
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>00:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>01:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>02:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>03:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>04:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>05:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>06:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>07:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>08:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>09:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>10:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>11:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>12:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>13:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>14:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>15:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>16:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>17:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>18:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>19:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>20:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>21:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>22:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>23:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>00:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>03:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>06:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>09:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>12:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>15:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>18:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>21:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>00:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>03:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>06:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>09:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>12:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>15:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>18:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>21:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /></div>
     </div>
     <div class="timeRange-fake-input">
@@ -131,8 +132,15 @@ export class TimeRangeHistory {
         pointClass = '';
       }
     } else {
-      this.points = [0, 180, 360, 540, 720, 900, 1080, 1260, 1440];
-      pointClass = 'time-180';
+      const interval = 60;
+      this.points = [];
+      for (let i = 0; i <= this.max; i += interval) {
+        this.points.push(i);
+      }
+      if (this.points[this.points.length - 1] < this.max) {
+        this.points.push(this.max);
+      }
+      pointClass = `time-${interval}`;
     }
 
     // .timeRange에 time-xxx 클래스 추가 (기존 time-xxx 제거)
@@ -158,25 +166,26 @@ export class TimeRangeHistory {
     }
     this.displayValue = this._logicalToDisplay(this.value);
     // upperLimit 옵션 처리 (실제 선택 제한용)
-    if (opt.upperLimit) {
-      if (Array.isArray(opt.upperLimit) && opt.upperLimit.length === 2) {
-        this.upperLimit = opt.upperLimit[0] * 60 + opt.upperLimit[1];
-      } else {
-        this.upperLimit = Number(opt.upperLimit);
-      }
-    } else {
-      this.upperLimit = this.max; // 제한 없으면 24:00
-    }
-    if (this.upperLimit > this.max) {
-      this.upperLimit = this.max;
-    }
-    // this._initRange();
-    // this._updateFakeHandle();
-    // this._updateValueBox();
-    // upperLimit보다 value가 크면 보정
-    if (this.value > this.upperLimit) {
-      this.setValue(this.upperLimit);
-    }
+    // if (opt.upperLimit) {
+    //   if (Array.isArray(opt.upperLimit) && opt.upperLimit.length === 2) {
+    //     this.upperLimit = opt.upperLimit[0] * 60 + opt.upperLimit[1];
+    //   } else {
+    //     this.upperLimit = Number(opt.upperLimit);
+    //   }
+    // } else {
+    //   this.upperLimit = this.max; // 제한 없으면 24:00
+    // }
+    // if (this.upperLimit > this.max) {
+    //   this.upperLimit = this.max;
+    // }
+    // // this._initRange();
+    // // this._updateFakeHandle();
+    // // this._updateValueBox();
+    // // upperLimit보다 value가 크면 보정
+    // if (this.value > this.upperLimit) {
+    //   this.setValue(this.upperLimit);
+    // }
+    this.upperLimit = this.max;
   }
 
   setPoint(point) {
@@ -205,8 +214,15 @@ export class TimeRangeHistory {
         pointClass = '';
       }
     } else {
-      this.points = [0, 180, 360, 540, 720, 900, 1080, 1260, 1440];
-      pointClass = 'time-180';
+      const interval = 60;
+      this.points = [];
+      for (let i = 0; i <= this.max; i += interval) {
+        this.points.push(i);
+      }
+      if (this.points[this.points.length - 1] < this.max) {
+        this.points.push(this.max);
+      }
+      pointClass = `time-${interval}`;
     }
     // .timeRange에 time-xxx 클래스 추가 (기존 time-xxx 제거)
     if (this.wrap && pointClass) {
@@ -288,7 +304,7 @@ export class TimeRangeHistory {
       this.input.value = display;
       this._updateFakeHandle();
       this._updateValueBox();
-      this.onChange(this.value, this._formatTime(this.value));
+      this.onChange(this._getActualValue(this.value), this._formatTime(this.value));
     };
     this.input.addEventListener('input', this._inputHandler);
 
@@ -312,14 +328,13 @@ export class TimeRangeHistory {
       this.input.value = snappedDisplay;
       this._updateFakeHandle();
       this._updateValueBox();
-      this.onChange(this.value, this._formatTime(this.value));
+      this.onChange(this._getActualValue(this.value), this._formatTime(this.value));
     };
     this.input.addEventListener('mouseup', this._mouseupHandler);
   }
   _updateValueBox() {
     if (!this.valueBox) return;
-    // UI 표시 규칙: 최종값 24:00(1440분)은 00:00으로 노출
-    this.valueBox.textContent = this.value === this.max ? '00:00' : this._formatTime(this.value);
+    this.valueBox.textContent = this._formatTime(this.value);
   }
   _updateFakeHandle() {
     if (!this.fakeHandle) return;
@@ -327,6 +342,7 @@ export class TimeRangeHistory {
     const percent = (this.displayValue - this.input.min) / (this.input.max - this.input.min) * 100;
     this.fakeHandle.style.left = `calc(${percent}% )`;
     this.fakeTrack.style.width = `${percent}%`;
+    this._updateDateTooltip();
   }
 
   _displayToLogical(displayVal) {
@@ -350,10 +366,33 @@ export class TimeRangeHistory {
   }
 
   _formatTime(val) {
-    // 분 단위를 시:분 문자열로 변환
-    const hour = Math.floor(val / 60);
-    const min = val % 60;
+    const actualVal = val * this.timeScale;
+    const dayMinutes = 24 * 60;
+    const normalized = ((actualVal % dayMinutes) + dayMinutes) % dayMinutes;
+    const hour = Math.floor(normalized / 60);
+    const min = normalized % 60;
     return `${hour.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}`;
+  }
+
+  _getActualValue(val) {
+    return val * this.timeScale;
+  }
+
+  _getDisplayDate(val) {
+    // 72시간 끝(00:00으로 표시되는 시점)은 기준일로 초기화
+    if (val >= this.max) {
+      const date = new Date(this.date);
+      return `${date.getMonth() + 1}월 ${date.getDate()}일`;
+    }
+    const actualVal = this._getActualValue(val);
+    const date = new Date(this.date);
+    date.setDate(date.getDate() + Math.floor(actualVal / (24 * 60)));
+    return `${date.getMonth() + 1}월 ${date.getDate()}일`;
+  }
+
+  _updateDateTooltip() {
+    if (!this.fakeTodayText) return;
+    this.fakeTodayText.textContent = this._getDisplayDate(this.value);
   }
 
   setStep(step) {
@@ -365,7 +404,7 @@ export class TimeRangeHistory {
     this.input.value = this.displayValue;
     this._updateFakeHandle();
     this._updateValueBox();
-    this.onChange(this.value, this._formatTime(this.value));
+    this.onChange(this._getActualValue(this.value), this._formatTime(this.value));
   }
 
   setValue(val) {
@@ -376,7 +415,7 @@ export class TimeRangeHistory {
     this.input.value = this.displayValue;
     this._updateFakeHandle();
     this._updateValueBox();
-    this.onChange(this.value, this._formatTime(this.value));
+    this.onChange(this._getActualValue(this.value), this._formatTime(this.value));
   }
 
   init() {
@@ -437,7 +476,7 @@ export class TimeRangeHistory {
     this._initRange();
     this._updateFakeHandle();
     this._updateValueBox();
-    this.onChange(this.value, this._formatTime(this.value));
+    this.onChange(this._getActualValue(this.value), this._formatTime(this.value));
   }
 
   setValue(val) {
@@ -451,6 +490,6 @@ export class TimeRangeHistory {
     this.input.value = this.displayValue;
     this._updateFakeHandle();
     this._updateValueBox();
-    this.onChange(this.value, this._formatTime(this.value));
+    this.onChange(this._getActualValue(this.value), this._formatTime(this.value));
   }
 }

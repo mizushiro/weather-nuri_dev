@@ -16,1313 +16,1319 @@
 </head>
 
 <body>
-<div class="base-wrap" data-toggle-target="side-content">
+  <div class="base-wrap" data-toggle-target="side-content">
 
-  <main class="full-map">
-    <!-- map-option -->
-    <div class="full-map-top-area" data-toggle-target="map-compare">
-      <div class="full-map-sh-box">
-        <i class="sh-logo"></i>
-        <input type="text" class="form-element-input ui-flex-1" data-px="8" data-style="no-line" data-size="36" data-bg="F4F8FF" data-round="full" />
-        <button type="button" class="btn-sh" aria-label="검색">
-          <i class="icon-aspect-search" data-size="24"></i>
-        </button>
-      </div>
-      <div class="full-map-setting-area">
-        <div class="form-fake-group-flex" data-form-style="round-box" data-form-h="48" data-item-size="88">
-          <div class="form-fake-button">
-            <input type="radio" id="radio005-1" name="radio005" value="" class="form-fake-input" checked>
-            <label for="radio005-1" class="form-fake-label">
-              전지구
-            </label>
-          </div>
-          <div class="form-fake-button">
-            <input type="radio" id="radio005-2" name="radio005" value="" class="form-fake-input">
-            <label for="radio005-2" class="form-fake-label">
-              대한민국
-            </label>
-          </div>
-        </div>
-        <button type="button" class="btn-base" data-size="48" data-round="full" data-type="icon" aria-label="설정" data-shadow data-color="white" data-toggle-object="side-content">
-          <i class="icon-aspect-setting" data-size="24"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- map-left -->
-    <div class="full-map-left-area" data-toggle-target="map-compare">
-      <!-- map options -->
-      <div class="map-options">
-        <div data-dropdown="option1">
-          <button type="button" class="btn-map-left" data-dropdown-button="option1" data-toggle-object="option1" data-radio="w-option" onclick="UI.exe.기온();">
-            <span class="icon-round-box">
-              <i class="icon-aspect-map-nav1" data-size="20"></i>
-            </span>
-            <span class="btn-text">기온</span>
-            <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+    <main class="full-map">
+      <!-- map-option -->
+      <div class="full-map-top-area" data-toggle-target="map-compare">
+        <div class="full-map-sh-box">
+          <i class="sh-logo"></i>
+          <input type="text" class="form-element-input ui-flex-1" data-px="8" data-style="no-line" data-size="36"
+            data-bg="F4F8FF" data-round="full" />
+          <button type="button" class="btn-sh" aria-label="검색">
+            <i class="icon-aspect-search" data-size="24"></i>
           </button>
         </div>
-        <button type="button" class="btn-map-left" data-toggle-object="option2" data-radio="w-option" onclick="UI.exe.강수량();">
-          <span class="icon-round-box">
-            <i class="icon-aspect-map-nav2" data-size="20"></i>
-          </span>
-          <span class="btn-text">강수량</span>
-          <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-        </button>
-        <div data-dropdown="option2">
-          <button type="button" class="btn-map-left" data-dropdown-button="option2" data-toggle-object="option3" data-radio="w-option" onclick="UI.exe.구름량();">
-            <span class="icon-round-box">
-              <i class="icon-aspect-map-nav3" data-size="20"></i>
-            </span>
-            <span class="btn-text">구름량</span>
-            <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-          </button>
+        <div class="map-choice-info-box">
+          <span class="text-16-700" data-text-color="navy">기온</span> :
+          <span class="text-16-700" data-text-color="primary">해수면</span>
         </div>
-        <div data-dropdown="option3">
-          <button type="button" class="btn-map-left" data-dropdown-button="option3" data-toggle-object="option4" data-radio="w-option" onclick="UI.exe.풍속();">
-            <span class="icon-round-box">
-              <i class="icon-aspect-map-nav4" data-size="20"></i>
-            </span>
-            <span class="btn-text">풍속</span>
-            <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-          </button>
-        </div>
-        <div data-dropdown="option4">
-          <button type="button" class="btn-map-left" data-dropdown-button="option4" data-toggle-object="option5" data-radio="w-option" onclick="UI.exe.기압();">
-            <span class="icon-round-box">
-              <i class="icon-aspect-map-nav5" data-size="20"></i>
-            </span>
-            <span class="btn-text">기압</span>
-            <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-          </button>
-        </div>
-        <div data-dropdown="option5">
-          <button type="button" class="btn-map-left" data-dropdown-button="option5" data-toggle-object="option6" data-radio="w-option" onclick="UI.exe.습도();">
-            <span class="icon-round-box">
-              <i class="icon-aspect-map-nav6" data-size="20"></i>
-            </span>
-            <span class="btn-text">습도</span>
-            <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-          </button>
-        </div>
-        <button type="button" class="btn-map-left" data-toggle-object="option7" data-radio="w-option" onclick="UI.exe.해빙();">
-          <span class="icon-round-box">
-            <i class="icon-aspect-map-nav7" data-size="20"></i>
-          </span>
-          <span class="btn-text">해빙</span>
-          <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-        </button>
-        <button type="button" class="btn-map-left" data-toggle-object="option8" data-radio="w-option" onclick="UI.exe.적설량();">
-          <span class="icon-round-box">
-            <i class="icon-aspect-map-nav8" data-size="20"></i>
-          </span>
-          <span class="btn-text">적설량</span>
-          <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-        </button>
-      </div>
-
-      <!-- 비교일때 -->
-      <div class="full-map-right-group2">
-        <div class="map-btn-group">
-          <button type="button" class="btn-base" data-color="white" data-size="38" data-type="icon" data-toggle-object="tool-zoom-in2" aria-label="확대">
-            <i class="icon-aspect-map-control6" data-size="24"></i>
-          </button>
-          <button type="button" class="btn-base" data-color="white" data-size="38" data-type="icon" data-toggle-object="tool-zoom-out2" aria-label="축소">
-            <i class="icon-aspect-map-control7" data-size="24"></i>
-          </button>
-        </div>
-        <button type="button" class="btn-base mt-14" data-color="white" data-shadow data-size="38" data-round="4" data-type="icon" data-toggle-object="tool-legend2" aria-label="범례">
-          <i class="icon-aspect-map-control8" data-size="24"></i>
-        </button>
-
-        <div class="rangedual-box">
-          <div class="s1-rangedual">
-            <div class="ui-range is-vertical" data-id="range2" data-from="-50" data-to="50">
-              <input class="ui-range-inp" data-range="from" type="range" aria-label="range2 최소 -50" value="-50" min="-100" max="100" step="0.1" tabindex="-1">
-              <input class="ui-range-inp on" data-range="to" type="range" aria-label="range2 최대 undefined" value="50" min="-100" max="100" step="0.1" tabindex="-1">
-
-              <div class="ui-range-track">
-                <div class="ui-range-bar" style="left: 25%; right: 25%;"></div>
-                <span class="left ui-range-point" data-range="from" aria-hidden="true" style="left: 25%;">
-                  <em class="ui-range-txt" data-from="range2">-50</em>
-                </span>
-
-                <span class="right ui-range-point on" data-range="to" aria-hidden="true" style="right: 25%;">
-                  <em class="ui-range-txt" data-to="range2">50</em>
-                </span>
-              </div>
+        <div class="full-map-setting-area">
+          <div class="form-fake-group-flex" data-form-style="round-box" data-form-h="48" data-item-size="88">
+            <div class="form-fake-button">
+              <input type="radio" id="radio005-1" name="radio005" value="" class="form-fake-input" checked>
+              <label for="radio005-1" class="form-fake-label">
+                전지구
+              </label>
+            </div>
+            <div class="form-fake-button">
+              <input type="radio" id="radio005-2" name="radio005" value="" class="form-fake-input">
+              <label for="radio005-2" class="form-fake-label">
+                대한민국
+              </label>
             </div>
           </div>
-
-          <div class="legend-gauge">
-            <span class="legend-level-bar" data-level-type="legend_01"></span>
-            <div class="legend-gauge-group">
-              <span class="legend-gauge-num">160</span>
-              <span class="legend-gauge-num">127.5</span>
-              <span class="legend-gauge-num">95</span>
-              <span class="legend-gauge-num">62.5</span>
-              <span class="legend-gauge-num">30</span>
-            </div>
-            <span class="legend-unit">(℃)</span>
-          </div>
+          <button type="button" class="btn-base" data-size="48" data-round="full" data-type="icon" aria-label="설정"
+            data-shadow data-color="white" data-toggle-object="side-content" onclick="UI.exe.sideOpenFn();">
+            <i class="icon-aspect-setting" data-size="24"></i>
+          </button>
         </div>
       </div>
-    </div>
 
-    <!-- map-right -->
-    <div class="full-map-right-area">
-      <div class="full-map-right-group1">
-        <div class="map-btn-group">
-          <div class="btn-with-tooltip">
-            <button type="button" class="btn-base" data-color="white" data-size="48" data-type="icon" data-toggle-object="tool-distance" aria-label="평면" data-radio="map-2d3d">
-              <i class="icon-aspect-map-control1" data-size="24"></i>
+      <!-- map-left -->
+      <div class="full-map-left-area" data-toggle-target="map-compare">
+        <!-- map options -->
+        <div class="map-options">
+          <div data-dropdown="option1">
+            <button type="button" class="btn-map-left" data-dropdown-button="option1" data-toggle-object="option1"
+              data-radio="w-option">
+              <span class="icon-round-box">
+                <i class="icon-aspect-map-nav1" data-size="20"></i>
+              </span>
+              <span class="btn-text">기온</span>
+              <i class="icon-aspect-arrow-r-w" data-size="24"></i>
             </button>
-            <span class="btn-tooltip">평면</span>
           </div>
-          <div class="btn-with-tooltip">
-            <button type="button" class="btn-base" data-color="white" data-size="48" data-type="icon" data-toggle-object="tool-area" aria-label="입체" data-radio="map-2d3d">
-              <i class="icon-aspect-map-control2" data-size="24"></i>
+          <button type="button" class="btn-map-left" data-toggle-object="option2" data-radio="w-option"
+            onclick="UI.exe.강수량();">
+            <span class="icon-round-box">
+              <i class="icon-aspect-map-nav2" data-size="20"></i>
+            </span>
+            <span class="btn-text">강수량</span>
+            <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+          </button>
+          <div data-dropdown="option2">
+            <button type="button" class="btn-map-left" data-dropdown-button="option2" data-toggle-object="option3"
+              data-radio="w-option">
+              <span class="icon-round-box">
+                <i class="icon-aspect-map-nav3" data-size="20"></i>
+              </span>
+              <span class="btn-text">구름량</span>
+              <i class="icon-aspect-arrow-r-w" data-size="24"></i>
             </button>
-            <span class="btn-tooltip">입체</span>
+          </div>
+          <div data-dropdown="option3">
+            <button type="button" class="btn-map-left" data-dropdown-button="option3" data-toggle-object="option4"
+              data-radio="w-option">
+              <span class="icon-round-box">
+                <i class="icon-aspect-map-nav4" data-size="20"></i>
+              </span>
+              <span class="btn-text">풍속</span>
+              <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+            </button>
+          </div>
+          <div data-dropdown="option4">
+            <button type="button" class="btn-map-left" data-dropdown-button="option4" data-toggle-object="option5"
+              data-radio="w-option">
+              <span class="icon-round-box">
+                <i class="icon-aspect-map-nav5" data-size="20"></i>
+              </span>
+              <span class="btn-text">기압</span>
+              <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+            </button>
+          </div>
+          <div data-dropdown="option5">
+            <button type="button" class="btn-map-left" data-dropdown-button="option5" data-toggle-object="option6"
+              data-radio="w-option">
+              <span class="icon-round-box">
+                <i class="icon-aspect-map-nav6" data-size="20"></i>
+              </span>
+              <span class="btn-text">습도</span>
+              <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+            </button>
+          </div>
+          <button type="button" class="btn-map-left" data-toggle-object="option7" data-radio="w-option">
+            <span class="icon-round-box">
+              <i class="icon-aspect-map-nav7" data-size="20"></i>
+            </span>
+            <span class="btn-text">해빙</span>
+            <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+          </button>
+          <button type="button" class="btn-map-left" data-toggle-object="option8" data-radio="w-option">
+            <span class="icon-round-box">
+              <i class="icon-aspect-map-nav8" data-size="20"></i>
+            </span>
+            <span class="btn-text">적설량</span>
+            <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+          </button>
+
+          <div class="btn-map-toggle">
+            <span class="btn-text">풍향 애니메이션</span>
+            <div class="form-element-switch" data-size="28">
+              <input type="checkbox" id="btn-switch1" />
+              <label for="btn-switch1">
+                <span class="txt-uncheck">꺼짐</span>
+                <span class="txt-checked">켜짐</span>
+              </label>
+            </div>
           </div>
         </div>
 
-        <div class="btn-with-tooltip">
-          <button type="button" class="btn-base" data-color="white" data-shadow data-size="48" data-round="4" data-type="icon" data-toggle-object="map-compare" aria-label="비교">
-            <i class="icon-aspect-map-control3" data-size="24"></i>
+        <!-- 비교일때 -->
+        <div class="full-map-right-group2">
+          <div class="map-btn-group">
+            <button type="button" class="btn-base" data-color="white" data-size="38" data-type="icon"
+              data-toggle-object="tool-zoom-in2" aria-label="확대">
+              <i class="icon-aspect-map-control6" data-size="24"></i>
+            </button>
+            <button type="button" class="btn-base" data-color="white" data-size="38" data-type="icon"
+              data-toggle-object="tool-zoom-out2" aria-label="축소">
+              <i class="icon-aspect-map-control7" data-size="24"></i>
+            </button>
+          </div>
+          <button type="button" class="btn-base mt-14" data-color="white" data-shadow data-size="38" data-round="4"
+            data-type="icon" data-toggle-object="tool-legend2" aria-label="범례">
+            <i class="icon-aspect-map-control8" data-size="24"></i>
           </button>
-          <span class="btn-tooltip">비교</span>
-        </div>
-      </div>
 
-      <div class="full-map-right-group2">
-        <button type="button" class="btn-base" data-color="white" data-shadow data-size="38" data-round="4" data-type="icon" data-toggle-object="tool- export" aria-label="">
-          <i class="icon-aspect-map-control4" data-size="24"></i>
-        </button>
-        <button type="button" class="btn-base" data-color="white" data-shadow data-size="38" data-round="4" data-type="icon" data-toggle-object="tool-place" aria-label="현위치">
-          <i class="icon-aspect-map-control5" data-size="24"></i>
-        </button>
-        <div class="map-btn-group">
-          <button type="button" class="btn-base" data-color="white" data-size="38" data-type="icon" data-toggle-object="tool-zoom-in" aria-label="확대">
-            <i class="icon-aspect-map-control6" data-size="24"></i>
-          </button>
-          <button type="button" class="btn-base" data-color="white" data-size="38" data-type="icon" data-toggle-object="tool-zoom-out" aria-label="축소">
-            <i class="icon-aspect-map-control7" data-size="24"></i>
-          </button>
-        </div>
-        <button type="button" class="btn-base mt-14" data-color="white" data-shadow data-size="38" data-round="4" data-type="icon" data-toggle-object="tool-legend" aria-label="범례">
-          <i class="icon-aspect-map-control8" data-size="24"></i>
-        </button>
+          <div class="rangedual-box">
+            <div class="s1-rangedual">
+              <div class="ui-range is-vertical" data-id="range2" data-from="-50" data-to="50">
+                <input class="ui-range-inp" data-range="from" type="range" aria-label="range2 최소 -50" value="-50"
+                  min="-100" max="100" step="0.1" tabindex="-1">
+                <input class="ui-range-inp on" data-range="to" type="range" aria-label="range2 최대 undefined" value="50"
+                  min="-100" max="100" step="0.1" tabindex="-1">
 
-        <div class="rangedual-box">
-          <div class="s1-rangedual">
-            <div class="ui-range is-vertical" data-id="range1" data-from="-50" data-to="50">
-              <input class="ui-range-inp" data-range="from" type="range" aria-label="range1 최소 -50" value="-50" min="-100" max="100" step="0.1" tabindex="-1">
-              <input class="ui-range-inp on" data-range="to" type="range" aria-label="range1 최대 undefined" value="50" min="-100" max="100" step="0.1" tabindex="-1">
+                <div class="ui-range-track">
+                  <div class="ui-range-bar" style="left: 25%; right: 25%;"></div>
+                  <span class="left ui-range-point" data-range="from" aria-hidden="true" style="left: 25%;">
+                    <em class="ui-range-txt" data-from="range2">-50</em>
+                  </span>
 
-              <div class="ui-range-track">
-                <div class="ui-range-bar" style="left: 25%; right: 25%;"></div>
-                <span class="left ui-range-point" data-range="from" aria-hidden="true" style="left: 25%;">
-                  <em class="ui-range-txt" data-from="range1">-50</em>
-                </span>
-
-                <span class="right ui-range-point on" data-range="to" aria-hidden="true" style="right: 25%;">
-                  <em class="ui-range-txt" data-to="range1">50</em>
-                </span>
+                  <span class="right ui-range-point on" data-range="to" aria-hidden="true" style="right: 25%;">
+                    <em class="ui-range-txt" data-to="range2">50</em>
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="legend-gauge">
-            <span class="legend-level-bar" data-level-type="legend_01"></span>
-            <div class="legend-gauge-group">
-              <span class="legend-gauge-num">160</span>
-              <span class="legend-gauge-num">127.5</span>
-              <span class="legend-gauge-num">95</span>
-              <span class="legend-gauge-num">62.5</span>
-              <span class="legend-gauge-num">30</span>
+            <div class="legend-gauge">
+              <span class="legend-level-bar" data-level-type="legend_01"></span>
+              <div class="legend-gauge-group">
+                <span class="legend-gauge-num">160</span>
+                <span class="legend-gauge-num">127.5</span>
+                <span class="legend-gauge-num">95</span>
+                <span class="legend-gauge-num">62.5</span>
+                <span class="legend-gauge-num">30</span>
+              </div>
+              <span class="legend-unit">(℃)</span>
             </div>
-            <span class="legend-unit">(℃)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- map-right -->
+      <div class="full-map-right-area">
+        <div class="full-map-right-group1">
+          <div class="map-btn-group">
+            <div class="btn-with-tooltip">
+              <button type="button" class="btn-base" data-color="white" data-size="48" data-type="icon"
+                data-toggle-object="tool-distance" aria-label="평면" data-radio="map-2d3d">
+                <i class="icon-aspect-map-control1" data-size="24"></i>
+              </button>
+              <span class="btn-tooltip">평면</span>
+            </div>
+            <div class="btn-with-tooltip">
+              <button type="button" class="btn-base" data-color="white" data-size="48" data-type="icon"
+                data-toggle-object="tool-area" aria-label="입체" data-radio="map-2d3d">
+                <i class="icon-aspect-map-control2" data-size="24"></i>
+              </button>
+              <span class="btn-tooltip">입체</span>
+            </div>
+          </div>
+
+          <div class="btn-with-tooltip">
+            <button type="button" class="btn-base" data-color="white" data-shadow data-size="48" data-round="4"
+              data-type="icon" data-toggle-object="map-compare" aria-label="비교">
+              <i class="icon-aspect-map-control3" data-size="24"></i>
+            </button>
+            <span class="btn-tooltip">비교</span>
           </div>
         </div>
 
-      </div>
-    </div>
-
-    <!-- map-bottom -->
-    <div class="full-map-bottom-area"  data-toggle-target="map-compare">
-      <div class="timeRange" data-time-range="time-range1">
-        <button type="button" class="timeRange-play" aria-label="실행" data-toggle-object="time-play"></button>
-        <div class="timeRange-bar">
-          <input type="range" class="timeRange-range" />
-        </div>
-      </div>
-    </div>
-
-    <!-- map : 싱글 & 듀얼 -->
-    <div class="full-map-area" data-toggle-target="map-compare">
-      <div class="comparisonMap" data-comparison-map="main">
-
-        <!-- 왼쪽 -->
-        <div class="comparisonMap-map" data-comparison-left="main">
-          <div class="comparisonMap-map-selects" data-form-style="round-box" data-form-h="48" data-item-size="88">
-            <select class="form-fake-select" aria-label="년도 선택">
-              <option value="option1" selected>2020</option>
-              <option value="option2">2021</option>
-              <option value="option3">2022</option>
-              <option value="option4">2023</option>
-              <option value="option5">2024</option>
-            </select>
-            <hr class="line" />
-            <select class="form-fake-select" aria-label="옵션 선택">
-              <option value="option1" selected>강수량</option>
-              <option value="option2">구름량</option>
-              <option value="option3">풍속</option>
-              <option value="option4">기압</option>
-              <option value="option5">습도</option>
-            </select>
+        <div class="full-map-right-group2">
+          <button type="button" class="btn-base" data-color="white" data-shadow data-size="38" data-round="4"
+            data-type="icon" data-toggle-object="tool- export" aria-label="">
+            <i class="icon-aspect-map-control4" data-size="24"></i>
+          </button>
+          <button type="button" class="btn-base" data-color="white" data-shadow data-size="38" data-round="4"
+            data-type="icon" data-toggle-object="tool-place" aria-label="현위치">
+            <i class="icon-aspect-map-control5" data-size="24"></i>
+          </button>
+          <div class="map-btn-group">
+            <button type="button" class="btn-base" data-color="white" data-size="38" data-type="icon"
+              data-toggle-object="tool-zoom-in" aria-label="확대">
+              <i class="icon-aspect-map-control6" data-size="24"></i>
+            </button>
+            <button type="button" class="btn-base" data-color="white" data-size="38" data-type="icon"
+              data-toggle-object="tool-zoom-out" aria-label="축소">
+              <i class="icon-aspect-map-control7" data-size="24"></i>
+            </button>
           </div>
+          <button type="button" class="btn-base mt-14" data-color="white" data-shadow data-size="38" data-round="4"
+            data-type="icon" data-toggle-object="tool-legend" aria-label="범례">
+            <i class="icon-aspect-map-control8" data-size="24"></i>
+          </button>
 
-          <div class="full-map-bottom-area">
-            <div class="timeRange" data-time-range="time-range2-left">
-              <button type="button" class="timeRange-play" aria-label="실행" data-toggle-object="time-play"></button>
-              <div class="timeRange-bar">
-                <input type="range" class="timeRange-range" />
+          <div class="rangedual-box">
+            <div class="s1-rangedual">
+              <div class="ui-range is-vertical" data-id="range1" data-from="-50" data-to="50">
+                <input class="ui-range-inp" data-range="from" type="range" aria-label="range1 최소 -50" value="-50"
+                  min="-100" max="100" step="0.1" tabindex="-1">
+                <input class="ui-range-inp on" data-range="to" type="range" aria-label="range1 최대 undefined" value="50"
+                  min="-100" max="100" step="0.1" tabindex="-1">
+
+                <div class="ui-range-track">
+                  <div class="ui-range-bar" style="left: 25%; right: 25%;"></div>
+                  <span class="left ui-range-point" data-range="from" aria-hidden="true" style="left: 25%;">
+                    <em class="ui-range-txt" data-from="range1">-50</em>
+                  </span>
+
+                  <span class="right ui-range-point on" data-range="to" aria-hidden="true" style="right: 25%;">
+                    <em class="ui-range-txt" data-to="range1">50</em>
+                  </span>
+                </div>
               </div>
             </div>
+
+            <div class="legend-gauge">
+              <span class="legend-level-bar" data-level-type="legend_01"></span>
+              <div class="legend-gauge-group">
+                <span class="legend-gauge-num">160</span>
+                <span class="legend-gauge-num">127.5</span>
+                <span class="legend-gauge-num">95</span>
+                <span class="legend-gauge-num">62.5</span>
+                <span class="legend-gauge-num">30</span>
+              </div>
+              <span class="legend-unit">(℃)</span>
+            </div>
           </div>
+
+        </div>
+      </div>
+
+      <!-- map-bottom -->
+      <div class="full-map-bottom-area" data-toggle-target="map-compare">
+        <div class="timeRange" data-time-range="time-range1">
+          <button type="button" class="timeRange-play" aria-label="실행" data-toggle-object="time-play-1"></button>
+          <div class="timeRange-bar">
+            <input type="range" class="timeRange-range" />
+          </div>
+        </div>
+      </div>
+
+      <!-- map : 싱글 & 듀얼 -->
+      <div class="full-map-area" data-toggle-target="map-compare">
+        <div class="comparisonMap" data-comparison-map="main">
+
+          <!-- 왼쪽 -->
+          <div class="comparisonMap-map" data-comparison-left="main">
+            <div class="comparisonMap-map-selects" data-form-style="round-box" data-form-h="48" data-item-size="88">
+              <select class="form-fake-select" aria-label="년도 선택">
+                <option value="option1" selected>2020</option>
+                <option value="option2">2021</option>
+                <option value="option3">2022</option>
+                <option value="option4">2023</option>
+                <option value="option5">2024</option>
+              </select>
+              <hr class="line" />
+              <select class="form-fake-select" aria-label="옵션 선택">
+                <option value="option1" selected>강수량</option>
+                <option value="option2">구름량</option>
+                <option value="option3">풍속</option>
+                <option value="option4">기압</option>
+                <option value="option5">습도</option>
+              </select>
+            </div>
+
+            <!-- <div class="full-map-bottom-area">
+              <div class="timeRange" data-time-range="time-range2-left">
+                <button type="button" class="timeRange-play" aria-label="실행"
+                  data-toggle-object="time-play-left"></button>
+                <div class="timeRange-bar">
+                  <input type="range" class="timeRange-range" />
+                </div>
+              </div>
+            </div> -->
+            <div class="sample-dim"></div>
+            <!-- <img src="../../resources/images/temp/map.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"> -->
+          </div>
+
+          <!-- 핸들 -->
+          <div class="comparisonMap-handle">
+            <button type="button" class="comparisonMap-handle-btn" data-comparison-handle="main"
+              aria-label="비교 분할"></button>
+          </div>
+
+          <!-- 오른쪽 -->
+          <div class="comparisonMap-map" data-comparison-right="main">
+            <div class="comparisonMap-map-selects" data-form-style="round-box" data-form-h="48" data-item-size="88">
+              <select class="form-fake-select" aria-label="년도 선택">
+                <option value="option1" selected>2020</option>
+                <option value="option2">2021</option>
+                <option value="option3">2022</option>
+                <option value="option4">2023</option>
+                <option value="option5">2024</option>
+              </select>
+              <hr />
+              <select class="form-fake-select" aria-label="옵션 선택">
+                <option value="option1" selected>강수량</option>
+                <option value="option2">구름량</option>
+                <option value="option3">풍속</option>
+                <option value="option4">기압</option>
+                <option value="option5">습도</option>
+              </select>
+            </div>
+            <!-- <div class="full-map-bottom-area">
+              <div class="timeRange" data-time-range="time-range2-right">
+                <button type="button" class="timeRange-play" aria-label="실행"
+                  data-toggle-object="time-play-right"></button>
+                <div class="timeRange-bar">
+                  <input type="range" class="timeRange-range" />
+                </div>
+              </div>
+            </div> -->
+            <div class="sample-dim"></div>
+            <!-- <img src="../../resources/images/temp/map.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block"> -->
+          </div>
+        </div>
+
+        <div class="full-map-box">
           <img src="../../resources/images/temp/map.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
         </div>
-
-        <!-- 핸들 -->
-        <div class="comparisonMap-handle">
-          <button type="button" class="comparisonMap-handle-btn"   data-comparison-handle="main" aria-label="비교 분할"></button>
-        </div>
-
-        <!-- 오른쪽 -->
-        <div class="comparisonMap-map" data-comparison-right="main">
-          <div class="comparisonMap-map-selects" data-form-style="round-box" data-form-h="48" data-item-size="88">
-            <select class="form-fake-select" aria-label="년도 선택">
-              <option value="option1" selected>2020</option>
-              <option value="option2">2021</option>
-              <option value="option3">2022</option>
-              <option value="option4">2023</option>
-              <option value="option5">2024</option>
-            </select>
-            <hr />
-            <select class="form-fake-select" aria-label="옵션 선택">
-              <option value="option1" selected>강수량</option>
-              <option value="option2">구름량</option>
-              <option value="option3">풍속</option>
-              <option value="option4">기압</option>
-              <option value="option5">습도</option>
-            </select>
-          </div>
-          <div class="full-map-bottom-area">
-            <div class="timeRange" data-time-range="time-range2-right">
-              <button type="button" class="timeRange-play" aria-label="실행" data-toggle-object="time-play"></button>
-              <div class="timeRange-bar">
-                <input type="range" class="timeRange-range" />
-              </div>
-            </div>
-          </div>
-          <img src="../../resources/images/temp/map.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
-        </div>
       </div>
 
-      <div class="full-map-box">
-        <img src="../../resources/images/temp/map.png" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
-      </div>
-    </div>
-    
-    <div class="area-dialog" data-area="main"></div>
-  </main>
+      <div class="area-dialog" data-area="main"></div>
+    </main>
 
-  <aside class="side-content">
-    <div class="side-content-head">
-      <div class="side-content-head-tit">
-        <div class="favorites-area">
-          <input type="checkbox" id="favoritesArea">
-          <label for="favoritesArea"><span class="for-a11y">즐겨찾기 추가</span></label>
+    <aside class="side-content">
+      <div class="side-content-head">
+        <div class="side-content-head-tit">
+          <div class="favorites-area">
+            <input type="checkbox" id="favoritesArea">
+            <label for="favoritesArea"><span class="for-a11y">즐겨찾기 추가</span></label>
+          </div>
+          <h2 class="side-content-head-tit-name">서울특별시</h2>
+          <span class="side-content-head-tit-div">|</span>
+          <div class="side-content-head-tit-info">37°34'북 / 126°58'동 / 10:00 2026.04.29, Asia/Seoul (UTC+9)</div>
         </div>
-        <h2 class="side-content-head-tit-name">서울특별시</h2>
-        <span class="side-content-head-tit-div">|</span>
-        <div class="side-content-head-tit-info">37°34'북 / 126°58'동 / 10:00 2026.04.29, Asia/Seoul (UTC+9)</div>
+
+        <button type="button" class="side-content-close" aria-label="side content close"
+          onClick="UI.exe.toggle.toggleById('side-content');">
+          <i class="icon-aspect-close2" data-size="24"></i>
+        </button>
       </div>
-      
-      <button type="button" class="side-content-close" aria-label="side content close" onClick="UI.exe.toggle.toggleById('side-content');">
-        <i class="icon-aspect-close2" data-size="24"></i>
-      </button>
-    </div>
-    <div class="side-content-body">
-      <div class="side-content-body-scroll">
-        <div class="table-update-content">
-          <span class="table-update-content-title">업데이트</span>초단기: 8일(금) 09:40, 동네예보: 8일(금) 08:00
-        </div>
-        <div class="weather-table-box scroll-style2">
-          <div class="weather-col-group weather-table-sticky">
-            <div class="weather-col-group-top">
-              시각
-            </div>
-            <div class="weather-col-group-item h-55">
-              날씨
-            </div>
-            <div class="weather-col-group-item">
-              기온(℃)
-            </div>
-            <div class="weather-col-group-item">
-              체감온도(℃)
-            </div>
-            <div class="weather-col-group-item">
-              강수량(mm)
-            </div>
-            <div class="weather-col-group-item">
-              강수강도
-            </div>
-            <div class="weather-col-group-item">
-              강수확률(%)
-            </div>
-            <div class="weather-col-group-item h-52">
-              바람(m/s)
-            </div>
-            <div class="weather-col-group-item">
-              습도
-            </div>
-            <div class="weather-col-group-item">
-              영향예보
-            </div>
+      <div class="side-content-body">
+        <div class="side-content-body-scroll">
+          <div class="table-update-content">
+            <span class="table-update-content-title">업데이트</span>초단기: 8일(금) 09:40, 동네예보: 8일(금) 08:00
           </div>
-          <div class="weather-col-section">
-            <div class="weather-col-group">
+          <div class="weather-table-box scroll-style2">
+            <div class="weather-col-group weather-table-sticky">
               <div class="weather-col-group-top">
-                18시
+                시각
               </div>
               <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB01" data-size="32"><span class="for-a11y">맑음</span></i>
+                날씨
               </div>
               <div class="weather-col-group-item">
-                20
+                기온(℃)
               </div>
               <div class="weather-col-group-item">
-                20
+                체감온도(℃)
               </div>
               <div class="weather-col-group-item">
-                -
+                강수량(mm)
               </div>
               <div class="weather-col-group-item">
-                -
+                강수강도
               </div>
               <div class="weather-col-group-item">
-                30
+                강수확률(%)
               </div>
               <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="0"></i>
-                약
+                바람(m/s)
               </div>
               <div class="weather-col-group-item">
-                2
+                습도
               </div>
               <div class="weather-col-group-item">
-                10
+                영향예보
               </div>
             </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                19시
+            <div class="weather-col-section">
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  18시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB01" data-size="32"><span class="for-a11y">맑음</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="0"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB02" data-size="32"><span class="for-a11y">구름많은(낮)</span></i>
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  19시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB02" data-size="32"><span class="for-a11y">구름많은(낮)</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="15"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item">
-                20
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  20시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB03" data-size="32"><span class="for-a11y">흐림</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="45"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item">
-                20
+
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  21시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB04" data-size="32"><span class="for-a11y">비</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="60"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item">
-                -
+
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  22시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB05" data-size="32"><span class="for-a11y">눈</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="90"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="15"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                20시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB03" data-size="32"><span class="for-a11y">흐림</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="45"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
+
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  23시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB06" data-size="32"><span class="for-a11y">비 또는 눈</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="105"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
             </div>
 
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                21시
+            <div class="weather-col-section">
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  <span class="day-start">내일</span>
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB07" data-size="32"><span class="for-a11y">눈 또는 비</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="120"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB04" data-size="32"><span class="for-a11y">비</span></i>
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  01시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB08" data-size="32"><span class="for-a11y">낙뢰</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="135"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item">
-                20
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  02시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB09" data-size="32"><span class="for-a11y">연무</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="150"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item">
-                20
+
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  03시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB10" data-size="32"><span class="for-a11y">안개</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="165"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item">
-                -
+
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  04시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB11" data-size="32"><span class="for-a11y">황사</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="180"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item">
-                -
+
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  05시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB12" data-size="32"><span class="for-a11y">맑음(밤)</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="195"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item">
-                30
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  06시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB13" data-size="32"><span class="for-a11y">구름많음(밤)</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="210"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="60"></i>
-                약
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  07시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB14" data-size="32"><span class="for-a11y">소나기</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="225"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item">
-                2
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  08시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB15" data-size="32"><span class="for-a11y">가끔 비, 한때 비</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="240"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
-              <div class="weather-col-group-item">
-                10
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  09시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB16" data-size="32"><span class="for-a11y">가끔 눈, 한때 눈</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="255"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
+              </div>
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  10시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB17" data-size="32"><span class="for-a11y">가끔 비 또는 눈, 한때 비 또는 눈</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="270"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
+              </div>
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  11시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB18" data-size="32"><span class="for-a11y">가끔 눈 또는 비, 한때 눈 또는 비</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="285"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
+              </div>
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  12시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB19" data-size="32"><span class="for-a11y">빗방울</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="300"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
+              </div>
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  13시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB20" data-size="32"><span class="for-a11y">눈날림</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="315"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
+              </div>
+              <div class="weather-col-group">
+                <div class="weather-col-group-top">
+                  14시
+                </div>
+                <div class="weather-col-group-item h-55">
+                  <i class="icon-aspect-NB21" data-size="32"><span class="for-a11y">박무</span></i>
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  20
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  -
+                </div>
+                <div class="weather-col-group-item">
+                  30
+                </div>
+                <div class="weather-col-group-item h-52">
+                  <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
+                  <i class="icon-aspect-wind" data-size="20" data-rotate="345"></i>
+                  약
+                </div>
+                <div class="weather-col-group-item">
+                  2
+                </div>
+                <div class="weather-col-group-item">
+                  10
+                </div>
               </div>
             </div>
 
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                22시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB05" data-size="32"><span class="for-a11y">눈</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="90"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                23시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB06" data-size="32"><span class="for-a11y">비 또는 눈</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="105"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
           </div>
-
-          <div class="weather-col-section">
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                <span class="day-start">내일</span>
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB07" data-size="32"><span class="for-a11y">눈 또는 비</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="120"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                01시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB08" data-size="32"><span class="for-a11y">낙뢰</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="135"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                02시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB09" data-size="32"><span class="for-a11y">연무</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="150"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                03시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB10" data-size="32"><span class="for-a11y">안개</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="165"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                04시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB11" data-size="32"><span class="for-a11y">황사</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="180"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                05시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB12" data-size="32"><span class="for-a11y">맑음(밤)</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="195"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                06시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB13" data-size="32"><span class="for-a11y">구름많음(밤)</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="210"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                07시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB14" data-size="32"><span class="for-a11y">소나기</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="225"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                08시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB15" data-size="32"><span class="for-a11y">가끔 비, 한때 비</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="240"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                09시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB16" data-size="32"><span class="for-a11y">가끔 눈, 한때 눈</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="255"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                10시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB17" data-size="32"><span class="for-a11y">가끔 비 또는 눈, 한때 비 또는 눈</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="270"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                11시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB18" data-size="32"><span class="for-a11y">가끔 눈 또는 비, 한때 눈 또는 비</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="285"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                12시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB19" data-size="32"><span class="for-a11y">빗방울</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="300"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                13시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB20" data-size="32"><span class="for-a11y">눈날림</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="315"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-            <div class="weather-col-group">
-              <div class="weather-col-group-top">
-                14시
-              </div>
-              <div class="weather-col-group-item h-55">
-                <i class="icon-aspect-NB21" data-size="32"><span class="for-a11y">박무</span></i>
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                20
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                -
-              </div>
-              <div class="weather-col-group-item">
-                30
-              </div>
-              <div class="weather-col-group-item h-52">
-                <!-- D : [data-rotate="0 ~ 345"] 15단위 -->
-                <i class="icon-aspect-wind" data-size="20" data-rotate="345"></i>
-                약
-              </div>
-              <div class="weather-col-group-item">
-                2
-              </div>
-              <div class="weather-col-group-item">
-                10
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
-    </div>
-  </aside>
-</div>
+    </aside>
+  </div>
 
-<div class="area-dropdown" data-area="body"></div>
-<div class="area-tooltip" data-area="body"></div>
-<div class="area-dialog" data-area="body"></div>
-<div class="area-toast" data-area="body"></div>
+  <div class="area-dropdown" data-area="body"></div>
+  <div class="area-tooltip" data-area="body"></div>
+  <div class="area-dialog" data-area="body"></div>
+  <div class="area-toast" data-area="body"></div>
 
-<!-- javascript -->
-<script type="module">
-  /* 준비 ---------------------------------------------- */
-  import { UX } from '../../resources/js/uiuxu.common.js';
-  import { ComparisonMap, TimeRangeHistory }  from '../../resources/js/component/comparisonMap.js';
-  UX.init();
+  <!-- javascript -->
+  <script type="module">
+    /* 준비 ---------------------------------------------- */
+    import { UX } from '../../resources/js/uiuxu.common.js';
+    import { ComparisonMap, TimeRangeHistory } from '../../resources/js/component/comparisonMap.js';
+    UX.init();
 
-  // [TOP]
-  UI.map.control = {
-    // 옵션: 기온
-    option1: new UX.Dropdown({
-      id: 'option1',
-      ps: 'rt',
-      src: '../dropdown/option1.html',
-      srcCallback:() => {
-        console.log('option1 load');
-      }
-    }),
-    // 옵션: 구름량
-    option2: new UX.Dropdown({
-      id: 'option2',
-      ps: 'rt',
-      src: '../dropdown/option2.html',
-      srcCallback:() => {
-        console.log('option2 load');
+    // [TOP]
+    UI.map.control = {
+      // 옵션: 기온
+      option1: new UX.Dropdown({
+        id: 'option1',
+        ps: 'rt',
+        src: '../dropdown/option1.html',
+        srcCallback: () => {
+          console.log('option1 load');
+        }
+      }),
+      // 옵션: 구름량
+      option2: new UX.Dropdown({
+        id: 'option2',
+        ps: 'rt',
+        src: '../dropdown/option2.html',
+        srcCallback: () => {
+          console.log('option2 load');
+        },
+      }),
+      // 옵션: 풍속
+      option3: new UX.Dropdown({
+        id: 'option3',
+        ps: 'rt',
+        src: '../dropdown/option3.html',
+        srcCallback: () => {
+          console.log('option3 load');
+        },
+      }),
+      // 옵션: 기압
+      option4: new UX.Dropdown({
+        id: 'option4',
+        ps: 'rt',
+        src: '../dropdown/option4.html',
+        srcCallback: () => {
+          console.log('option4 load');
+        },
+      }),
+      // 옵션: 습도
+      option5: new UX.Dropdown({
+        id: 'option5',
+        ps: 'rt',
+        src: '../dropdown/option5.html',
+        srcCallback: () => {
+          console.log('option5 load');
+        },
+      }),
+
+      // 범례
+      setting: new UX.Dropdown({
+        id: 'setting',
+        ps: 'lb',
+        src: '../dropdown/setting.html',
+        srcCallback: () => {
+          UI.exe.settingFakeRadio = new UX.FakeRadio({
+            id: 'setting',
+            callback: (v) => {
+              document.querySelector('[data-dropdown="setting"] .legend-gauge .legend-level-bar').dataset.levelType = v.querySelector('.legend-level-bar').dataset.levelType;
+            }
+          });
+        },
+      }),
+      setting2: new UX.Dropdown({
+        id: 'setting2',
+        ps: 'lb',
+        src: '../dropdown/setting2.html',
+        srcCallback: () => {
+          UI.exe.settingFakeRadio2 = new UX.FakeRadio({
+            id: 'setting2',
+            callback: (v) => {
+              document.querySelector('[data-dropdown="setting2"] .legend-gauge .legend-level-bar').dataset.levelType = v.querySelector('.legend-level-bar').dataset.levelType;
+            }
+          });
+        },
+      }),
+    }
+    UI.map.control.option1.init();
+    UI.map.control.option2.init();
+    UI.map.control.option3.init();
+    UI.map.control.option4.init();
+    UI.map.control.option5.init();
+    UI.map.control.setting.init();
+    UI.map.control.setting2.init();
+
+    UI.exe.rangeDual = {
+      init: () => {
+        UI.exe.rangeDual.item1.init();
+        UI.exe.rangeDual.item2.init();
       },
-    }),
-    // 옵션: 풍속
-    option3: new UX.Dropdown({
-      id: 'option3',
-      ps: 'rt',
-      src: '../dropdown/option3.html',
-      srcCallback:() => {
-        console.log('option3 load');
-      },
-    }),
-    // 옵션: 기압
-    option4: new UX.Dropdown({
-      id: 'option4',
-      ps: 'rt',
-      src: '../dropdown/option4.html',
-      srcCallback:() => {
-        console.log('option4 load');
-      },
-    }),
-    // 옵션: 습도
-    option5: new UX.Dropdown({
-      id: 'option5',
-      ps: 'rt',
-      src: '../dropdown/option5.html',
-      srcCallback:() => {
-        console.log('option5 load');
-      },
-    }),
-
-    // 범례
-    setting: new UX.Dropdown({
-      id: 'setting',
-      ps: 'lb',
-      src: '../dropdown/setting.html',
-      srcCallback:() => {
-        UI.exe.settingFakeRadio = new UX.FakeRadio({
-          id:'setting',
-          callback: (v) => {
-            document.querySelector('[data-dropdown="setting"] .legend-gauge .legend-level-bar').dataset.levelType = v.querySelector('.legend-level-bar').dataset.levelType;
-          }
-        });
-      },
-    }),
-    setting2: new UX.Dropdown({
-      id: 'setting2',
-      ps: 'lb',
-      src: '../dropdown/setting2.html',
-      srcCallback:() => {
-        UI.exe.settingFakeRadio2 = new UX.FakeRadio({
-          id:'setting2',
-          callback: (v) => {
-            document.querySelector('[data-dropdown="setting2"] .legend-gauge .legend-level-bar').dataset.levelType = v.querySelector('.legend-level-bar').dataset.levelType;
-          }
-        });
-      },
-    }),
-  }
-  UI.map.control.option1.init();
-  UI.map.control.option2.init();
-  UI.map.control.option3.init();
-  UI.map.control.option4.init();
-  UI.map.control.option5.init();
-  UI.map.control.setting.init();
-  UI.map.control.setting2.init();
-
-  UI.exe.rangeDual = {
-    init:() => {
-      UI.exe.rangeDual.item1.init();
-      UI.exe.rangeDual.item2.init();
-    },
-    item1: new UX.RangeSliderDual({
-      id: 'range1',
-      value: [-50, 50],
-      title: 'range1',
-      min: -100,
-      max: 100,
-      step: 0.1,
-      orientation: 'vertical'
-    }),
-    item2: new UX.RangeSliderDual({
-      id: 'range2',
-      value: [-50, 50],
-      title: 'range2',
-      min: -100,
-      max: 100,
-      step: 0.1,
-      orientation: 'vertical'
-    }),
-  }
-  UI.exe.rangeDual.init();
+      item1: new UX.RangeSliderDual({
+        id: 'range1',
+        value: [-50, 50],
+        title: 'range1',
+        min: -100,
+        max: 100,
+        step: 0.1,
+        orientation: 'vertical'
+      }),
+      item2: new UX.RangeSliderDual({
+        id: 'range2',
+        value: [-50, 50],
+        title: 'range2',
+        min: -100,
+        max: 100,
+        step: 0.1,
+        orientation: 'vertical'
+      }),
+    }
+    UI.exe.rangeDual.init();
 
 
-  UI.exe.comparisonMap = new ComparisonMap({
-    id: 'main'
-  });
+    UI.exe.comparisonMap = new ComparisonMap({
+      id: 'main'
+    });
 
-  UI.exe.timeRangeHistory = new TimeRangeHistory({
-    id: 'time-range1',
-    upperLimit: [24,0], // max 제한: 실시간으로 미래의 정보가 없을 경우
-    playTime: 3000, // 플레이시 변경되는 시간 간격 (ms)
-    point: 60, // 시간 범위 표시 간격 (분 단위)
-    value: [10, 0], // [시, 분] or value
-    date: '2024-06-01', // 날짜 설정 (YYYY-MM-DD)
-  });
-  UI.exe.timeRangeHistoryLeft = new TimeRangeHistory({
-    id: 'time-range2-left',
-    upperLimit: [24,0], 
-    playTime: 3000, 
-    point: 60,
-    value: [10, 0],
-    date: '2024-06-01', // 날짜 설정 (YYYY-MM-DD)
-  });
-  UI.exe.timeRangeHistoryRight = new TimeRangeHistory({
-    id: 'time-range2-right',
-    upperLimit: [24,0], 
-    playTime: 3000, 
-    point: 60,
-    value: [10, 0],
-    date: '2024-06-01', // 날짜 설정 (YYYY-MM-DD)
-  });
+    UI.exe.timeRangeHistory = new TimeRangeHistory({
+      id: 'time-range1',
+      // upperLimit: [24, 0], // max 제한: 실시간으로 미래의 정보가 없을 경우
+      playTime: 3000, // 플레이시 변경되는 시간 간격 (ms)
+      value: [10, 0], // [시, 분] or value
+      date: '2026-04-30', // 날짜 설정 (YYYY-MM-DD)
+    });
+    // UI.exe.timeRangeHistoryLeft = new TimeRangeHistory({
+    //   id: 'time-range2-left',
+    //   upperLimit: [24, 0],
+    //   playTime: 3000,
+    //   point: 60,
+    //   value: [10, 0],
+    //   date: '2024-06-01', // 날짜 설정 (YYYY-MM-DD)
+    // });
+    // UI.exe.timeRangeHistoryRight = new TimeRangeHistory({
+    //   id: 'time-range2-right',
+    //   upperLimit: [24, 0],
+    //   playTime: 3000,
+    //   point: 60,
+    //   value: [10, 0],
+    //   date: '2024-06-01', // 날짜 설정 (YYYY-MM-DD)
+    // });
 
-  UI.exe.timeRangeHistory.init();
-  UI.exe.timeRangeHistoryLeft.init();
-  UI.exe.timeRangeHistoryRight.init();
+    UI.exe.timeRangeHistory.init();
+    // UI.exe.timeRangeHistoryLeft.init();
+    // UI.exe.timeRangeHistoryRight.init();
 
-  UI.exe.기온 = () => {
-    UI.exe.timeRangeHistory.setUpperLimit([24, 0]);
-    UI.exe.timeRangeHistory.setPlayTime(1000);
-    UI.exe.timeRangeHistory.setValue([6, 0]);
-    UI.exe.timeRangeHistory.setPoint(10);
-  }
-  UI.exe.강수량 = () => {
-    UI.exe.timeRangeHistory.setUpperLimit([24, 0]);
-    UI.exe.timeRangeHistory.setPlayTime(1000);
-    UI.exe.timeRangeHistory.setValue([6, 0]);
-    UI.exe.timeRangeHistory.setPoint(180);
-  }
-  UI.exe.구름량 = () => {
-    UI.exe.timeRangeHistory.setUpperLimit([24, 0]);
-    UI.exe.timeRangeHistory.setPlayTime(1000);
-    UI.exe.timeRangeHistory.setValue([6, 0]);
-    UI.exe.timeRangeHistory.setPoint(120);
-  }
-  UI.exe.풍속 = () => {
-    UI.exe.timeRangeHistory.setUpperLimit([24, 0]);
-    UI.exe.timeRangeHistory.setPlayTime(1000);
-    UI.exe.timeRangeHistory.setValue([6, 0]);
-  }
-  UI.exe.기압 = () => {
-    UI.exe.timeRangeHistory.setUpperLimit([24, 0]);
-    UI.exe.timeRangeHistory.setPlayTime(1000);
-    UI.exe.timeRangeHistory.setValue([6, 0]);
-  }
-  UI.exe.습도 = () => {
-    UI.exe.timeRangeHistory.setUpperLimit([24, 0]);
-    UI.exe.timeRangeHistory.setPlayTime(1000);
-    UI.exe.timeRangeHistory.setValue([6, 0]);
-  }
-  UI.exe.해빙 = () => {
-    UI.exe.timeRangeHistory.setUpperLimit([24, 0]);
-    UI.exe.timeRangeHistory.setPlayTime(1000);
-    UI.exe.timeRangeHistory.setValue([6, 0]);
-  }
-  UI.exe.적설량 = () => {
-    UI.exe.timeRangeHistory.setUpperLimit([24, 0]);
-    UI.exe.timeRangeHistory.setPlayTime(1000);
-    UI.exe.timeRangeHistory.setValue([6, 0]);
-  }
-</script>
+    UI.exe.sideOpenFn = () => {
+      console.log('사이드 열림');
+      const btnCompare = document.querySelector('[data-toggle-object="map-compare"]');
+      btnCompare.getAttribute('disabled') ? btnCompare.removeAttribute('disabled') : btnCompare.setAttribute('disabled', true);
+    }
+  </script>
 </body>
+
 </html>
