@@ -1,0 +1,76 @@
+﻿ <!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>로그인</title>
+
+  <link rel="stylesheet" href="../../resources/css/ui.base.css">
+</head>
+
+<body data-content-bg="F7F8FB">
+<div class="base-wrap sub-content-layout" data-type="sub4">
+  <!-- /html/header.html -->
+  <header class="header" data-id="header"></header>
+
+  <main class="join-area" data-type="login">
+    <div class="ui-flex mb-30" data-align-items="center" data-justify-content="center" data-view="mobile-hidden">
+      <i class="login-top-logo" ></i>
+    </div>
+
+    <div class="join-content-box" data-h="400">
+      <div class="id-pw-type">
+        <h1 class="text-32-800 m-text-22-800" data-text-color="black" data-text-align="center">로그인</h1>
+        <div class="mt-20 ui-flex" data-gap="10" data-direction="col">
+          <input type="text" class="form-element-input" data-width="full" data-size="46" placeholder="아이디" />
+          <input type="password" class="form-element-input" data-width="full" data-size="46" placeholder="비밀번호" />
+        </div>
+        <div class="ui-flex mt-20" data-gap="16" data-align-items="center" data-justify-content="center">
+          <a href="" class="link-black-line text-14-800">아이디 찾기</a>
+          <i class="line-id-pw"></i>
+          <a href="" class="link-black-line text-14-800">비밀번호 찾기</a>
+        </div>
+        <div class="join-btn-group mt-20">
+          <button type="button" class="btn-base" data-size="46" data-color="primary" data-round="4" data-width="full">
+            <span class="btn-text" data-font-size="16-800">로그인</span>
+          </button>
+        </div>
+        <div class="ui-flex mt-20" data-gap="16" data-align-items="center" data-justify-content="center">
+          <a href="" class="link-blue-line text-16-800">회원가입</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-desc-area">
+      <p class="login-desc-item">개인정보 보호를 위해 비밀번호 5회 이상 오류 시 비밀번호 재설정이 필요합니다.</p>
+      <p class="login-desc-item">비밀번호는 주기적(3개월)으로 변경하고, 서비스 이용 후 반드시 로그아웃하시기 바랍니다.</p>
+      <p class="login-desc-item">아이디는 영문, 숫자를 조합한 4~12자입니다.</p>
+      <p class="login-desc-item">비밀번호는 문자, 숫자, 특수문자를 조합한 9~16자 입니다.</p>
+    </div>
+  </main>
+
+  <footer class="ui-footer" data-id="footer"></footer>
+
+
+</div>
+
+<div class="area-dropdown" data-area="body"></div>
+<div class="area-tooltip" data-area="body"></div>
+<div class="area-dialog" data-area="body"></div>
+<div class="area-toast" data-area="body"></div>
+<!-- javascript -->
+<script type="module">
+  /* 준비 ---------------------------------------------- */
+  import { UX } from '../../resources/js/uiuxu.common.js';
+  UX.init();
+
+</script>
+</body>
+</html>

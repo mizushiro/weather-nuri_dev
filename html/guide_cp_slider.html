@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="../resources/css/ui.base.css">
+</head>
+
+<body>
+<div class="base-wrap">
+  <main class="guide-page-content" >
+    <div style="padding: 5rem;">
+      <div class="slider-container" data-slider-theme="dark">
+        <div class="slider-item" data-rangeslider="rangeInput">
+          <div class="slider-wrapper">
+            <input type="range" id="rangeInput" min="2000" max="2100" value="2040">
+          </div>
+        </div>
+      </div>
+      <br /><br /><br />
+      <div class="slider-container" data-slider-theme="light">
+        <div class="slider-item" data-rangeslider="rangeInput2">
+          <div class="slider-wrapper">
+            <input type="range" id="rangeInput2" min="2000" max="2100" value="2050">
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- zIndex 100: dropdown -->
+<div class="area-dropdown"></div>
+<!-- zIndex 200: tooltip  -->
+<div class="area-tooltip"></div>
+<!-- zIndex 300: modal -->
+<div class="area-dialog" data-area="body"></div>
+<!-- toast -->
+<div class="area-toast"></div>
+
+<script type="module">
+  // 세팅 ----------------------------------------------
+  import { UX } from '../resources/js/uiuxu.common.js';
+  UX.init();
+
+
+  // 선언 ----------------------------------------------
+  UI.exe.rangeInput = new UX.RangeSlider({
+    id: 'rangeInput',
+    range: 19,
+    tooltip: true,
+    pointerWidth: 18,
+  });
+ UI.exe.rangeInput2 = new UX.RangeSlider({
+    id: 'rangeInput2',
+    range: 0,
+    tooltip: true,
+    pointerWidth: 18,
+  });
+
+
+  // 실행 ----------------------------------------------
+  UI.exe.rangeInput.init();
+  UI.exe.rangeInput2.init();
+
+
+  
+
+</script>
+</body>
+
+</html>
