@@ -52,58 +52,66 @@ export class TimeRangeHistory {
     this.max = 24 * 60;
     this.trackOffset = 60;
     this.trackMax = this.max + this.trackOffset;
-    this.timeScale = 3;
+    this.timeScale = 1;
     this.id = opt.id;
     this.wrap = document.querySelector(`.timeRange[data-time-range="${this.id}"]`);
     this.input = this.wrap.querySelector('.timeRange-range');
     this.bar = this.wrap.querySelector('.timeRange-bar');
     this.step = opt.step || 10; // 기본 10분
     this.date = opt.date || new Date().toISOString().split('T')[0]; // 날짜 설정 (YYYY-MM-DD)
+    this.minmaxDay = opt.minmaxDay || null; // 선택 가능한 날짜 범위 설정 (YYYY-MM-DD)
+    this.totalDays = this._normalizeTotalDays(opt.totalDays ?? opt.days ?? opt.dayCount ?? 4);
+    this.currentDayIndex = 0;
+    this.currentDate = this._addDaysToDate(this.date, this.currentDayIndex);
 
-    const makeHtml = `<div class="timeRange-line">
+    const makeHtml = `<div class="time-range-day">
+        <i class="icon-aspect-calendar-b" data-size="20"></i>
+        <input type="date" value="${this.date}" class="timeRange-date-input" min="${this.minmaxDay ? this.minmaxDay[0] : this.date}" max="${this.minmaxDay ? this.minmaxDay[1] : this._addDaysToDate(this.date, this.totalDays - 1)}" disabled />
+      </div>
+      <div class="timeRange-line">
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>00:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>01:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>02:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>03:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>04:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>05:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>06:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>07:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>08:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>09:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>10:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>11:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>12:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>13:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>14:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>15:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>16:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>17:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>18:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>19:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>20:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>21:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>00:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>03:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>06:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>09:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>12:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>15:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>18:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>21:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>00:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>03:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>06:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>09:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>12:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>15:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>18:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>21:00</b></div>
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>22:00</b></div>
+      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>23:00</b></div>
     </div>
     <div class="timeRange-fake-input">
       <div class="timeRange-fake-handle">
-        <b class="timeRange-fake-value">00:00</b>
+        <b class="timeRange-fake-value"></b>
       </div>
       <div class="timeRange-fake-track">
         <div class="timeRange-today">
-          <b class="timeRange-today-text">4월 26일</b>
+          <b class="timeRange-today-text">00:00</b>
         </div>
       </div>
+      
     </div>`;
 
     this.bar.insertAdjacentHTML('beforeend', makeHtml);
     this.fakeHandle = this.wrap.querySelector('.timeRange-fake-handle');
     this.fakeTrack = this.wrap.querySelector('.timeRange-fake-track');
     this.fakeTodayText = this.wrap.querySelector('.timeRange-today-text');
-    this.fakeTodayText.textContent = `${new Date(this.date).getMonth() + 1}월 ${new Date(this.date).getDate()}일`;
+    // this.fakeTodayText.textContent = `${new Date(this.date).getMonth() + 1}월 ${new Date(this.date).getDate()}일`;
 
 
     // point 처리: 숫자면 배열로 변환, 마지막 값 1440(24*60) 초과시 1440으로 보정
@@ -152,11 +160,20 @@ export class TimeRangeHistory {
     }
     this.onChange = opt.onChange || function(){};
     this.valueBox = this.wrap.querySelector('.timeRange-fake-value');
+    this.dateInput = this.wrap.querySelector('.timeRange-date-input');
     this.playTime = opt.playTime || 3000; // 기본 3초
     this.playBtn = this.wrap.querySelector('.timeRange-play');
+    this.playPrev = this.wrap.querySelector('.timeRange-prev');
+    this.playNext = this.wrap.querySelector('.timeRange-next');
     this._playTimer = null;
     this._playClickHandler = null;
+    this._playPrevClickHandler = null;
+    this._playNextClickHandler = null;
     this._inputHandler = null;
+    this._dateInputClickHandler = null;
+    this._dateInputChangeHandler = null;
+
+    this._setCurrentDayIndex(0);
 
     // value가 [시, 분] 배열이면 분 단위로 변환
     if (Array.isArray(opt.value) && opt.value.length === 2) {
@@ -232,15 +249,85 @@ export class TimeRangeHistory {
       this.wrap.classList.add(pointClass);
     }
   }
-  _startPlay() {
-    if (this._playTimer) return;
-    const sortedPoints = [...new Set(this.points)]
+
+  _normalizeTotalDays(totalDays) {
+    const parsed = Number(totalDays);
+    if (!Number.isFinite(parsed) || parsed < 1) return 4;
+    return Math.floor(parsed);
+  }
+
+  _addDaysToDate(dateStr, dayOffset) {
+    const date = new Date(dateStr);
+    if (Number.isNaN(date.getTime())) return dateStr;
+    date.setDate(date.getDate() + dayOffset);
+    return date.toISOString().split('T')[0];
+  }
+
+  _setCurrentDayIndex(dayIndex) {
+    const maxDayIndex = Math.max(0, this.totalDays - 1);
+    this.currentDayIndex = Math.min(Math.max(0, dayIndex), maxDayIndex);
+    this.currentDate = this._addDaysToDate(this.date, this.currentDayIndex);
+    if (this.dateInput) {
+      this.dateInput.value = this.currentDate;
+    }
+  }
+
+  _getSortedPoints() {
+    return [...new Set(this.points)]
       .map((p) => Number(p))
       .filter((p) => !Number.isNaN(p))
       .sort((a, b) => a - b);
+  }
 
-    // 완료 상태(마지막 값)에서 재생 버튼을 다시 누르면 시작점으로 초기화
-    if (this.value >= this.upperLimit) {
+  _moveByPoint(direction) {
+    const sortedPoints = this._getSortedPoints();
+    if (!sortedPoints.length) return;
+
+    if (this._playTimer) {
+      this._stopPlay();
+    }
+
+    if (direction > 0) {
+      const nextPoint = sortedPoints.find((p) => p > this.value && p <= this.upperLimit);
+      if (nextPoint !== undefined) {
+        this.setValue(nextPoint);
+        return;
+      }
+
+      if (this.currentDayIndex < this.totalDays - 1) {
+        this._setCurrentDayIndex(this.currentDayIndex + 1);
+        this.setValue(sortedPoints[0]);
+        return;
+      }
+
+      this.setValue(this.upperLimit);
+      return;
+    }
+
+    const prevCandidates = sortedPoints.filter((p) => p < this.value);
+    if (prevCandidates.length) {
+      this.setValue(prevCandidates[prevCandidates.length - 1]);
+      return;
+    }
+
+    if (this.currentDayIndex > 0) {
+      this._setCurrentDayIndex(this.currentDayIndex - 1);
+      const prevDayPoint = [...sortedPoints].reverse().find((p) => p <= this.upperLimit) ?? this.upperLimit;
+      this.setValue(prevDayPoint);
+      return;
+    }
+
+    this.setValue(sortedPoints[0]);
+  }
+
+  _startPlay() {
+    if (this._playTimer) return;
+    const sortedPoints = this._getSortedPoints();
+    const firstPoint = sortedPoints[0] ?? 0;
+
+    // 마지막 날까지 모두 완료된 상태에서 다시 재생하면 첫째 날부터 재시작
+    if (this.currentDayIndex >= this.totalDays - 1 && this.value >= this.upperLimit) {
+      this._setCurrentDayIndex(0);
       const resetPoint = sortedPoints.find((p) => p < this.upperLimit) ?? sortedPoints[0] ?? 0;
       this.setValue(resetPoint);
     }
@@ -248,23 +335,23 @@ export class TimeRangeHistory {
     this.playBtn.setAttribute('data-toggle-state', 'selected');
     this._playTimer = setInterval(() => {
       let next = sortedPoints.find((p) => p > this.value);
-      if (next === undefined) {
-        next = this.upperLimit;
-      }
-      if (next > this.upperLimit) {
-        next = this.upperLimit;
-      }
-      this.setValue(next);
-      if (next >= this.upperLimit) {
-        this._stopPlay();
-        // 재생으로 24:00 도달 후 종료되면 핸들은 00:00 위치로 이동
-        if (this.value === this.max) {
-          this.displayValue = this.trackOffset;
-          this.input.value = this.displayValue;
-          this._updateFakeHandle();
-          this._updateValueBox();
+
+      if (next !== undefined && next <= this.upperLimit) {
+        this.setValue(next);
+        if (this.currentDayIndex >= this.totalDays - 1 && next >= this.upperLimit) {
+          this._stopPlay();
         }
+        return;
       }
+
+      if (this.currentDayIndex < this.totalDays - 1) {
+        this._setCurrentDayIndex(this.currentDayIndex + 1);
+        this.setValue(firstPoint);
+        return;
+      }
+
+      this.setValue(this.upperLimit);
+      this._stopPlay();
     }, this.playTime);
   }
 
@@ -333,8 +420,8 @@ export class TimeRangeHistory {
     this.input.addEventListener('mouseup', this._mouseupHandler);
   }
   _updateValueBox() {
-    if (!this.valueBox) return;
-    this.valueBox.textContent = this._formatTime(this.value);
+    if (!this.fakeTodayText) return;
+    this.fakeTodayText.textContent = this._formatTime(this.value);
   }
   _updateFakeHandle() {
     if (!this.fakeHandle) return;
@@ -375,24 +462,19 @@ export class TimeRangeHistory {
   }
 
   _getActualValue(val) {
-    return val * this.timeScale;
+    return (this.currentDayIndex * this.max + val) * this.timeScale;
   }
 
-  _getDisplayDate(val) {
-    // 72시간 끝(00:00으로 표시되는 시점)은 기준일로 초기화
-    if (val >= this.max) {
-      const date = new Date(this.date);
-      return `${date.getMonth() + 1}월 ${date.getDate()}일`;
-    }
-    const actualVal = this._getActualValue(val);
-    const date = new Date(this.date);
-    date.setDate(date.getDate() + Math.floor(actualVal / (24 * 60)));
+  _getDisplayDate() {
+    const date = new Date(this.currentDate);
+    if (Number.isNaN(date.getTime())) return this.currentDate;
     return `${date.getMonth() + 1}월 ${date.getDate()}일`;
   }
 
   _updateDateTooltip() {
-    if (!this.fakeTodayText) return;
-    this.fakeTodayText.textContent = this._getDisplayDate(this.value);
+    if (this.dateInput) {
+      this.dateInput.value = this.currentDate;
+    }
   }
 
   setStep(step) {
@@ -423,6 +505,30 @@ export class TimeRangeHistory {
     this._initRange();
     this._updateFakeHandle();
     this._updateValueBox();
+
+    if (this.dateInput) {
+      if (this._dateInputClickHandler) {
+        this.dateInput.removeEventListener('click', this._dateInputClickHandler);
+      }
+      if (this._dateInputChangeHandler) {
+        this.dateInput.removeEventListener('change', this._dateInputChangeHandler);
+      }
+
+      this._dateInputClickHandler = () => {
+        if (typeof this.dateInput.showPicker === 'function') {
+          this.dateInput.showPicker();
+        }
+      };
+      this._dateInputChangeHandler = (e) => {
+        this.date = e.target.value;
+        this._setCurrentDayIndex(0);
+        this.setValue(this.value);
+      };
+
+      this.dateInput.addEventListener('click', this._dateInputClickHandler);
+      this.dateInput.addEventListener('change', this._dateInputChangeHandler);
+    }
+
     // playBtn 이벤트 중복 방지
     if (this.playBtn) {
       if (this._playClickHandler) {
@@ -437,6 +543,26 @@ export class TimeRangeHistory {
         }
       };
       this.playBtn.addEventListener('click', this._playClickHandler);
+    }
+
+    if (this.playPrev) {
+      if (this._playPrevClickHandler) {
+        this.playPrev.removeEventListener('click', this._playPrevClickHandler);
+      }
+      this._playPrevClickHandler = () => {
+        this._moveByPoint(-1);
+      };
+      this.playPrev.addEventListener('click', this._playPrevClickHandler);
+    }
+
+    if (this.playNext) {
+      if (this._playNextClickHandler) {
+        this.playNext.removeEventListener('click', this._playNextClickHandler);
+      }
+      this._playNextClickHandler = () => {
+        this._moveByPoint(1);
+      };
+      this.playNext.addEventListener('click', this._playNextClickHandler);
     }
   }
 
@@ -455,6 +581,16 @@ export class TimeRangeHistory {
     this._initRange();
     this._updateFakeHandle();
     this._updateValueBox();
+  }
+
+  setTotalDays(totalDays) {
+    this.totalDays = this._normalizeTotalDays(totalDays);
+    if (this.currentDayIndex > this.totalDays - 1) {
+      this._setCurrentDayIndex(this.totalDays - 1);
+      this.setValue(Math.min(this.value, this.upperLimit));
+    } else {
+      this._setCurrentDayIndex(this.currentDayIndex);
+    }
   }
 
   setPlayTime(playTime) {

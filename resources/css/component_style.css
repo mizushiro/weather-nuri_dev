@@ -30,7 +30,9 @@
 [data-tab-style="line-bottom-type"] [role="tab"][aria-selected="true"] {color:#2E7EF6;position:relative}
 [data-tab-style="line-bottom-type"] [role="tab"][aria-selected="true"]::after {content:'';height:.2rem;left:0;right:0;bottom:0;background-color:#2E7EF6;position:absolute}
 
-.dropdown-panel {margin-left:1rem;border-radius:.8rem;box-shadow:0 .4rem .4rem 0 #00000040;padding:0;width:14.6rem;}
+.dropdown-panel {border-radius:.8rem;box-shadow:0 .4rem .4rem 0 #00000040;padding:0;}
+[data-dropdown-panel][data-ps=rt] .dropdown-panel {margin-left:1rem;width:14.6rem;}
+[data-dropdown-panel][data-ps=tl] .dropdown-panel {margin-bottom:.4rem;width:100%}
 .dropdown-panel[data-box-radius="6"] {border-radius:.6rem}
 .dropdown-panel[data-w-size="160"] {width:16rem;min-width:16rem}
 .dropdown-panel[data-w-size="220"] {width:22rem;min-width:22rem}
