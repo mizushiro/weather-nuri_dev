@@ -33,13 +33,16 @@
           <i class="icon-aspect-map-nav1" data-size="24"></i>
         </span>
         <div class="ui-flex" data-align-items="center">
-          <span class="text-16-700" data-text-color="white50">기온</span>
+          <span class="text-16-700" data-text-color="white50" data-title>기온</span>
           <i class="icon-aspect-arrow-right" data-size="24"></i>
-          <span class="text-16-700" data-text-color="white">850 hPa, 1500m</span>
+          <span class="text-16-700" data-text-color="white" data-value>850 hPa, 1500m</span>
         </div>
+        <button type="button" class="link-full" data-view="pc-hidden" onclick="UI.exe.modalFilter.show()">
+          <span class="for-a11y">메뉴 열기</span>
+        </button>
       </div>
       <div class="full-map-setting-area">
-        <div class="form-fake-group-flex" data-form-style="round-box" data-form-h="48" data-item-size="88">
+        <div class="form-fake-group-flex" data-form-style="round-box" data-form-h="48" data-item-size="88" data-view="mobile-hidden">
           <div class="form-fake-button">
             <input type="radio" id="mapTypeSelect-1" name="mapTypeSelect" value="world" class="form-fake-input" checked>
             <label for="mapTypeSelect-1" class="form-fake-label">
@@ -52,7 +55,7 @@
               대한민국
             </label>
           </div>
-        </div>
+        </div >
         <button type="button" class="btn-base" data-size="48" data-round="full" data-type="icon" aria-label="설정" data-shadow data-color="white" data-toggle-object="side-content" onclick="UI.exe.sideOpenFn();">
           <i class="icon-aspect-setting" data-size="24"></i>
         </button>
@@ -62,7 +65,7 @@
     <!-- map-left -->
     <div class="full-map-left-area" data-toggle-target="map-compare">
       <!-- map options -->
-      <div class="map-options">
+      <div class="map-options" data-view="mobile-hidden">
         <div data-dropdown="option1">
           <button type="button" class="btn-map-left" data-dropdown-button="option1" data-toggle-object="option1" data-radio="w-option">
             <span class="icon-round-box">
@@ -163,13 +166,23 @@
           </div>
 
           <div class="legend-gauge">
-            <span class="legend-level-bar" data-level-type="legend_01"></span>
+            <span class="legend-level-bar" data-level-type="legend-block-01"></span>
             <div class="legend-gauge-group">
-              <span class="legend-gauge-num">160</span>
-              <span class="legend-gauge-num">127.5</span>
-              <span class="legend-gauge-num">95</span>
-              <span class="legend-gauge-num">62.5</span>
+              <span class="legend-gauge-num">50</span>
+              <span class="legend-gauge-num">50</span>
               <span class="legend-gauge-num">30</span>
+              <span class="legend-gauge-num">25</span>
+              <span class="legend-gauge-num">20</span>
+              <span class="legend-gauge-num">15</span>
+              <span class="legend-gauge-num">10</span>
+              <span class="legend-gauge-num">5</span>
+              <span class="legend-gauge-num">0</span>
+              <span class="legend-gauge-num">-5</span>
+              <span class="legend-gauge-num">-10</span>
+              <span class="legend-gauge-num">-15</span>
+              <span class="legend-gauge-num">-20</span>
+              <span class="legend-gauge-num">-30</span>
+              <span class="legend-gauge-num">-40</span>
             </div>
             <span class="legend-unit">(℃)</span>
           </div>
@@ -204,7 +217,7 @@
       </div>
 
       <div class="full-map-right-group2">
-        <button type="button" class="btn-base" data-color="white" data-shadow data-size="38" data-round="4" data-type="icon" data-toggle-object="tool- export" aria-label="">
+        <button type="button" class="btn-base" data-color="white" data-shadow data-size="38" data-round="4" data-type="icon" data-toggle-object="tool- export" aria-label="" data-view="mobile-hidden">
           <i class="icon-aspect-map-control4" data-size="24"></i>
         </button>
         <button type="button" class="btn-base" data-color="white" data-shadow data-size="38" data-round="4" data-type="icon" data-toggle-object="tool-place" aria-label="현위치">
@@ -239,13 +252,23 @@
           </div>
 
           <div class="legend-gauge">
-            <span class="legend-level-bar" data-level-type="legend_01"></span>
+            <span class="legend-level-bar" data-level-type="legend-block-01"></span>
             <div class="legend-gauge-group">
-              <span class="legend-gauge-num">160</span>
-              <span class="legend-gauge-num">127.5</span>
-              <span class="legend-gauge-num">95</span>
-              <span class="legend-gauge-num">62.5</span>
+              <span class="legend-gauge-num">50</span>
+              <span class="legend-gauge-num">50</span>
               <span class="legend-gauge-num">30</span>
+              <span class="legend-gauge-num">25</span>
+              <span class="legend-gauge-num">20</span>
+              <span class="legend-gauge-num">15</span>
+              <span class="legend-gauge-num">10</span>
+              <span class="legend-gauge-num">5</span>
+              <span class="legend-gauge-num">0</span>
+              <span class="legend-gauge-num">-5</span>
+              <span class="legend-gauge-num">-10</span>
+              <span class="legend-gauge-num">-15</span>
+              <span class="legend-gauge-num">-20</span>
+              <span class="legend-gauge-num">-30</span>
+              <span class="legend-gauge-num">-40</span>
             </div>
             <span class="legend-unit">(℃)</span>
           </div>
@@ -253,7 +276,7 @@
 
       </div>
 
-      <div class="full-map-right-group3">
+      <div class="full-map-right-group3" data-view="mobile-hidden">
         <div data-dropdown="optionAni">
           <button type="button" class="btn-map-ani-option" data-dropdown-button="optionAni">
             <span class="btn-text">풍향 에니메이션 / 강하게</span>
@@ -292,35 +315,52 @@
     </div>
 
     <!-- map-layer -->
-    <div class="full-map-layer" style="top:40%;left:55%">
+    <div class="full-map-layer" style="top:40%;left:30%">
       <div class="full-map-layer-content">
         <div class="full-map-layer-title">
-          <i class="icon-aspect-map-pin" data-size="18"></i>
-          <span class="text-14-600" data-color="19213D">36°29'북 / 127°39'동</span>
+          <div class="ui-flex" data-align-items="center" data-gap="2">
+            <i class="icon-aspect-map-pin" data-size="18"></i>
+            <span class="text-14-600" data-text-color="19213D">36°29'북 / 127°39'동</span>
+          </div>
+          <span class="text-10-500" data-text-color="6D758F" data-line-h="1">
+            0 Km
+          </span>
         </div>
         <div class="form-fake-group-grid" data-form-style="line-list-type2" data-col="1">
           <div class="form-fake-button">
             <input type="radio" id="radio-option-area-1" name="radio-option-area" value="" class="form-fake-input">
-            <label for="radio-option-area-1" class="form-fake-label" data-form-h="42" data-font-size="12-600">
+            <label for="radio-option-area-1" class="form-fake-label" data-form-h="42" data-font-size="12-600" data-direction="col">
               두산시(Gitdaebong)
+              <span class="text-10-500" data-text-color="6D758F" data-line-h="1">
+                0.8 Km
+              </span>
             </label>
           </div>
           <div class="form-fake-button">
             <input type="radio" id="radio-option-area-2" name="radio-option-area" value="" class="form-fake-input">
-            <label for="radio-option-area-2" class="form-fake-label" data-form-h="42" data-font-size="12-600">
+            <label for="radio-option-area-2" class="form-fake-label" data-form-h="42" data-font-size="12-600" data-direction="col">
               금당리(Geumdang-ri)
+              <span class="text-10-500" data-text-color="6D758F" data-line-h="1">
+                1.2 Km
+              </span>
             </label>
           </div>
           <div class="form-fake-button">
             <input type="radio" id="radio-option-area-3" name="radio-option-area" value="" class="form-fake-input">
-            <label for="radio-option-area-3" class="form-fake-label" data-form-h="42" data-font-size="12-600">
+            <label for="radio-option-area-3" class="form-fake-label" data-form-h="42" data-font-size="12-600" data-direction="col">
               중남리(Jungnam-ri)
+              <span class="text-10-500" data-text-color="6D758F" data-line-h="1">
+                2.6 Km
+              </span>
             </label>
           </div>
           <div class="form-fake-button">
             <input type="radio" id="radio-option-area-4" name="radio-option-area" value="" class="form-fake-input">
-            <label for="radio-option-area-4" class="form-fake-label" data-form-h="42" data-font-size="12-600">
+            <label for="radio-option-area-4" class="form-fake-label" data-form-h="42" data-font-size="12-600" data-direction="col">
               서상면(Seosang-myeon)
+              <span class="text-10-500" data-text-color="6D758F" data-line-h="1">
+                2.8 Km
+              </span>
             </label>
           </div>
         </div>
@@ -333,7 +373,7 @@
 
         <!-- 왼쪽 -->
         <div class="comparisonMap-map" data-comparison-left="main">
-          <div class="comparisonMap-map-selects" data-form-style="round-box" data-form-h="48" data-item-size="88">
+          <div class="comparisonMap-map-selects" data-form-style="round-box" data-form-h="48" data-item-size="88" data-view="mobile-hidden">
             <select class="form-fake-select" aria-label="년도 선택">
               <option value="option1" selected>2020</option>
               <option value="option2">2021</option>
@@ -371,7 +411,7 @@
 
         <!-- 오른쪽 -->
         <div class="comparisonMap-map" data-comparison-right="main">
-          <div class="comparisonMap-map-selects" data-form-style="round-box" data-form-h="48" data-item-size="88">
+          <div class="comparisonMap-map-selects" data-form-style="round-box" data-form-h="48" data-item-size="88" data-view="mobile-hidden">
             <select class="form-fake-select" aria-label="년도 선택">
               <option value="option1" selected>2020</option>
               <option value="option2">2021</option>
@@ -411,6 +451,7 @@
   </main>
 
   <aside class="side-content">
+    <div class="side-content-search-area" data-view="pc-hidden"></div>
     <div class="side-content-head">
       <div class="side-content-head-tit">
         <div class="favorites-area">
@@ -1191,6 +1232,102 @@
           </div>
 
         </div>
+        <h3 class="text-18-700 mt-28" data-color="19213D">월별기후자료</h3>
+        <div class="pb-20 m-pb-15">
+          <table class="table-1 mt-10">
+          <thead>
+          <tr>
+            <th scope="col">날짜</th>
+            <th scope="col">최저기온(℃)</th>
+            <th scope="col">최고기온(℃)</th>
+            <th scope="col">강수량(mm)</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td data-text-align="center">1월</td>
+            <td data-text-align="center">7.1</td>
+            <td data-text-align="center">17.8</td>
+            <td data-text-align="center">7.5</td>
+          </tr>
+          <tr>
+            <td data-text-align="center">2월</td>
+            <td data-text-align="center">7.1</td>
+            <td data-text-align="center">17.8</td>
+            <td data-text-align="center">7.5</td>
+          </tr>
+          <tr>
+            <td data-text-align="center">3월</td>
+            <td data-text-align="center">7.1</td>
+            <td data-text-align="center">17.8</td>
+            <td data-text-align="center">7.5</td>
+          </tr>
+          <tr>
+            <td data-text-align="center">4월</td>
+            <td data-text-align="center">7.1</td>
+            <td data-text-align="center">17.8</td>
+            <td data-text-align="center">7.5</td>
+          </tr>
+          <tr>
+            <td data-text-align="center">5월</td>
+            <td data-text-align="center">7.1</td>
+            <td data-text-align="center">17.8</td>
+            <td data-text-align="center">7.5</td>
+          </tr>
+          <tr>
+            <td data-text-align="center">6월</td>
+            <td data-text-align="center">7.1</td>
+            <td data-text-align="center">17.8</td>
+            <td data-text-align="center">7.5</td>
+          </tr>
+          <tr>
+            <td data-text-align="center">7월</td>
+            <td data-text-align="center">7.1</td>
+            <td data-text-align="center">17.8</td>
+            <td data-text-align="center">7.5</td>
+          </tr>
+          <tr>
+            <td data-text-align="center">8월</td>
+            <td data-text-align="center">7.1</td>
+            <td data-text-align="center">17.8</td>
+            <td data-text-align="center">7.5</td>
+          </tr>
+          <tr>
+            <td data-text-align="center">9월</td>
+            <td data-text-align="center">7.1</td>
+            <td data-text-align="center">17.8</td>
+            <td data-text-align="center">7.5</td>
+          </tr>
+          <tr>
+            <td data-text-align="center">10월</td>
+            <td data-text-align="center">7.1</td>
+            <td data-text-align="center">17.8</td>
+            <td data-text-align="center">7.5</td>
+          </tr>
+          <tr>
+            <td data-text-align="center">11월</td>
+            <td data-text-align="center">7.1</td>
+            <td data-text-align="center">17.8</td>
+            <td data-text-align="center">7.5</td>
+          </tr>
+          <tr>
+            <td data-text-align="center">12월</td>
+            <td data-text-align="center">7.1</td>
+            <td data-text-align="center">17.8</td>
+            <td data-text-align="center">7.5</td>
+          </tr>
+          </tbody>
+        </table>
+          <div class="mt-10 m-mt-15 ui-flex data-source-box-wrap">
+            <div class="data-source-box">
+              <span class="text-14-600" data-text-color="6D758F">
+                세계기상정보서비스 <span class="text-14-800" data-text-color="19213D">WWIS</span>
+              </span>
+              <i class="data-source-line"></i>
+              <img src="../../resources/images/common/wwis-logo.png" alt="" class="data-source-img">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </aside>
@@ -1367,9 +1504,129 @@
   // 사이드영역
   UI.exe.sideOpenFn = () => {
     console.log('사이드 열림');
+
+    UX.searchHeader(document.querySelector('.side-content .side-content-search-area'));
+
     const btnCompare = document.querySelector('[data-toggle-object="map-compare"]');
     btnCompare.getAttribute('disabled') ? btnCompare.removeAttribute('disabled') : btnCompare.setAttribute('disabled', true);
+
+    
   }
+
+  // 메뉴
+  UI.exe.modalFilter = new UX.Dialog({
+    area: document.querySelector('.area-dialog[data-area="body"]'),
+    id: 'modalFilter',
+    ps: 'bottom',
+    src: '../dialog/filter.html',
+    extend: false,
+    loadCallback: () => {
+      const modalFilterElement = document.querySelector('[data-dialog="modalFilter"]');
+
+      UX.searchHeader(modalFilterElement.querySelector('.side-content-search-area'));
+      UI.exe.acco1 = new UX.Accordion({
+        id: 'acco1',
+        expanded: 'acco1-0',
+      });
+      UI.exe.acco1.init();
+
+      const mapChoiceInfoBox = document.querySelector('.map-choice-info-box');
+      const mapChoiceTitleElement = mapChoiceInfoBox?.querySelector('[data-title]');
+      const mapChoiceValueElement = mapChoiceInfoBox?.querySelector('[data-value]');
+      const mapChoiceIconElement = mapChoiceInfoBox?.querySelector('.icon-round-box i');
+      const mapNavTitleOrder = ['기온', '강수량', '구름량', '풍속', '기압', '습도', '해빙', '적설량'];
+
+      const getAccordionTitleByInput = (inputElement) => {
+        const accordionItem = inputElement?.closest('[data-accordion-item="acco1"]');
+        const accordionTitle = accordionItem
+          ?.querySelector('[data-accordion-head="acco1"] .dialog-filter-title')
+          ?.textContent
+          ?.trim();
+
+        return accordionTitle || '';
+      };
+
+      UI.exe.modalFilter.selected = (selection) => {
+        let selectedValue = '';
+        let selectedTitle = '';
+        let selectedInputId = '';
+
+        if (typeof selection === 'object' && selection !== null) {
+          selectedValue = selection.value || '';
+          selectedTitle = selection.title || '';
+          selectedInputId = selection.inputId || '';
+        } else {
+          selectedValue = selection;
+          selectedTitle = selection || '';
+        }
+
+        if (selectedValue === undefined || selectedValue === null || selectedValue === '') {
+          const checkedInput = modalFilterElement?.querySelector('input.form-fake-input[type="radio"]:checked');
+          if (checkedInput) {
+            const selectedLabel = modalFilterElement
+              ?.querySelector(`label[for="${checkedInput.id}"]`)
+              ?.textContent
+              ?.trim();
+            selectedTitle = selectedTitle || getAccordionTitleByInput(checkedInput);
+            selectedInputId = checkedInput.id;
+            selectedValue = checkedInput.value || selectedLabel || checkedInput.id;
+          }
+        }
+
+        console.log('선택 정보:', {
+          title: selectedTitle,
+          value: selectedValue,
+          inputId: selectedInputId,
+        });
+
+        const nextTitle = selectedTitle || selectedValue || '';
+        const nextValue = selectedValue || selectedTitle || '';
+        const iconIndex = mapNavTitleOrder.indexOf(nextTitle) + 1;
+
+        if (mapChoiceTitleElement) {
+          mapChoiceTitleElement.textContent = nextTitle;
+        }
+
+        if (mapChoiceValueElement) {
+          mapChoiceValueElement.textContent = nextValue;
+        }
+
+        if (mapChoiceIconElement && iconIndex > 0) {
+          const navIconClasses = Array.from(mapChoiceIconElement.classList)
+            .filter((className) => /^icon-aspect-map-nav\d+$/.test(className));
+          navIconClasses.forEach((className) => mapChoiceIconElement.classList.remove(className));
+          mapChoiceIconElement.classList.add(`icon-aspect-map-nav${iconIndex}`);
+        }
+
+        UI.exe.modalFilter.hide();
+
+      }
+
+      const filterRadioInputs = modalFilterElement?.querySelectorAll('input.form-fake-input[type="radio"]');
+      filterRadioInputs?.forEach((input) => {
+        const labelText = modalFilterElement
+          ?.querySelector(`label[for="${input.id}"]`)
+          ?.textContent
+          ?.trim();
+
+        if (!input.value && labelText) {
+          input.value = labelText;
+        }
+
+        input.addEventListener('change', (event) => {
+          const selectedInput = event.target;
+          if (!selectedInput.checked) return;
+
+          const selectedTitle = getAccordionTitleByInput(selectedInput);
+          UI.exe.modalFilter.selected({
+            title: selectedTitle,
+            value: selectedInput.value,
+            inputId: selectedInput.id,
+          });
+        });
+      });
+    },
+  });
 </script>
 </body>
 

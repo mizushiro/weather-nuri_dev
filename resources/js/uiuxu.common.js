@@ -350,6 +350,18 @@ export const UX = {
 	utils: {
 		loadContent,
 		getUrlParameter,
+	},
+	searchHeader: ( selector ) => {
+		console.log('load search header:', selector);
+		loadContent({
+			area: selector,
+			src: '../inc/search.html',
+			insert: false
+		})
+		.then(() => {
+				console.log('Search content loaded successfully');
+		})
+		.catch(err => console.error('Error loading search content:', err));
 	}
 }
 

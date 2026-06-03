@@ -50,8 +50,8 @@ export class TimeRangeHistory {
 
   constructor(opt) {
     this.max = 24 * 60;
-    this.trackOffset = 60;
-    this.trackMax = this.max + this.trackOffset;
+    this.trackOffset = 0;
+    this.trackMax = this.max;
     this.timeScale = 1;
     this.id = opt.id;
     this.wrap = document.querySelector(`.timeRange[data-time-range="${this.id}"]`);
@@ -69,7 +69,6 @@ export class TimeRangeHistory {
         <input type="date" value="${this.date}" class="timeRange-date-input" min="${this.minmaxDay ? this.minmaxDay[0] : this.date}" max="${this.minmaxDay ? this.minmaxDay[1] : this._addDaysToDate(this.date, this.totalDays - 1)}" disabled />
       </div>
       <div class="timeRange-line">
-      <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>00:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>01:00</b></div>
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>02:00</b></div>
@@ -364,7 +363,7 @@ export class TimeRangeHistory {
   }
 
   _initRange() {
-    // 23-00-...-24 순환축(0~1500분), step 적용
+    // 00-...-24 직선축(0~1440분), step 적용
     this.input.min = 0;
     this.input.max = this.trackMax;
     this.input.step = this.step;
@@ -433,22 +432,15 @@ export class TimeRangeHistory {
   }
 
   _displayToLogical(displayVal) {
-    if (displayVal >= this.trackMax) return this.max;
-    const shifted = displayVal - this.trackOffset;
-    return shifted < 0 ? shifted + this.max : shifted;
+    return Math.min(displayVal, this.max);
   }
 
   _logicalToDisplay(logicalVal) {
-    if (logicalVal >= this.max) return this.trackMax;
-    return logicalVal + this.trackOffset;
+    return Math.min(logicalVal, this.trackMax);
   }
 
   _resolveDisplayFromLogical(logicalVal, referenceDisplay) {
-    // mouseup 최종 보정 규칙
-    // 1) 최종값이 24:00이면 항상 00:00 위치로 이동
-    if (logicalVal === this.max) return this.trackOffset;
-    // 2) 최종값이 23:00이면 항상 뒤쪽(22-23-24 구간)의 23:00 위치로 이동
-    if (logicalVal === this.max - 60) return this.trackMax - this.trackOffset;
+    // 직선축에서는 logical 값과 동일한 위치를 사용
     return this._logicalToDisplay(logicalVal);
   }
 
