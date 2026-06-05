@@ -13,7 +13,7 @@
 [data-toggle-target="map-compare"][data-toggle-state="selected"].full-map-left-area {top:auto;bottom:2rem}
 [data-toggle-target="map-compare"][data-toggle-state="selected"] .map-options {display:none}
 .full-map-left-area .full-map-right-group2 {align-items:start;}
-.full-map-left-area .legend-gauge .legend-unit {left:3.4rem;}
+.full-map-left-area .legend-gauge .legend-unit {left:auto;right:1.2rem}
 .ui-range.is-vertical .ui-range-txt {width:3.2rem;}
 .full-map-left-area .ui-range.is-vertical .ui-range-txt {top:calc(100% + 2.2rem);text-align:center;bottom:auto;}
 .full-map-left-area .ui-range.is-vertical .ui-range-txt::after {left:-.3rem;right:auto;transform:rotate(-45deg);}
