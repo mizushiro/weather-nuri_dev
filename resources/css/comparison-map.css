@@ -8,7 +8,7 @@
 .full-map-top-area,
 .full-map-left-area,
 .full-map-right-area,
-.full-map-bottom {z-index:1;}
+.full-map-bottom {z-index:2;}
 .full-map-area {width:100%;height:100%;}
 [data-toggle-target="map-compare"][data-toggle-state="selected"].full-map-left-area {top:auto;bottom:2rem}
 [data-toggle-target="map-compare"][data-toggle-state="selected"] .map-options {display:none}
