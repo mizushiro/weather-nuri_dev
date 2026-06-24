@@ -5,13 +5,18 @@
 .comparisonMap-handle-btn:active {background-color:#002249;}
 .comparisonMap-handle-btn {width:4.2rem;height:4.2rem;background-color:#0475F4;border:.3rem solid #FFF;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);cursor:pointer;background-image:url("../images/icon/icon-aspect-link.svg");background-size:2rem 2rem;background-position:50% 50%;background-repeat:no-repeat;}
 .map-options {display:flex;flex-direction:column;gap:.6rem;}
-.full-map-top-area,
+.full-map-top-area {z-index:3;}
 .full-map-left-area,
 .full-map-right-area,
 .full-map-bottom {z-index:2;}
 .full-map-area {width:100%;height:100%;}
 [data-toggle-target="map-compare"][data-toggle-state="selected"].full-map-left-area {top:auto;bottom:2rem}
 [data-toggle-target="map-compare"][data-toggle-state="selected"] .map-options {display:none}
+.map-options [data-map]{flex-direction:column;gap:.6rem;}
+[data-map-select] [data-map="world"],
+[data-map-select] [data-map="local"]{display: none;}
+[data-map-select="world"] [data-map="world"] {display: flex;}
+[data-map-select="local"] [data-map="local"] {display: flex;}
 .full-map-left-area .full-map-right-group2 {align-items:start;}
 .full-map-left-area .legend-gauge .legend-unit {left:auto;right:1.2rem}
 .ui-range.is-vertical .ui-range-txt {width:3.2rem;}
@@ -38,12 +43,8 @@
 .timeRange {user-select:none;position:relative;height:9rem;padding-right:2rem;z-index:1;display:grid;align-items:center;grid-template-columns:auto 1fr;background-color:#181D2BBF;border-radius:0.4rem;gap:19.7rem;}
 .timeRange-play {width:5.4rem;height:5.4rem;border-radius:99em;background-color:#181D2BCC;;background-image:url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='mask0_58_2259' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='0' y='0' width='24' height='24'%3E%3Crect width='24' height='24' fill='%23D9D9D9'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_58_2259)'%3E%3Cpath d='M8 17.1752V6.8252C8 6.54186 8.1 6.30436 8.3 6.1127C8.5 5.92103 8.73333 5.8252 9 5.8252C9.08333 5.8252 9.17083 5.8377 9.2625 5.8627C9.35417 5.8877 9.44167 5.9252 9.525 5.9752L17.675 11.1502C17.825 11.2502 17.9375 11.3752 18.0125 11.5252C18.0875 11.6752 18.125 11.8335 18.125 12.0002C18.125 12.1669 18.0875 12.3252 18.0125 12.4752C17.9375 12.6252 17.825 12.7502 17.675 12.8502L9.525 18.0252C9.44167 18.0752 9.35417 18.1127 9.2625 18.1377C9.17083 18.1627 9.08333 18.1752 9 18.1752C8.73333 18.1752 8.5 18.0794 8.3 17.8877C8.1 17.696 8 17.4585 8 17.1752Z' fill='white'/%3E%3C/g%3E%3C/svg%3E%0A");background-position:50% 50%;background-size:2.4rem 2.4rem;background-repeat:no-repeat;}
 .timeRange-play[data-toggle-state="selected"] {background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cmask id='mask0_5023_7' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='0' y='0' width='24' height='24'%3E%3Crect width='24' height='24' fill='%23D9D9D9'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_5023_7)'%3E%3Cpath d='M6 7C6 6.44772 6.44772 6 7 6H9C9.55228 6 10 6.44772 10 7V17C10 17.5523 9.55228 18 9 18H7C6.44772 18 6 17.5523 6 17V7Z' fill='white'/%3E%3Cpath d='M14 7C14 6.44772 14.4477 6 15 6H17C17.5523 6 18 6.44772 18 7V17C18 17.5523 17.5523 18 17 18H15C14.4477 18 14 17.5523 14 17V7Z' fill='white'/%3E%3C/g%3E%3C!-- Code injected by live-server --%3E%3Cscript%3E // %3C!%5BCDATA%5B %3C-- For SVG support if ('WebSocket' in window) %7B (function () %7B function refreshCSS() %7B var sheets = %5B%5D.slice.call(document.getElementsByTagName('link')); var head = document.getElementsByTagName('head')%5B0%5D; for (var i = 0; i %3C sheets.length; ++i) %7B var elem = sheets%5Bi%5D; var parent = elem.parentElement %7C%7C head; parent.removeChild(elem); var rel = elem.rel; if (elem.href && typeof rel != 'string' %7C%7C rel.length == 0 %7C%7C rel.toLowerCase() == 'stylesheet') %7B var url = elem.href.replace(/(&%7C%5C%3F)_cacheOverride=%5Cd+/, ''); elem.href = url + (url.indexOf('%3F') %3E= 0 %3F '&' :'%3F') + '_cacheOverride=' + (new Date().valueOf()); %7D parent.appendChild(elem); %7D %7D var protocol = window.location.protocol === 'http:' %3F 'ws://' :'wss://'; var address = protocol + window.location.host + window.location.pathname + '/ws'; var socket = new WebSocket(address); socket.onmessage = function (msg) %7B if (msg.data == 'reload') window.location.reload(); else if (msg.data == 'refreshcss') refreshCSS(); %7D; if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) %7B console.log('Live reload enabled.'); sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true); %7D %7D)(); %7D else %7B console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.'); %7D // %5D%5D%3E%3C/script%3E%3C/svg%3E");}
-.time-range-day {background-color:#fff;border:.2rem solid #19213D;border-radius:99em;height:3.6rem;display:flex;align-items:center;padding:0 .8rem 0 .8rem;font-size:1.4rem;font-weight:700;color:#19213D;gap:.6rem;width:13.6rem;position:absolute;left:-17rem;top:50%;transform:translateY(-50%);cursor:pointer;z-index:4;}
-.time-range-day input{border:0;padding:0;width:9rem;outline:0;font-weight:700;font-size:1.4rem}
-.time-range-day input[type="date"] {appearance:none;-webkit-appearance:none;-moz-appearance:textfield;background:none;}
-.time-range-day input[type="date"]::-webkit-calendar-picker-indicator {opacity:0;-webkit-appearance:none;}
-.time-range-day input[type="date"]::-webkit-clear-button,
-.time-range-day input[type="date"]::-webkit-inner-spin-button {opacity:0;}
+.time-range-day {background-color:#fff;border:.2rem solid #19213D;border-radius:99em;height:3.6rem;display:flex;align-items:center;padding:0 .8rem 0 .8rem;font-size:1.4rem;font-weight:700;color:#19213D;gap:.4rem;width:17rem;position:absolute;left:-18.8rem;top:50%;transform:translateY(-50%);cursor:pointer;z-index:4;}
+.timeRange-date-input{border:0;padding:0;outline:0;font-weight:700;font-size:1.4rem}
 .timeRange-bar {display:flex;position:relative;height:0.6rem;}
 .timeRange-bar::after {content:"";position:absolute;top:0;left:-4rem;height:100%;background-color:#0475F4;height:.6rem;width:4rem;}
 .timeRange-line {position:absolute;top:0;left:0;right:0;background-color:#000;height:.6rem;pointer-events:none;display:grid;grid-template-columns:repeat(24, 1fr);z-index:1;}
@@ -130,7 +131,14 @@
 .table-update-content {text-align:right;font-size:1.4rem;color:#6D758F;font-weight:400}
 .table-update-content-title {font-weight:700;color:#19213D;padding-right:10px}
 @media (max-width:1023px) {
-  .side-content {z-index:20;background-color:#fff;display:flex;flex-direction:column}
+  .base-wrap{display: flex;}
+  .base-wrap[data-toggle-target="side-content"][data-toggle-state="selected"]{grid-template-columns: 1fr 1fr;}
+  .side-content {z-index:20;background-color:#fff;display:flex;flex-direction:column; position: fixed; top:100%; border-radius:2rem 2rem 0 0; transform: translateY(0%); transition: transform 0.3s ease;}
+
+  .full-map::after{content:""; display:block; width:100%; height:100%; z-index:20; position: fixed; top:0; left:0; right:0; bottom:0; background-color: rgba(0, 0, 0, 0.8); pointer-events:none;opacity: 0; transition:opacity 0.2s ease}
+  [data-toggle-state="selected"] .full-map::after{opacity: 1;}
+
+  [data-toggle-state="selected"] .side-content {transform: translateY(-100%)}
   .side-content > div{width:100vw}
   .side-content-search-area {flex-shrink:0;background-color:#F6F7FB;padding:1.5rem;display:flex;gap:.6rem}
   .side-content-search-area .full-map-sh-box {width:calc(100% - 5.4rem)}
@@ -195,3 +203,6 @@
   .weather-table-box {margin-right:-2rem}
   .data-source-box-wrap {justify-content:center}
 }
+[data-dropdown-section^="localOption"] .dropdown-panel-content,
+[data-dropdown-section^="option"] .dropdown-panel-content{width:14.6rem;}
+[data-dropdown-section="localTimeSelect"] .dropdown-panel-content{width:7.8rem;}

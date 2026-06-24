@@ -64,9 +64,16 @@ export class TimeRangeHistory {
     this.currentDayIndex = 0;
     this.currentDate = this._addDaysToDate(this.date, this.currentDayIndex);
 
+    // value가 [시, 분] 배열이면 분 단위로 변환
+    if (Array.isArray(opt.value) && opt.value.length === 2) {
+      this.value = opt.value[0] * 60 + opt.value[1];
+    } else {
+      this.value = opt.value || 0;
+    }
+
     const makeHtml = `<div class="time-range-day">
         <i class="icon-aspect-calendar-b" data-size="20"></i>
-        <input type="date" value="${this.date}" class="timeRange-date-input" min="${this.minmaxDay ? this.minmaxDay[0] : this.date}" max="${this.minmaxDay ? this.minmaxDay[1] : this._addDaysToDate(this.date, this.totalDays - 1)}" disabled />
+        <div class="timeRange-date-input">${this.currentDate} ${this._formatTime(this.value)}</div>
       </div>
       <div class="timeRange-line">
       <div class="timeRange-hour"><hr /><hr /><hr /><hr /><hr /><hr /><b>00:00</b></div>
@@ -173,13 +180,6 @@ export class TimeRangeHistory {
     this._dateInputChangeHandler = null;
 
     this._setCurrentDayIndex(0);
-
-    // value가 [시, 분] 배열이면 분 단위로 변환
-    if (Array.isArray(opt.value) && opt.value.length === 2) {
-      this.value = opt.value[0] * 60 + opt.value[1];
-    } else {
-      this.value = opt.value || 0;
-    }
     this.displayValue = this._logicalToDisplay(this.value);
     // upperLimit 옵션 처리 (실제 선택 제한용)
     // if (opt.upperLimit) {
@@ -267,7 +267,11 @@ export class TimeRangeHistory {
     this.currentDayIndex = Math.min(Math.max(0, dayIndex), maxDayIndex);
     this.currentDate = this._addDaysToDate(this.date, this.currentDayIndex);
     if (this.dateInput) {
-      this.dateInput.value = this.currentDate;
+      if (this.dateInput.tagName === 'INPUT') {
+        this.dateInput.value = this.currentDate;
+      } else {
+        this.dateInput.textContent = `${this.currentDate} ${this._formatTime(this.value)}`;
+      }
     }
   }
 
@@ -419,8 +423,12 @@ export class TimeRangeHistory {
     this.input.addEventListener('mouseup', this._mouseupHandler);
   }
   _updateValueBox() {
-    if (!this.fakeTodayText) return;
-    this.fakeTodayText.textContent = this._formatTime(this.value);
+    if (this.fakeTodayText) {
+      this.fakeTodayText.textContent = this._formatTime(this.value);
+    }
+    if (this.dateInput && this.dateInput.tagName !== 'INPUT') {
+      this.dateInput.textContent = `${this.currentDate} ${this._formatTime(this.value)}`;
+    }
   }
   _updateFakeHandle() {
     if (!this.fakeHandle) return;
@@ -465,7 +473,11 @@ export class TimeRangeHistory {
 
   _updateDateTooltip() {
     if (this.dateInput) {
-      this.dateInput.value = this.currentDate;
+      if (this.dateInput.tagName === 'INPUT') {
+        this.dateInput.value = this.currentDate;
+      } else {
+        this.dateInput.textContent = `${this.currentDate} ${this._formatTime(this.value)}`;
+      }
     }
   }
 
