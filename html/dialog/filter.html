@@ -1,4 +1,5 @@
-<div class="ui-dialog" role="dialog" aria-hidden="true" data-dialog="modalFilter" aria-labelledby="modalFilter-label" aria-describedby="modalFilter-decs">
+<div class="ui-dialog" role="dialog" aria-hidden="true" data-dialog="modalFilter" aria-labelledby="modalFilter-label"
+  aria-describedby="modalFilter-decs">
   <div class="ui-dialog--wrap" role="document" tabindex="-1" data-dialog-item="wrap" data-style="full" data-pd="0">
     <div class="ui-dialog--header">
       <div class="ui-dialog--header-title">
@@ -15,10 +16,10 @@
       <div class="mobile-menu-tab">
         <div data-tab="menu_tab" data-tab-style="round-box-type">
           <div role="tablist">
-            <button type="button" role="tab">
+            <button type="button" role="tab" name="mapTypeSelect" value="world">
               <span>전지구</span>
             </button>
-            <button type="button" role="tab">
+            <button type="button" role="tab" name="mapTypeSelect" value="korea">
               <span>동네예보</span>
             </button>
           </div>
@@ -115,7 +116,8 @@
               <div data-accordion="acco1" data-style="bottom-line-type">
                 <div data-accordion-item="acco1">
                   <div data-accordion-head="acco1">
-                    <button type="button" data-accordion-button="acco1"></button>
+                    <button type="button" data-accordion-button="acco1" data-radio="w-option"
+                      data-dropdown-button="option1" data-variable="temperature"></button>
                     <div class="dialog-filter-title">
                       <span class="icon-round-box">
                         <i class="icon-aspect-map-nav1" data-size="24"></i>
@@ -124,36 +126,44 @@
                     </div>
                     <i class="icon-aspect-expand-circle" data-size="20"></i>
                   </div>
-                  <div data-accordion-body="acco1">
+                  <div data-accordion-body="acco1" data-dropdown-panel="option1">
                     <div class="py-10 px-2">
                       <div class="form-fake-group-grid" data-form-style="text-type" data-col="1">
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option1-1" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option1-1" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option1-1" name="filter-radio-option" value="t2m"
+                            class="form-fake-input" checked>
+                          <label for="filter-radio-option1-1" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             지상 2m
                           </label>
                         </div>
-                        <div class="form-fake-button">
+                        <!--<div class="form-fake-button">
                           <input type="radio" id="filter-radio-option1-2" name="filter-radio-option" value="" class="form-fake-input">
                           <label for="filter-radio-option1-2" class="form-fake-label" data-form-h="28" data-font-size="12-600">
                             해수면
                           </label>
-                        </div>
+                        </div>-->
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option1-3" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option1-3" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option1-3" name="filter-radio-option" value="t850hPa"
+                            class="form-fake-input">
+                          <label for="filter-radio-option1-3" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             850 hPa, 1500m
                           </label>
                         </div>
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option1-4" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option1-4" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option1-4" name="filter-radio-option" value="t500hPa"
+                            class="form-fake-input">
+                          <label for="filter-radio-option1-4" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             500 hPa, 5500m
                           </label>
                         </div>
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option1-5" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option1-5" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option1-5" name="filter-radio-option" value="t200hPa"
+                            class="form-fake-input">
+                          <label for="filter-radio-option1-5" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             200 hPa, 12000m
                           </label>
                         </div>
@@ -163,7 +173,8 @@
                 </div>
 
                 <div class="not-acc-filter">
-                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('강수량');">
+                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('강수량');"
+                    data-radio="w-option" data-toggle-object="option2" data-variable="prec_diff">
                     <span class="icon-round-box">
                       <i class="icon-aspect-map-nav2" data-size="24"></i>
                     </span>
@@ -173,7 +184,8 @@
 
                 <div data-accordion-item="acco1">
                   <div data-accordion-head="acco1">
-                    <button type="button" data-accordion-button="acco1"></button>
+                    <button type="button" data-accordion-button="acco1" data-radio="w-option"
+                      data-dropdown-button="option2" data-variable="cloud_cover"></button>
                     <div class="dialog-filter-title">
                       <span class="icon-round-box">
                         <i class="icon-aspect-map-nav3" data-size="24"></i>
@@ -182,24 +194,30 @@
                     </div>
                     <i class="icon-aspect-expand-circle" data-size="20"></i>
                   </div>
-                  <div data-accordion-body="acco1">
+                  <div data-accordion-body="acco1" data-dropdown-panel="option2">
                     <div class="py-10 px-2">
                       <div class="form-fake-group-grid" data-form-style="text-type" data-col="1">
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option2-1" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option2-1" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option2-1" name="filter-radio-option" value="lcld"
+                            class="form-fake-input">
+                          <label for="filter-radio-option2-1" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             하층운
                           </label>
                         </div>
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option2-2" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option2-2" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option2-2" name="filter-radio-option" value="mcld"
+                            class="form-fake-input">
+                          <label for="filter-radio-option2-2" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             중층운
                           </label>
                         </div>
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option2-3" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option2-3" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option2-3" name="filter-radio-option" value="hcld"
+                            class="form-fake-input">
+                          <label for="filter-radio-option2-3" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             상층운
                           </label>
                         </div>
@@ -210,7 +228,8 @@
 
                 <div data-accordion-item="acco1">
                   <div data-accordion-head="acco1">
-                    <button type="button" data-accordion-button="acco1"></button>
+                    <button type="button" data-accordion-button="acco1" data-radio="w-option"
+                      data-dropdown-button="option3" data-variable="wind_speed"></button>
                     <div class="dialog-filter-title">
                       <span class="icon-round-box">
                         <i class="icon-aspect-map-nav4" data-size="24"></i>
@@ -219,30 +238,38 @@
                     </div>
                     <i class="icon-aspect-expand-circle" data-size="20"></i>
                   </div>
-                  <div data-accordion-body="acco1">
+                  <div data-accordion-body="acco1" data-dropdown-panel="option3">
                     <div class="py-10 px-2">
                       <div class="form-fake-group-grid" data-form-style="text-type" data-col="1">
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option3-1" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option3-1" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            지상 2m
+                          <input type="radio" id="filter-radio-option3-1" name="filter-radio-option" value="ws10m"
+                            class="form-fake-input">
+                          <label for="filter-radio-option3-1" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
+                            지상 10m
                           </label>
                         </div>
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option3-2" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option3-2" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option3-2" name="filter-radio-option" value="ws850hPa"
+                            class="form-fake-input">
+                          <label for="filter-radio-option3-2" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             850 hPa, 1500m
                           </label>
                         </div>
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option3-3" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option3-3" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option3-3" name="filter-radio-option" value="ws500hPa"
+                            class="form-fake-input">
+                          <label for="filter-radio-option3-3" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             500 hPa, 5500m
                           </label>
                         </div>
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option3-4" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option3-4" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option3-4" name="filter-radio-option" value="ws200hPa"
+                            class="form-fake-input">
+                          <label for="filter-radio-option3-4" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             200 hPa, 12000m
                           </label>
                         </div>
@@ -252,40 +279,25 @@
                 </div>
                 <div data-accordion-item="acco1">
                   <div data-accordion-head="acco1">
-                    <button type="button" data-accordion-button="acco1"></button>
+                    <button type="button" data-accordion-button="acco1" data-radio="w-option"
+                      data-dropdown-button="option4" data-variable="seasurface_temp"></button>
                     <div class="dialog-filter-title">
                       <span class="icon-round-box">
-                        <i class="icon-aspect-map-nav5" data-size="24"></i>
+                        <i class="icon-aspect-map-nav6" data-size="24"></i>
                       </span>
-                      기압
+                      해수면
                     </div>
                     <i class="icon-aspect-expand-circle" data-size="20"></i>
                   </div>
-                  <div data-accordion-body="acco1">
+                  <div data-accordion-body="acco1" data-dropdown-panel="option4">
                     <div class="py-10 px-2">
                       <div class="form-fake-group-grid" data-form-style="text-type" data-col="1">
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option4-1" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option4-1" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            해면기압
-                          </label>
-                        </div>
-                        <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option4-2" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option4-2" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            850 hPa
-                          </label>
-                        </div>
-                        <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option4-3" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option4-3" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            500 hPa
-                          </label>
-                        </div>
-                        <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option4-4" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option4-4" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            200 hPa
+                          <input type="radio" id="filter-radio-option5-1" name="filter-radio-option" value="sst"
+                            class="form-fake-input">
+                          <label for="filter-radio-option5-1" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
+                            해수면온도
                           </label>
                         </div>
                       </div>
@@ -294,7 +306,8 @@
                 </div>
                 <div data-accordion-item="acco1">
                   <div data-accordion-head="acco1">
-                    <button type="button" data-accordion-button="acco1"></button>
+                    <button type="button" data-accordion-button="acco1" data-radio="w-option"
+                      data-dropdown-button="option5" data-variable="relative_humidity"></button>
                     <div class="dialog-filter-title">
                       <span class="icon-round-box">
                         <i class="icon-aspect-map-nav6" data-size="24"></i>
@@ -303,30 +316,38 @@
                     </div>
                     <i class="icon-aspect-expand-circle" data-size="20"></i>
                   </div>
-                  <div data-accordion-body="acco1">
+                  <div data-accordion-body="acco1" data-dropdown-panel="option5">
                     <div class="py-10 px-2">
                       <div class="form-fake-group-grid" data-form-style="text-type" data-col="1">
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option5-1" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option5-1" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option6-1" name="filter-radio-option" value="rh2m_liq"
+                            class="form-fake-input">
+                          <label for="filter-radio-option6-1" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             지상 2m
                           </label>
                         </div>
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option5-2" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option5-2" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option6-2" name="filter-radio-option" value="rh850hPa"
+                            class="form-fake-input">
+                          <label for="filter-radio-option6-2" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             850 hPa, 1500m
                           </label>
                         </div>
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option5-3" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option5-3" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option6-3" name="filter-radio-option" value="rh500hPa"
+                            class="form-fake-input">
+                          <label for="filter-radio-option6-3" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             500 hPa, 5500m
                           </label>
                         </div>
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option5-4" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option5-4" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option6-4" name="filter-radio-option" value="rh200hPa"
+                            class="form-fake-input">
+                          <label for="filter-radio-option6-4" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             200 hPa, 12000m
                           </label>
                         </div>
@@ -336,7 +357,8 @@
                 </div>
 
                 <div class="not-acc-filter">
-                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('해빙');">
+                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('해빙');"
+                    data-radio="w-option" data-toggle-object="option7" data-variable="seaice">
                     <span class="icon-round-box">
                       <i class="icon-aspect-map-nav7" data-size="24"></i>
                     </span>
@@ -344,7 +366,8 @@
                   </button>
                 </div>
                 <div class="not-acc-filter">
-                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('적설량');">
+                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('적설량');"
+                    data-radio="w-option" data-toggle-object="option8" data-variable="snowd">
                     <span class="icon-round-box">
                       <i class="icon-aspect-map-nav8" data-size="24"></i>
                     </span>
@@ -354,28 +377,41 @@
 
                 <div data-accordion-item="acco1">
                   <div data-accordion-head="acco1">
-                    <button type="button" data-accordion-button="acco1"></button>
+                    <button type="button" data-accordion-button="acco1" data-radio="w-option"
+                      data-dropdown-button="option6" data-variable="gts"></button>
                     <div class="dialog-filter-title">
                       <span class="icon-round-box">
                         <i class="icon-aspect-map-nav9" data-size="24"></i>
                       </span>
-                      GST
+                      GTS
                     </div>
                     <i class="icon-aspect-expand-circle" data-size="20"></i>
                   </div>
-                  <div data-accordion-body="acco1">
+                  <div data-accordion-body="acco1" data-dropdown-panel="option6">
                     <div class="py-10 px-2">
                       <div class="form-fake-group-grid" data-form-style="text-type" data-col="1">
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option6-1" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option6-1" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option7-1" name="filter-radio-option" value="TA"
+                            class="form-fake-input">
+                          <label for="filter-radio-option7-1" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             기온
                           </label>
                         </div>
                         <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option6-2" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option6-2" class="form-fake-label" data-form-h="28" data-font-size="12-600">
+                          <input type="radio" id="filter-radio-option7-2" name="filter-radio-option" value="RN"
+                            class="form-fake-input">
+                          <label for="filter-radio-option7-2" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
                             강수량
+                          </label>
+                        </div>
+                        <div class="form-fake-button">
+                          <input type="radio" id="filter-radio-option7-3" name="filter-radio-option" value="WS"
+                            class="form-fake-input">
+                          <label for="filter-radio-option7-3" class="form-fake-label" data-form-h="28"
+                            data-font-size="12-600">
+                            풍향/풍속
                           </label>
                         </div>
                       </div>
@@ -390,99 +426,38 @@
           <section>
             <div class="px-15 pb-12 ui-flex" data-direction="col" data-gap="12">
               <div data-accordion="acco2" data-style="bottom-line-type">
-                <div data-accordion-item="acco2">
-                  <div data-accordion-head="acco2">
-                    <button type="button" data-accordion-button="acco2"></button>
-                    <div class="dialog-filter-title">
-                      <span class="icon-round-box">
-                        <i class="icon-aspect-map-nav1" data-size="24"></i>
-                      </span>
-                      기온
-                    </div>
-                    <i class="icon-aspect-expand-circle" data-size="20"></i>
-                  </div>
-                  <div data-accordion-body="acco2">
-                    <div class="py-10 px-2">
-                      <div class="form-fake-group-grid" data-form-style="text-type" data-col="1">
-                        <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option11-1" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option11-1" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            지상 2m
-                          </label>
-                        </div>
-                        <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option11-2" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option11-2" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            해수면
-                          </label>
-                        </div>
-                        <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option11-3" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option11-3" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            850 hPa, 1500m
-                          </label>
-                        </div>
-                        <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option11-4" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option11-4" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            500 hPa, 5500m
-                          </label>
-                        </div>
-                        <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option11-5" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option11-5" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            200 hPa, 12000m
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="not-acc-filter">
+                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('기온');"
+                    data-radio="w-localOption" data-toggle-object="localOption1" data-variable="TMP">
+                    <span class="icon-round-box">
+                      <i class="icon-aspect-map-nav1" data-size="24"></i>
+                    </span>
+                    기온
+                  </button>
                 </div>
 
-                <div data-accordion-item="acco2">
-                  <div data-accordion-head="acco2">
-                    <button type="button" data-accordion-button="acco2"></button>
-                    <div class="dialog-filter-title">
-                      <span class="icon-round-box">
-                        <i class="icon-aspect-map-nav6" data-size="24"></i>
-                      </span>
-                      상대습도
-                    </div>
-                    <i class="icon-aspect-expand-circle" data-size="20"></i>
-                  </div>
-                  <div data-accordion-body="acco2">
-                    <div class="py-10 px-2">
-                      <div class="form-fake-group-grid" data-form-style="text-type" data-col="1">
-                        <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option15-1" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option15-1" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            지상 2m
-                          </label>
-                        </div>
-                        <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option15-2" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option15-2" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            850 hPa, 1500m
-                          </label>
-                        </div>
-                        <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option15-3" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option15-3" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            500 hPa, 5500m
-                          </label>
-                        </div>
-                        <div class="form-fake-button">
-                          <input type="radio" id="filter-radio-option15-4" name="filter-radio-option" value="" class="form-fake-input">
-                          <label for="filter-radio-option15-4" class="form-fake-label" data-form-h="28" data-font-size="12-600">
-                            200 hPa, 12000m
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="not-acc-filter">
+                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('상대습도');"
+                    data-radio="w-localOption" data-toggle-object="localOption2" data-variable="REH">
+                    <span class="icon-round-box">
+                      <i class="icon-aspect-map-nav6" data-size="24"></i>
+                    </span>
+                    상대습도
+                  </button>
                 </div>
 
-                <div data-accordion-item="acco2">
+                <div class="not-acc-filter">
+                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('풍속');"
+                    data-radio="w-localOption" data-toggle-object="localOption2" data-variable="WSP">
+                    <span class="icon-round-box">
+                      <i class="icon-aspect-map-nav4" data-size="24"></i>
+                    </span>
+                    풍속
+                  </button>
+                </div>
+
+
+                <!--<div data-accordion-item="acco2">
                   <div data-accordion-head="acco2">
                     <button type="button" data-accordion-button="acco2"></button>
                     <div class="dialog-filter-title">
@@ -523,10 +498,11 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div>-->
 
                 <div class="not-acc-filter">
-                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('강수량');">
+                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('강수량');"
+                    data-radio="w-localOption" data-toggle-object="localOption2" data-variable="RN01H">
                     <span class="icon-round-box">
                       <i class="icon-aspect-map-nav2" data-size="24"></i>
                     </span>
@@ -534,7 +510,30 @@
                   </button>
                 </div>
 
-                <div data-accordion-item="acco2">
+                <div class="not-acc-filter">
+                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('하늘상태');"
+                    data-radio="w-localOption" data-toggle-object="localOption2" data-variable="SKY">
+                    <span class="icon-round-box">
+                      <i class="icon-aspect-map-nav3" data-size="24"></i>
+                    </span>
+                    하늘상태
+                  </button>
+                </div>
+
+                <div class="not-acc-filter">
+                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('강수형태');"
+                    data-radio="w-localOption" data-toggle-object="localOption2" data-variable="PTY">
+                    <span class="icon-round-box">
+                      <i class="icon-aspect-map-nav10" data-size="24"></i>
+                    </span>
+                    강수형태
+                  </button>
+                </div>
+
+
+
+
+                <!--<div data-accordion-item="acco2">
                   <div data-accordion-head="acco2">
                     <button type="button" data-accordion-button="acco2"></button>
                     <div class="dialog-filter-title">
@@ -569,19 +568,9 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div>-->
 
-
-                <div class="not-acc-filter">
-                  <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('강수형태');">
-                    <span class="icon-round-box">
-                      <i class="icon-aspect-map-nav10" data-size="24"></i>
-                    </span>
-                    강수형태
-                  </button>
-                </div>
-
-                <div class="not-acc-filter">
+                <!--<div class="not-acc-filter">
                   <button type="button" class="dialog-filter-title" onClick="UI.exe.modalFilter.selected('레이더');">
                     <span class="icon-round-box">
                       <i class="icon-aspect-map-nav11" data-size="24"></i>
@@ -596,7 +585,7 @@
                     </span>
                     위성
                   </button>
-                </div>
+                </div>-->
 
               </div>
             </div>
