@@ -401,6 +401,7 @@ export class TimeRangeHistory {
     // 마우스업 시 step 기준으로 스냅
     if (this._mouseupHandler) {
       this.input.removeEventListener('mouseup', this._mouseupHandler);
+      this.input.removeEventListener('touchend', this._mouseupHandler);
     }
     this._mouseupHandler = (e) => {
       const display = Number(this.input.value);
@@ -421,6 +422,7 @@ export class TimeRangeHistory {
       this.onChange(this._getActualValue(this.value), this._formatTime(this.value));
     };
     this.input.addEventListener('mouseup', this._mouseupHandler);
+    this.input.addEventListener('touchend', this._mouseupHandler);
   }
   _updateValueBox() {
     if (this.fakeTodayText) {

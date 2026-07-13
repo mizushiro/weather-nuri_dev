@@ -93,10 +93,10 @@
 .timeRange-hour > hr:first-child {height:1.6rem;}
 .comparisonMap .timeRange-hour > b {font-size:1rem;}
 .timeRange-hour > b {position:absolute;left:-1.8rem;top:1.8rem;color:#fff;font-size:1.2rem;font-weight:700;width:3.6rem;text-align:center;}
-.timeRange-range {position:absolute;top:0;left:-.5rem;right:-.5rem;height:4.4rem;border:0;margin:0;padding:0;cursor:pointer;background:transparent;-webkit-appearance:none;}
-.timeRange-range::-webkit-slider-thumb {-webkit-appearance:none;appearance:none;width:0;height:0;background:transparent;border:none;box-shadow:none;}
-.timeRange-range::-moz-range-thumb {width:0;height:0;background:transparent;border:none;box-shadow:none;}
-.timeRange-range::-ms-thumb {width:0;height:0;background:transparent;border:none;box-shadow:none;}
+.timeRange-range {position:absolute;top:0;left:-.5rem;right:-.5rem;height:4.4rem;border:0;margin:0;padding:0;cursor:pointer;background:transparent;-webkit-appearance:none;touch-action:pan-y;}
+.timeRange-range::-webkit-slider-thumb {-webkit-appearance:none;appearance:none;width:4.4rem;height:4.4rem;background:transparent;border:none;box-shadow:none;cursor:pointer;}
+.timeRange-range::-moz-range-thumb {width:4.4rem;height:4.4rem;background:transparent;border:none;box-shadow:none;cursor:pointer;}
+.timeRange-range::-ms-thumb {width:4.4rem;height:4.4rem;background:transparent;border:none;box-shadow:none;cursor:pointer;}
 .timeRange-fake-input {position:absolute;top:0;left:0;right:0;height:4.4rem;pointer-events:none;z-index:2;}
 .timeRange-fake-track {position:absolute;top:0;left:0;width:0;height:.6rem;background-color:#0475F4;border-radius:0rem;}
 .timeRange-today {position:absolute;top:-3.5rem;right:0;color:#000;font-size:1rem;font-weight:700;width:4.8rem;background-color:#FFF;border-radius:0.3rem;padding:0rem;transform:translateX(2.4rem);}
