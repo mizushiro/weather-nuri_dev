@@ -534,20 +534,7 @@
 
       <!-- map-bottom -->
       <div class="full-map-bottom-area" data-toggle-target="map-compare">
-        <div class="timeRange" data-time-range="time-range1">
-          <div class="time-range-control-area">
-            <button type="button" class="timeRange-prev" aria-label="이전">
-              <i class="icon-aspect-play-prev" data-size="20"></i>
-            </button>
-            <button type="button" class="timeRange-play" aria-label="실행" data-toggle-object="time-play-1"></button>
-            <button type="button" class="timeRange-next" aria-label="다음">
-              <i class="icon-aspect-play-next" data-size="20"></i>
-            </button>
-          </div>
-          <div class="timeRange-bar">
-            <input type="range" class="timeRange-range" />
-          </div>
-        </div>
+        <div class="timeRange" data-time-range="time-range1" style="height: 12rem;"></div>
       </div>
 
       <!-- map-layer -->
@@ -1681,7 +1668,9 @@
   <script type="module">
     /* 준비 ---------------------------------------------- */
     import { UX } from '../../resources/js/uiuxu.common.js';
-    import { ComparisonMap, TimeRangeHistory } from '../../resources/js/component/comparisonMap.js';
+    import { ComparisonMap } from '../../resources/js/component/comparisonMap.js';
+    import { TimeRange } from '../../resources/js/component/timeRange.js';
+
     UX.init();
 
     // [TOP]
@@ -1874,22 +1863,26 @@
     });
 
 
-    // 하단 시간슬라이더
-    UI.exe.timeRangeHistory = new TimeRangeHistory({
+    /// 하단 시간슬라이더
+    UI.exe.timeRangeHistory = new TimeRange({
       id: 'time-range1',
-      point: 180,
-      totalDays: 10,
-      playTime: 3000, // 플레이시 변경되는 시간 간격 (ms)
-      value: [0, 0], // 처음 시작 시간 [시, 분] 
-      date: '2026-05-25', // 날짜 설정 (YYYY-MM-DD)
-      // upperLimit: [24, 0], // max 제한: 실시간으로 미래의 정보가 없을 경우
-      // minmaxDay: ['2026-05-10', '2026-06-28'], // 선택 가능한 날짜 범위 설정 (YYYY-MM-DD)
+      rangeType: 'relative',
+      relativeHours: 50, // ◀ 현재시간 기준으로 12시간 설정 (1~240 범위 지정 가능, 미설정 시 기본 24시간)
+      step: 10,
+      playTime: 1000,
+      onChange: (dateStr, timeStr, dateObj) => {
+        console.log(`[Change] 선택 시점: <b>${dateStr}</b> (시간: ${timeStr}) | 타임스탬프: ${dateObj.getTime()}`)
+      }
     });
+
     const mapTypeSelectList = document.querySelectorAll('[name="mapTypeSelect"]');
     const mapOptions = document.querySelectorAll('[data-map-select]');
     const applyPointByMapType = (selectedValue) => {
       const isWorld = selectedValue === 'world';
-      UI.exe.timeRangeHistory.setPoint(isWorld ? 10 : 180);
+      const step = isWorld ? 10 : 60;
+      const hours = isWorld ? 50 : 6;
+      UI.exe.timeRangeHistory.setStep(step);
+      UI.exe.timeRangeHistory.setRelativeHours(hours);
       mapOptions.forEach(item => {
         item.dataset.mapSelect = isWorld ? 'world' : 'local';
       });
