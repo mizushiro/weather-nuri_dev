@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no" />
+
+  <title>날씨누리 - 커스텀 시간 범위 슬라이더 테스트</title>
+
+  <link rel="stylesheet" href="../../resources/css/ui.base.css">
+  <link rel="stylesheet" href="../../resources/css/comparison-map.css">
+  <style>
+    body {
+      background-color: #0f1319;
+      color: #fff;
+      padding: 2rem;
+    }
+    .test-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+    }
+    .slider-test-block {
+      background-color: #1b202e;
+      border: 1px solid #2d3548;
+      border-radius: 8px;
+      padding: 2.5rem;
+    }
+    .slider-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #3b82f6;
+    }
+    .slider-desc {
+      font-size: 1.3rem;
+      color: #94a3b8;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+    .slider-log {
+      margin-top: 5rem;
+      background-color: #0f1319;
+      border: 1px solid #1e293b;
+      padding: 1rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 1.2rem;
+      color: #10b981;
+    }
+    /* Adjust styles for select box padding */
+    .time-range-day select {
+      color: #19213D;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+<div class="test-container">
+  <h1>TimeRange 신규 기능 테스트 데모</h1>
+
+  <!-- 테스트 1: 24시간 이하 범위 (자정 교차 및 10분 단위 검증) -->
+  <div class="slider-test-block">
+    <div class="slider-title">테스트 1: 24시간 이하 범위 (23:00 ~ 다음날 03:00)</div>
+    <div class="slider-desc">
+      기간이 24시간 이하인 케이스입니다. 100% 가로 너비 내에서 전체 4시간 분량이 표시됩니다.<br>
+      <b>검증 포인트:</b><br>
+      1. 슬라이더가 10분 단위로 세밀하게 이동하는지 확인하세요.<br>
+      2. 슬라이더를 우측으로 움직여 자정(24:00)을 지나 00:00 이후가 되는 순간 상단 날짜 드롭다운이 자동으로 다음날로 변경되는지 확인하세요.<br>
+      3. 상단 드롭다운에서 날짜를 수동 변경하면 슬라이더 핸들이 해당 날짜의 최초 유효 시간(23:00 또는 00:00)으로 스냅 이동하는지 확인하세요.
+    </div>
+
+    <div class="timeRange" data-time-range="time-range-test1" style="height: 12rem;"></div>
+    
+    <div class="slider-log" id="log-test1">이벤트 발생 로그가 여기에 출력됩니다.</div>
+  </div>
+
+  <!-- 테스트 2: 24시간 이상 범위 (유효 범위 활성/비활성 오버레이 및 상단 날짜 이동) -->
+  <div class="slider-test-block">
+    <div class="slider-title">테스트 2: 24시간 이상 범위 (시작일 09:00 ~ 종료일 15:00)</div>
+    <div class="slider-desc">
+      기간이 24시간 이상인 케이스입니다. 각 날짜는 무조건 최대 범위인 00:00 ~ 24:00으로 채워집니다.<br>
+      <b>검증 포인트:</b><br>
+      1. 첫날(시작일)은 09:00 이전 구간에 반투명 음영 오버레이가 깔려 선택할 수 없는지 확인하세요.<br>
+      2. 마지막 날(종료일)은 15:00 이후 구간에 반투명 음영 오버레이가 깔려 선택할 수 없는지 확인하세요.<br>
+      3. 날짜 드롭다운을 통해 날짜를 변경하면 각 날짜의 눈금선 및 비활성 영역이 올바르게 갱신되는지 확인하세요.<br>
+      4. 재생 버튼이나 다음 버튼을 통해 하루의 끝에 도달하면 자동으로 다음 날짜로 매끄럽게 넘어가는지 확인하세요.
+    </div>
+
+    <div class="timeRange" data-time-range="time-range-test2" style="height: 12rem;"></div>
+    
+    <div class="slider-log" id="log-test2">이벤트 발생 로그가 여기에 출력됩니다.</div>
+  </div>
+
+  <!-- 가이드 문서 섹션 -->
+  <div class="slider-test-block" style="background-color: #1e2536; border-color: #3b82f6;">
+    <div class="slider-title" style="color: #60a5fa; font-size: 2.2rem; border-bottom: 2px solid #3b82f6; padding-bottom: 1rem; margin-bottom: 2rem;">
+      TimeRange 컴포넌트 개발 가이드
+    </div>
+    
+    <div class="slider-desc" style="color: #cbd5e1; font-size: 1.4rem;">
+      <h3 style="color: #fff; font-size: 1.7rem; margin: 2rem 0 1rem 0;">1. 생성자 옵션 (Constructor Options)</h3>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 2rem; font-size: 1.3rem; color: #cbd5e1; text-align: left;">
+        <thead>
+          <tr style="border-bottom: 1px solid #475569; color: #fff;">
+            <th style="padding: 1rem 0.5rem;">옵션명</th>
+            <th style="padding: 1rem 0.5rem;">타입</th>
+            <th style="padding: 1rem 0.5rem;">설명</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #334155;">
+            <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">id</td>
+            <td style="padding: 1rem 0.5rem;">String</td>
+            <td style="padding: 1rem 0.5rem;">슬라이더 래퍼 요소의 식별자 (`data-time-range="..."` 값)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #334155;">
+            <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">rangeType</td>
+            <td style="padding: 1rem 0.5rem;">'datetime' | 'relative'</td>
+            <td style="padding: 1rem 0.5rem;">범위 설정 방식: `'datetime'`(고정 날짜시간) 또는 `'relative'`(현재 시간 기준 상대 기간)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #334155;">
+            <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">start</td>
+            <td style="padding: 1rem 0.5rem;">String</td>
+            <td style="padding: 1rem 0.5rem;">`rangeType: 'datetime'`일 때 시작 시간 (`'YYYY-MM-DD HH:MM'`)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #334155;">
+            <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">end</td>
+            <td style="padding: 1rem 0.5rem;">String</td>
+            <td style="padding: 1rem 0.5rem;">`rangeType: 'datetime'`일 때 종료 시간 (`'YYYY-MM-DD HH:MM'`)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #334155;">
+            <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">relativeHours</td>
+            <td style="padding: 1rem 0.5rem;">Number</td>
+            <td style="padding: 1rem 0.5rem;">`rangeType: 'relative'`일 때 기간 설정 시간 값 (1~240시간, 미설정 시 기본 24)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #334155;">
+            <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">step</td>
+            <td style="padding: 1rem 0.5rem;">Number</td>
+            <td style="padding: 1rem 0.5rem;">분 단위 조절 간격 (기본값 `10`)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #334155;">
+            <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">playTime</td>
+            <td style="padding: 1rem 0.5rem;">Number</td>
+            <td style="padding: 1rem 0.5rem;">자동 재생 시 눈금 이동 시간 간격 (ms, 기본값 `3000`)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #334155;">
+            <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">onChange</td>
+            <td style="padding: 1rem 0.5rem;">Function</td>
+            <td style="padding: 1rem 0.5rem;">값이 변경될 때의 콜백 함수 `(fullDateTimeStr, timeStr, dateObj)`</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: #fff; font-size: 1.7rem; margin: 2rem 0 1rem 0;">2. 동적 API 메서드 (Dynamic Methods)</h3>
+      <ul style="list-style-type: disc; padding-left: 2rem; line-height: 1.8; margin-bottom: 2rem;">
+        <li>
+          <code style="color: #34d399; font-weight: bold;">init()</code>: 컴포넌트를 초기화하고 이벤트를 바인딩하여 렌더링을 개시합니다.
+        </li>
+        <li>
+          <code style="color: #34d399; font-weight: bold;">setValue(minutes)</code>: 현재 활성 트랙 내에서 슬라이더 값을 설정합니다 (스냅 포인트 자동 보정).
+        </li>
+        <li>
+          <code style="color: #34d399; font-weight: bold;">setStep(stepMinutes)</code>: 조절 간격(`step`)을 실시간 변경하고 트랙 및 핸들을 갱신합니다.
+        </li>
+        <li>
+          <code style="color: #34d399; font-weight: bold;">setRelativeHours(hours)</code>: relative 모드일 때 기간(시간)을 실시간 변경하고 날짜 목록과 슬라이더 트랙을 재구성합니다.
+        </li>
+        <li>
+          <code style="color: #34d399; font-weight: bold;">updateOptions(opt)</code>: 모든 옵션을 동적으로 리셋하고 신규 설정값으로 컴포넌트를 재구성(Destroy & Reinit)합니다.
+        </li>
+      </ul>
+
+      <h3 style="color: #fff; font-size: 1.7rem; margin: 2rem 0 1rem 0;">3. 코드 적용 예시</h3>
+      
+      <p style="margin-bottom: 0.5rem;"><b>가. datetime 절대 시간 지정 모드 초기화</b></p>
+      <pre style="background: #0f1319; border: 1px solid #334155; padding: 1.2rem; border-radius: 4px; color: #10b981; font-family: monospace; font-size: 1.2rem; overflow-x: auto; margin-bottom: 2rem;">
+const range = new TimeRange({
+  id: 'time-range-test1',
+  rangeType: 'datetime',
+  start: '2026-07-15 23:00',
+  end: '2026-07-16 03:00',
+  step: 10,
+  onChange: (dateStr, timeStr, dateObj) => {
+    console.log(`선택 날짜시간: ${dateStr}, 시간: ${timeStr}`);
+  }
+});
+range.init();</pre>
+
+      <p style="margin-bottom: 0.5rem;"><b>나. relative 상대 기간 모드 초기화 및 도중 변경</b></p>
+      <pre style="background: #0f1319; border: 1px solid #334155; padding: 1.2rem; border-radius: 4px; color: #10b981; font-family: monospace; font-size: 1.2rem; overflow-x: auto; margin-bottom: 2rem;">
+const range = new TimeRange({
+  id: 'time-range-test2',
+  rangeType: 'relative',
+  relativeHours: 48, // 48시간 지정
+  step: 10
+});
+range.init();
+
+// 도중에 조절 단위(step)를 3시간(180분)으로 변경
+range.setStep(180);
+
+// 도중에 상대 기간 범위를 6시간으로 변경
+range.setRelativeHours(6);</pre>
+
+      <p style="margin-bottom: 0.5rem;"><b>다. updateOptions를 활용한 전체 설정 리셋</b></p>
+      <pre style="background: #0f1319; border: 1px solid #334155; padding: 1.2rem; border-radius: 4px; color: #10b981; font-family: monospace; font-size: 1.2rem; overflow-x: auto;">
+// relative 모드에서 datetime 고정 범위 모드로 완전히 덮어쓰기
+range.updateOptions({
+  id: 'time-range-test2',
+  rangeType: 'datetime',
+  start: '2026-07-15 09:00',
+  end: '2026-07-17 15:00',
+  step: 30
+});</pre>
+    </div>
+  </div>
+</div>
+
+<!-- javascript -->
+<script type="module">
+  import { UX } from '../../resources/js/uiuxu.common.js';
+  import { TimeRange } from '../../resources/js/component/timeRange.js';
+  UX.init();
+
+  const log1 = document.getElementById('log-test1');
+  const log2 = document.getElementById('log-test2');
+
+  // 슬라이더 1: 4시간 단일트랙, 자정 교차 (datetime 모드)
+  const range1 = new TimeRange({
+    id: 'time-range-test1',
+    rangeType: 'relative',
+    relativeHours: 4,
+    // start: '2026-07-15 23:00',
+    // end: '2026-07-16 03:00',
+    step: 10,
+    playTime: 1500,
+    onChange: (dateStr, timeStr, dateObj) => {
+      log1.innerHTML = `[Change] 선택 시점: <b>${dateStr}</b> (시간: ${timeStr}) | 타임스탬프: ${dateObj.getTime()}`;
+    }
+  });
+  range1.init();
+
+  // 슬라이더 2: 24시간 초과 다중트랙 (datetime 모드)
+  const range2 = new TimeRange({
+    id: 'time-range-test2',
+    rangeType: 'relative',
+    relativeHours: 96,
+    // rangeType: 'datetime',
+    // start: '2026-07-15 09:00',
+    // end: '2026-07-17 15:00',
+    step: 60, // 30분 단위
+    playTime: 1000,
+    onChange: (dateStr, timeStr, dateObj) => {
+      log2.innerHTML = `[Change] 선택 시점: <b>${dateStr}</b> (시간: ${timeStr}) | 타임스탬프: ${dateObj.getTime()}`;
+    }
+  });
+  range2.init();
+</script>
+</body>
+
+</html>
