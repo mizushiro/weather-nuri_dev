@@ -28,7 +28,7 @@
       gap: 5rem;
     }
     .slider-test-block {
-      background-color: #1b202e;
+      background-color: #373a41;
       border: 1px solid #2d3548;
       border-radius: 8px;
       padding: 2.5rem;
@@ -78,7 +78,7 @@
       3. 상단 드롭다운에서 날짜를 수동 변경하면 슬라이더 핸들이 해당 날짜의 최초 유효 시간(23:00 또는 00:00)으로 스냅 이동하는지 확인하세요.
     </div>
 
-    <div class="timeRange" data-time-range="time-range-test1" style="height: 12rem;"></div>
+    <div class="timeRange" data-time-range="time-range-test1"></div>
     
     <div class="slider-log" id="log-test1">이벤트 발생 로그가 여기에 출력됩니다.</div>
   </div>
@@ -95,9 +95,26 @@
       4. 재생 버튼이나 다음 버튼을 통해 하루의 끝에 도달하면 자동으로 다음 날짜로 매끄럽게 넘어가는지 확인하세요.
     </div>
 
-    <div class="timeRange" data-time-range="time-range-test2" style="height: 12rem;"></div>
+    <div class="timeRange" data-time-range="time-range-test2"></div>
     
     <div class="slider-log" id="log-test2">이벤트 발생 로그가 여기에 출력됩니다.</div>
+  </div>
+
+  <!-- 테스트 3: rangeType 'day' 일자 선택 모드 (컨트롤/range 미사용, 드래그 스크롤 및 중앙 정렬) -->
+  <div class="slider-test-block">
+    <div class="slider-title">테스트 3: Day 일자 선택 모드 (rangeType: 'day')</div>
+    <div class="slider-desc">
+      재생 컨트롤 버튼 및 range 슬라이더를 사용하지 않고, 일 단위 칩/버튼 목록 형태로 제공되는 모드입니다.<br>
+      <b>검증 포인트:</b><br>
+      1. 재생/이전/다음 컨트롤 버튼과 슬라이더 트랙이 생성되지 않는지 확인하세요.<br>
+      2. 오늘 날짜를 중심으로 이전(5일), 이후(5일) 날짜 칩이 표시되고 '오늘' 뱃지가 붙어있는지 확인하세요.<br>
+      3. PC 환경에서도 마우스 클릭 후 좌우로 드래그 시 가로 스크롤이 매끄럽게 동작하고, 가로 스크롤바가 숨겨져 있는지 확인하세요.<br>
+      4. 날짜 항목 클릭 시 해당 날짜가 활성화(`active`)되고, 스크롤 영역의 중앙으로 자동 정렬되는지 확인하세요.
+    </div>
+
+    <div class="timeRange" data-time-range="time-range-test3"></div>
+    
+    <div class="slider-log" id="log-test3">이벤트 발생 로그가 여기에 출력됩니다.</div>
   </div>
 
   <!-- 가이드 문서 섹션 -->
@@ -124,18 +141,33 @@
           </tr>
           <tr style="border-bottom: 1px solid #334155;">
             <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">rangeType</td>
-            <td style="padding: 1rem 0.5rem;">'datetime' | 'relative'</td>
-            <td style="padding: 1rem 0.5rem;">범위 설정 방식: `'datetime'`(고정 날짜시간) 또는 `'relative'`(현재 시간 기준 상대 기간)</td>
+            <td style="padding: 1rem 0.5rem;">'datetime' | 'relative' | 'day'</td>
+            <td style="padding: 1rem 0.5rem;">범위 설정 방식: `'datetime'`(고정 날짜시간), `'relative'`(상대 기간 시간), `'day'`(컨트롤/range 없는 일자 선택 목록)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #334155;">
+            <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">today</td>
+            <td style="padding: 1rem 0.5rem;">String | Date</td>
+            <td style="padding: 1rem 0.5rem;">`rangeType: 'day'`일 때 기준이 되는 오늘 날짜 (기본값: 실시간 `new Date()`)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #334155;">
+            <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">daysBefore</td>
+            <td style="padding: 1rem 0.5rem;">Number</td>
+            <td style="padding: 1rem 0.5rem;">`rangeType: 'day'`일 때 오늘 기준 이전 일수 (기본값 `3`)</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #334155;">
+            <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">daysAfter</td>
+            <td style="padding: 1rem 0.5rem;">Number</td>
+            <td style="padding: 1rem 0.5rem;">`rangeType: 'day'`일 때 오늘 기준 이후 일수 (기본값 `3`)</td>
           </tr>
           <tr style="border-bottom: 1px solid #334155;">
             <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">start</td>
             <td style="padding: 1rem 0.5rem;">String</td>
-            <td style="padding: 1rem 0.5rem;">`rangeType: 'datetime'`일 때 시작 시간 (`'YYYY-MM-DD HH:MM'`)</td>
+            <td style="padding: 1rem 0.5rem;">`rangeType: 'datetime'`일 때 시작 시간 (`'YYYY-MM-DD HH:MM'`) 또는 `day` 모드 시작일</td>
           </tr>
           <tr style="border-bottom: 1px solid #334155;">
             <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">end</td>
             <td style="padding: 1rem 0.5rem;">String</td>
-            <td style="padding: 1rem 0.5rem;">`rangeType: 'datetime'`일 때 종료 시간 (`'YYYY-MM-DD HH:MM'`)</td>
+            <td style="padding: 1rem 0.5rem;">`rangeType: 'datetime'`일 때 종료 시간 (`'YYYY-MM-DD HH:MM'`) 또는 `day` 모드 종료일</td>
           </tr>
           <tr style="border-bottom: 1px solid #334155;">
             <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">relativeHours</td>
@@ -155,7 +187,7 @@
           <tr style="border-bottom: 1px solid #334155;">
             <td style="padding: 1rem 0.5rem; font-weight: bold; color: #60a5fa;">onChange</td>
             <td style="padding: 1rem 0.5rem;">Function</td>
-            <td style="padding: 1rem 0.5rem;">값이 변경될 때의 콜백 함수 `(fullDateTimeStr, timeStr, dateObj)`</td>
+            <td style="padding: 1rem 0.5rem;">값이 변경될 때의 콜백 함수 (`day` 모드: `(dateStr, dateObj)`)</td>
           </tr>
         </tbody>
       </table>
@@ -166,7 +198,7 @@
           <code style="color: #34d399; font-weight: bold;">init()</code>: 컴포넌트를 초기화하고 이벤트를 바인딩하여 렌더링을 개시합니다.
         </li>
         <li>
-          <code style="color: #34d399; font-weight: bold;">setValue(minutes)</code>: 현재 활성 트랙 내에서 슬라이더 값을 설정합니다 (스냅 포인트 자동 보정).
+          <code style="color: #34d399; font-weight: bold;">setValue(val)</code>: 값 설정 (`day` 모드: `'YYYY-MM-DD'` 날짜 지정 및 해당 일자 칩 중앙 정렬).
         </li>
         <li>
           <code style="color: #34d399; font-weight: bold;">setStep(stepMinutes)</code>: 조절 간격(`step`)을 실시간 변경하고 트랙 및 핸들을 갱신합니다.
@@ -211,15 +243,27 @@ range.setStep(180);
 // 도중에 상대 기간 범위를 6시간으로 변경
 range.setRelativeHours(6);</pre>
 
-      <p style="margin-bottom: 0.5rem;"><b>다. updateOptions를 활용한 전체 설정 리셋</b></p>
+      <p style="margin-bottom: 0.5rem;"><b>다. rangeType: 'day' 일자 선택 모드 (마우스 드래그 스크롤 & 중앙 정렬)</b></p>
+      <pre style="background: #0f1319; border: 1px solid #334155; padding: 1.2rem; border-radius: 4px; color: #10b981; font-family: monospace; font-size: 1.2rem; overflow-x: auto; margin-bottom: 2rem;">
+const dayRange = new TimeRange({
+  id: 'time-range-test3',
+  rangeType: 'day',
+  daysBefore: 5, // 오늘 기준 5일 전부터
+  daysAfter: 5,  // 오늘 기준 5일 후까지
+  onChange: (dateStr, dateObj) => {
+    console.log(`선택된 날짜: ${dateStr}`);
+  }
+});
+dayRange.init();</pre>
+
+      <p style="margin-bottom: 0.5rem;"><b>라. updateOptions를 활용한 전체 설정 리셋</b></p>
       <pre style="background: #0f1319; border: 1px solid #334155; padding: 1.2rem; border-radius: 4px; color: #10b981; font-family: monospace; font-size: 1.2rem; overflow-x: auto;">
-// relative 모드에서 datetime 고정 범위 모드로 완전히 덮어쓰기
+// relative 모드에서 day 모드로 완전히 덮어쓰기
 range.updateOptions({
   id: 'time-range-test2',
-  rangeType: 'datetime',
-  start: '2026-07-15 09:00',
-  end: '2026-07-17 15:00',
-  step: 30
+  rangeType: 'day',
+  daysBefore: 3,
+  daysAfter: 3
 });</pre>
     </div>
   </div>
@@ -233,14 +277,13 @@ range.updateOptions({
 
   const log1 = document.getElementById('log-test1');
   const log2 = document.getElementById('log-test2');
+  const log3 = document.getElementById('log-test3');
 
   // 슬라이더 1: 4시간 단일트랙, 자정 교차 (datetime 모드)
   const range1 = new TimeRange({
     id: 'time-range-test1',
     rangeType: 'relative',
     relativeHours: 4,
-    // start: '2026-07-15 23:00',
-    // end: '2026-07-16 03:00',
     step: 10,
     playTime: 1500,
     onChange: (dateStr, timeStr, dateObj) => {
@@ -254,16 +297,25 @@ range.updateOptions({
     id: 'time-range-test2',
     rangeType: 'relative',
     relativeHours: 96,
-    // rangeType: 'datetime',
-    // start: '2026-07-15 09:00',
-    // end: '2026-07-17 15:00',
-    step: 60, // 30분 단위
+    step: 60, // 60분 단위
     playTime: 1000,
     onChange: (dateStr, timeStr, dateObj) => {
       log2.innerHTML = `[Change] 선택 시점: <b>${dateStr}</b> (시간: ${timeStr}) | 타임스탬프: ${dateObj.getTime()}`;
     }
   });
   range2.init();
+
+  // 슬라이더 3: rangeType 'day' 일자 선택 모드
+  const range3 = new TimeRange({
+    id: 'time-range-test3',
+    rangeType: 'day',
+    daysBefore: 5,
+    daysAfter: 0,
+    onChange: (dateStr, dateObj) => {
+      log3.innerHTML = `[Change] 선택 날짜: <b>${dateStr}</b> | 타임스탬프: ${dateObj ? dateObj.getTime() : ''}`;
+    }
+  });
+  range3.init();
 </script>
 </body>
 

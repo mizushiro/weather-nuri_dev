@@ -31,37 +31,178 @@ export class TimeRange {
     this.id = opt.id;
     this.wrap = document.querySelector(`.timeRange[data-time-range="${this.id}"]`);
     
-    if (this.wrap && !this.wrap.querySelector('.timeRange-bar')) {
-      const controlsHtml = `
-        <div class="time-range-control-area">
-          <button type="button" class="timeRange-prev" aria-label="이전">
-            <i class="icon-aspect-play-prev" data-size="20"></i>
-          </button>
-          <button type="button" class="timeRange-play" aria-label="실행"></button>
-          <button type="button" class="timeRange-next" aria-label="다음">
-            <i class="icon-aspect-play-next" data-size="20"></i>
-          </button>
-        </div>
-        <div class="timeRange-bar">
-          <input type="range" class="timeRange-range" />
-        </div>
-      `;
-      this.wrap.innerHTML = controlsHtml;
-    }
-    
-    this.input = this.wrap.querySelector('.timeRange-range');
-    this.bar = this.wrap.querySelector('.timeRange-bar');
-    this.fake = this.wrap.querySelector('.timeRange-fake-input');
-    
-    // Check if custom datetime range mode is requested
     this.rangeType = opt.rangeType;
+    this.isDayMode = (this.rangeType === 'day');
     this.isCustomRange = (this.rangeType === 'datetime' || this.rangeType === 'relative');
     
-    if (this.isCustomRange) {
-      this._initCustom(opt);
-    } else {
-      this._initLegacy(opt);
+    if (this.wrap) {
+      this.wrap.setAttribute('data-range-type', this.rangeType || 'legacy');
     }
+    
+    if (this.isDayMode) {
+      if (this.wrap) {
+        this.wrap.innerHTML = '';
+      }
+      this._initDay(opt);
+    } else {
+      if (this.wrap && !this.wrap.querySelector('.timeRange-bar')) {
+        const controlsHtml = `
+          <div class="time-range-control-area">
+            <button type="button" class="timeRange-prev" aria-label="이전">
+              <i class="icon-aspect-play-prev" data-size="20"></i>
+            </button>
+            <button type="button" class="timeRange-play" aria-label="실행"></button>
+            <button type="button" class="timeRange-next" aria-label="다음">
+              <i class="icon-aspect-play-next" data-size="20"></i>
+            </button>
+          </div>
+          <div class="timeRange-bar">
+            <input type="range" class="timeRange-range" />
+          </div>
+        `;
+        this.wrap.innerHTML = controlsHtml;
+      }
+      
+      this.input = this.wrap.querySelector('.timeRange-range');
+      this.bar = this.wrap.querySelector('.timeRange-bar');
+      this.fake = this.wrap.querySelector('.timeRange-fake-input');
+      
+      if (this.isCustomRange) {
+        this._initCustom(opt);
+      } else {
+        this._initLegacy(opt);
+      }
+    }
+  }
+
+  _initDay(opt) {
+    this.onChange = opt.onChange || function() {};
+    
+    // 1. Determine base date (today)
+    const baseDate = opt.today ? new Date(opt.today) : new Date();
+    this.todayStr = formatDate(baseDate);
+    
+    // 2. Determine date range
+    let start, end;
+    if (opt.start && opt.end) {
+      start = new Date(opt.start.split(' ')[0] + 'T00:00:00');
+      end = new Date(opt.end.split(' ')[0] + 'T00:00:00');
+    } else {
+      const daysBefore = typeof opt.daysBefore === 'number' ? Math.max(0, opt.daysBefore) : 3;
+      const daysAfter = typeof opt.daysAfter === 'number' ? Math.max(0, opt.daysAfter) : 3;
+      
+      start = new Date(baseDate);
+      start.setDate(start.getDate() - daysBefore);
+      end = new Date(baseDate);
+      end.setDate(end.getDate() + daysAfter);
+    }
+    
+    this.dayItemList = getDatesInRange(start, end);
+    
+    // 3. Initial selected date
+    if (opt.value) {
+      this.selectedDateStr = typeof opt.value === 'string' ? opt.value.split(' ')[0] : formatDate(opt.value);
+    } else {
+      this.selectedDateStr = this.dayItemList.includes(this.todayStr) ? this.todayStr : this.dayItemList[0];
+    }
+    
+    // 4. Construct HTML
+    const weekNames = ['일', '월', '화', '수', '목', '금', '토'];
+    const itemsHtml = this.dayItemList.map(dateStr => {
+      const d = new Date(dateStr + 'T00:00:00');
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      const dayName = weekNames[d.getDay()];
+      const isToday = (dateStr === this.todayStr);
+      const isActive = (dateStr === this.selectedDateStr);
+      
+      return `
+        <button type="button" class="time-range-day-item ${isActive ? 'active' : ''} ${isToday ? 'is-today' : ''}" data-date="${dateStr}">
+          <span class="day-date-text">${yyyy}.${mm}.${dd} ${dayName}</span>
+        </button>
+      `;
+    }).join('');
+    
+    const makeHtml = `
+      <div class="time-range-day-wrap">
+        <div class="time-range-day-list">
+          ${itemsHtml}
+        </div>
+      </div>
+    `;
+    
+    this.wrap.innerHTML = makeHtml;
+    this.dayWrap = this.wrap.querySelector('.time-range-day-wrap');
+    this.dayList = this.wrap.querySelector('.time-range-day-list');
+    
+    this._initDragScroll();
+  }
+
+  _initDragScroll() {
+    if (!this.dayWrap) return;
+    
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let isMoved = false;
+
+    this.dayWrap.addEventListener('mousedown', (e) => {
+      isDown = true;
+      isMoved = false;
+      startX = e.pageX - this.dayWrap.offsetLeft;
+      scrollLeft = this.dayWrap.scrollLeft;
+    });
+
+    this.dayWrap.addEventListener('mouseleave', () => {
+      isDown = false;
+    });
+
+    this.dayWrap.addEventListener('mouseup', () => {
+      isDown = false;
+    });
+
+    this.dayWrap.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - this.dayWrap.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      if (Math.abs(x - startX) > 5) {
+        isMoved = true;
+      }
+      this.dayWrap.scrollLeft = scrollLeft - walk;
+    });
+
+    const dayButtons = this.dayList.querySelectorAll('.time-range-day-item');
+    dayButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        if (isMoved) {
+          isMoved = false;
+          return;
+        }
+        const dateStr = btn.getAttribute('data-date');
+        this.setValue(dateStr);
+      });
+    });
+  }
+
+  _scrollToCenter(targetElement, isSmooth = true) {
+    if (!this.dayWrap) return;
+    const target = targetElement || (this.dayList ? this.dayList.querySelector('.time-range-day-item.active') : null);
+    if (!target) return;
+
+    const wrapWidth = this.dayWrap.clientWidth;
+    const itemLeft = target.offsetLeft;
+    const itemWidth = target.clientWidth;
+
+    if (wrapWidth === 0 || itemWidth === 0) return;
+
+    const targetScrollLeft = itemLeft - (wrapWidth / 2) + (itemWidth / 2);
+
+    this.dayWrap.scrollTo({
+      left: targetScrollLeft,
+      behavior: isSmooth ? 'smooth' : 'auto'
+    });
   }
 
   _initCustom(opt) {
@@ -874,12 +1015,33 @@ export class TimeRange {
   }
 
   init() {
-    if (this.isCustomRange) {
+    if (this.isDayMode) {
+      const scrollToActive = (smooth = false) => {
+        const activeItem = this.dayList ? this.dayList.querySelector('.time-range-day-item.active') : null;
+        if (activeItem) {
+          this._scrollToCenter(activeItem, smooth);
+        }
+      };
+
+      requestAnimationFrame(() => scrollToActive(false));
+      setTimeout(() => scrollToActive(false), 50);
+      setTimeout(() => scrollToActive(true), 300);
+
+      if (!this._hasResizeListener) {
+        this._hasResizeListener = true;
+        window.addEventListener('resize', () => {
+          if (this.isDayMode) {
+            scrollToActive(false);
+          }
+        });
+      }
+    } else if (this.isCustomRange) {
       this._initCustomRange();
+      this._initFakeHandleDrag();
     } else {
       this._initLegacyRange();
+      this._initFakeHandleDrag();
     }
-    this._initFakeHandleDrag();
   }
 
   _initFakeHandleDrag() {
@@ -1156,7 +1318,35 @@ export class TimeRange {
   }
 
   setValue(val) {
-    if (this.isCustomRange) {
+    if (this.isDayMode) {
+      let dateStr = val;
+      if (val instanceof Date) {
+        dateStr = formatDate(val);
+      } else if (typeof val === 'string') {
+        dateStr = val.split(' ')[0];
+      }
+      if (!this.dayItemList || !this.dayItemList.includes(dateStr)) return;
+      
+      this.selectedDateStr = dateStr;
+      
+      if (this.dayList) {
+        const items = this.dayList.querySelectorAll('.time-range-day-item');
+        let selectedItem = null;
+        items.forEach(btn => {
+          if (btn.getAttribute('data-date') === dateStr) {
+            btn.classList.add('active');
+            selectedItem = btn;
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+        if (selectedItem) {
+          this._scrollToCenter(selectedItem);
+        }
+      }
+      const selectedDateObj = new Date(dateStr + 'T00:00:00');
+      this.onChange(dateStr, selectedDateObj);
+    } else if (this.isCustomRange) {
       this._setValueCustom(val);
     } else {
       let v = val;
@@ -1174,6 +1364,7 @@ export class TimeRange {
   }
 
   setStep(step) {
+    if (this.isDayMode) return;
     if (this.isCustomRange) {
       this._setStepCustom(step);
     } else {
@@ -1190,7 +1381,7 @@ export class TimeRange {
   }
 
   setRelativeHours(hours) {
-    if (!this.isCustomRange || this.rangeType !== 'relative') return;
+    if (this.isDayMode || !this.isCustomRange || this.rangeType !== 'relative') return;
     
     this.relativeHours = Math.max(1, Math.min(240, Number(hours) || 24));
     
@@ -1241,14 +1432,13 @@ export class TimeRange {
     if (this._playTimer) {
       if (this.isCustomRange) {
         this._stopPlayCustom();
-      } else {
+      } else if (!this.isDayMode) {
         this._stopPlayLegacy();
       }
     }
     
-    // 2. Remove previously injected elements from this.bar
-    const elementsToRemove = this.bar.querySelectorAll('.time-range-day, .timeRange-line, .timeRange-fake-input, .timeRange-disabled-zone');
-    elementsToRemove.forEach(el => el.remove());
+    // 2. Clear wrapper contents
+    this.wrap.innerHTML = '';
     
     // 3. Clear event listeners from range input and date picker
     if (this.input) {
@@ -1273,26 +1463,57 @@ export class TimeRange {
     
     // 4. Reset component properties
     this.rangeType = opt.rangeType;
+    this.isDayMode = (this.rangeType === 'day');
     this.isCustomRange = (this.rangeType === 'datetime' || this.rangeType === 'relative');
-    
-    if (this.isCustomRange) {
-      this._initCustom(opt);
-    } else {
-      this._initLegacy(opt);
+    if (this.wrap) {
+      this.wrap.setAttribute('data-range-type', this.rangeType || 'legacy');
     }
     
-    // 5. Reinitialize handlers and redraw slider
+    if (this.isDayMode) {
+      this._initDay(opt);
+    } else {
+      const controlsHtml = `
+        <div class="time-range-control-area">
+          <button type="button" class="timeRange-prev" aria-label="이전">
+            <i class="icon-aspect-play-prev" data-size="20"></i>
+          </button>
+          <button type="button" class="timeRange-play" aria-label="실행"></button>
+          <button type="button" class="timeRange-next" aria-label="다음">
+            <i class="icon-aspect-play-next" data-size="20"></i>
+          </button>
+        </div>
+        <div class="timeRange-bar">
+          <input type="range" class="timeRange-range" />
+        </div>
+      `;
+      this.wrap.innerHTML = controlsHtml;
+      
+      this.input = this.wrap.querySelector('.timeRange-range');
+      this.bar = this.wrap.querySelector('.timeRange-bar');
+      this.fake = this.wrap.querySelector('.timeRange-fake-input');
+      
+      if (this.isCustomRange) {
+        this._initCustom(opt);
+      } else {
+        this._initLegacy(opt);
+      }
+    }
+    
+    // 5. Reinitialize handlers and redraw UI
     this.init();
     
-    // 6. Explicitly reset slider position to the start
-    if (this.isCustomRange) {
-      this._setToEarliestTime();
-    } else {
-      this.setValue(0);
+    // 6. Reset position if not day mode
+    if (!this.isDayMode) {
+      if (this.isCustomRange) {
+        this._setToEarliestTime();
+      } else {
+        this.setValue(0);
+      }
     }
   }
 
   setUpperLimit(upperLimit) {
+    if (this.isDayMode) return;
     if (this.isCustomRange) {
       // Upper limit is dynamic in custom range
     } else {
@@ -1314,6 +1535,7 @@ export class TimeRange {
   }
 
   setTotalDays(totalDays) {
+    if (this.isDayMode) return;
     if (this.isCustomRange) {
       // Dynamic in custom range
     } else {
@@ -1328,6 +1550,7 @@ export class TimeRange {
   }
 
   setPlayTime(playTime) {
+    if (this.isDayMode) return;
     this.playTime = playTime;
     if (this._playTimer) {
       if (this.isCustomRange) {
@@ -1341,6 +1564,7 @@ export class TimeRange {
   }
 
   setPoint(point) {
+    if (this.isDayMode) return;
     if (this.isCustomRange) {
       this.optPoint = point;
       this._setupTrackForCurrentPage();
