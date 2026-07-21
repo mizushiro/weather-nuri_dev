@@ -196,134 +196,82 @@
               </div>
             </div>
             <div data-tab-wrap="pc_menu_tab">
-              <div role="tabpanel">
+              <div role="tabpanel"><!--예보·예측-->
                 <section class="ui-flex" data-direction="col" data-gap="6">
-                  <div data-dropdown="localOption1" data-map-type="local">
-                    <button type="button" class="btn-map-left" data-dropdown-button="localOption1" data-toggle-object="localOption1" data-radio="w-localOption" data-variable="temperature">
-                <span class="icon-round-box">
-                  <i class="icon-aspect-map-nav1" data-size="24"></i>
-                </span>
-                      <span class="btn-text">기온</span>
-                      <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-                    </button>
-                  </div>
-                  <div data-dropdown="localOption2">
-                    <button type="button" class="btn-map-left" data-dropdown-button="localOption2" data-toggle-object="localOption2"
-                            data-radio="w-localOption" data-variable="temperature">
-                <span class="icon-round-box">
-                  <i class="icon-aspect-map-nav6" data-size="24"></i>
-                </span>
-                      <span class="btn-text">상대습도</span>
-                      <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-                    </button>
-                  </div>
-                  <div data-dropdown="localOption3">
-                    <button type="button" class="btn-map-left" data-dropdown-button="localOption3" data-toggle-object="localOption3"
-                            data-radio="w-localOption" data-variable="temperature">
-                <span class="icon-round-box">
-                  <i class="icon-aspect-map-nav4" data-size="24"></i>
-                </span>
-                      <span class="btn-text">풍속</span>
-                      <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-                    </button>
-                  </div>
-                  <button type="button" class="btn-map-left" data-toggle-object="localOption5" data-radio="w-localOption"
-                          data-variable="prec_diff">
-              <span class="icon-round-box">
-                <i class="icon-aspect-map-nav2" data-size="24"></i>
-              </span>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption1" data-radio="w-localOption"
+                    data-variable="TMP" data-listener-added="true" data-toggle-state="selected">
+                    <span class="icon-round-box">
+                      <i class="icon-aspect-map-nav1" data-size="24"></i>
+                    </span>
+                    <span class="btn-text">기온</span>
+                  </button>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption2" data-radio="w-localOption"
+                    data-variable="REH">
+                    <span class="icon-round-box">
+                      <i class="icon-aspect-map-nav6" data-size="24"></i>
+                    </span>
+                    <span class="btn-text">상대습도</span>
+                  </button>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption3" data-radio="w-localOption"
+                    data-variable="WSP">
+                    <span class="icon-round-box">
+                      <i class="icon-aspect-map-nav4" data-size="24"></i>
+                    </span>
+                    <span class="btn-text">풍속</span>
+                  </button>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption4" data-radio="w-localOption"
+                    data-variable="RN01H">
+                    <span class="icon-round-box">
+                      <i class="icon-aspect-map-nav2" data-size="24"></i>
+                    </span>
                     <span class="btn-text">강수량</span>
-                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
                   </button>
-
-                  <div data-dropdown="localOption4">
-                    <button type="button" class="btn-map-left" data-dropdown-button="localOption4" data-toggle-object="localOption4"
-                            data-radio="w-localOption" data-variable="temperature">
-                <span class="icon-round-box">
-                  <i class="icon-aspect-map-nav3" data-size="24"></i>
-                </span>
-                      <span class="btn-text">하늘상태</span>
-                      <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-                    </button>
-                  </div>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption5" data-radio="w-localOption"
+                    data-variable="SKY">
+                    <span class="icon-round-box">
+                      <i class="icon-aspect-map-nav3" data-size="24"></i>
+                    </span>
+                    <span class="btn-text">하늘상태</span>
+                  </button>
                   <button type="button" class="btn-map-left" data-toggle-object="localOption6" data-radio="w-localOption"
-                          data-variable="prec_diff">
-              <span class="icon-round-box">
-                <i class="icon-aspect-map-nav2" data-size="24"></i>
-              </span>
+                    data-variable="PTY">
+                    <span class="icon-round-box">
+                      <i class="icon-aspect-map-nav2" data-size="24"></i>
+                    </span>
                     <span class="btn-text">강수형태</span>
-                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-                  </button>
-                  <button type="button" class="btn-map-left" data-toggle-object="localOption7" data-radio="w-localOption"
-                          data-variable="prec_diff">
-              <span class="icon-round-box">
-                <i class="icon-aspect-map-nav11" data-size="24"></i>
-              </span>
-                    <span class="btn-text">레이더</span>
-                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-                  </button>
-                  <button type="button" class="btn-map-left" data-toggle-object="localOption8" data-radio="w-localOption"
-                          data-variable="prec_diff">
-              <span class="icon-round-box">
-                <i class="icon-aspect-map-nav12" data-size="24"></i>
-              </span>
-                    <span class="btn-text">위성</span>
-                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
                   </button>
                   <button type="button" class="btn-map-left" data-toggle-object="localOption9" data-radio="w-localOption"
-                          data-variable="prec_diff">
-              <span class="icon-round-box">
-                <i class="icon-aspect-map-nav13" data-size="24"></i>
-              </span>
+                    data-variable="prec_diff">
+                    <span class="icon-round-box">
+                      <i class="icon-aspect-map-nav13" data-size="24"></i>
+                    </span>
                     <span class="btn-text">재생에너지</span>
                     <i class="icon-aspect-arrow-r-w" data-size="24"></i>
                   </button>
                 </section>
               </div>
-              <div role="tabpanel">
+              <div role="tabpanel"> <!--관측·통계-->
                 <section class="ui-flex" data-direction="col" data-gap="6">
-                  <div data-dropdown="localOption4">
-                    <button type="button" class="btn-map-left" data-dropdown-button="localOption4" data-toggle-object="localOption4"
-                            data-radio="w-localOption" data-variable="temperature">
-                <span class="icon-round-box">
-                  <i class="icon-aspect-map-nav3" data-size="24"></i>
-                </span>
-                      <span class="btn-text">하늘상태</span>
+                  <div data-dropdown="localOption7">
+                    <button type="button" class="btn-map-left" data-dropdown-button="localOption7"
+                      data-toggle-object="localOption7" data-radio="w-localOption" data-variable="RDR">
+                      <span class="icon-round-box">
+                        <i class="icon-aspect-map-nav11" data-size="24"></i>
+                      </span>
+                      <span class="btn-text">레이더</span>
                       <i class="icon-aspect-arrow-r-w" data-size="24"></i>
                     </button>
                   </div>
-                  <button type="button" class="btn-map-left" data-toggle-object="localOption6" data-radio="w-localOption"
-                          data-variable="prec_diff">
-              <span class="icon-round-box">
-                <i class="icon-aspect-map-nav2" data-size="24"></i>
-              </span>
-                    <span class="btn-text">강수형태</span>
-                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-                  </button>
-                  <button type="button" class="btn-map-left" data-toggle-object="localOption7" data-radio="w-localOption"
-                          data-variable="prec_diff">
-              <span class="icon-round-box">
-                <i class="icon-aspect-map-nav11" data-size="24"></i>
-              </span>
-                    <span class="btn-text">레이더</span>
-                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-                  </button>
-                  <button type="button" class="btn-map-left" data-toggle-object="localOption8" data-radio="w-localOption"
-                          data-variable="prec_diff">
-              <span class="icon-round-box">
-                <i class="icon-aspect-map-nav12" data-size="24"></i>
-              </span>
-                    <span class="btn-text">위성</span>
-                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-                  </button>
-                  <button type="button" class="btn-map-left" data-toggle-object="localOption9" data-radio="w-localOption"
-                          data-variable="prec_diff">
-              <span class="icon-round-box">
-                <i class="icon-aspect-map-nav13" data-size="24"></i>
-              </span>
-                    <span class="btn-text">재생에너지</span>
-                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-                  </button>
+                  <div data-dropdown="localOption8">
+                    <button type="button" class="btn-map-left" data-dropdown-button="localOption8"
+                      data-toggle-object="localOption8" data-radio="w-localOption" data-variable="GK2A">
+                      <span class="icon-round-box">
+                        <i class="icon-aspect-map-nav12" data-size="24"></i>
+                      </span>
+                      <span class="btn-text">위성</span>
+                      <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                    </button>
+                  </div>
                 </section>
               </div>
             </div>

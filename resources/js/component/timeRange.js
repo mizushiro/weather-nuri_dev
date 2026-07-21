@@ -62,11 +62,11 @@ export class TimeRange {
         `;
         this.wrap.innerHTML = controlsHtml;
       }
-      
+    
       this.input = this.wrap.querySelector('.timeRange-range');
       this.bar = this.wrap.querySelector('.timeRange-bar');
       this.fake = this.wrap.querySelector('.timeRange-fake-input');
-      
+        
       if (this.isCustomRange) {
         this._initCustom(opt);
       } else {
@@ -1317,6 +1317,14 @@ export class TimeRange {
     }
   }
 
+  stopPlay() {
+    if (this.isCustomRange) {
+      this._stopPlayCustom();
+    } else {
+      this._stopPlayLegacy();
+    }
+  }
+
   setValue(val) {
     if (this.isDayMode) {
       let dateStr = val;
@@ -1611,5 +1619,86 @@ export class TimeRange {
         this.wrap.classList.add(pointClass);
       }
     }
+  }
+
+  /**
+   * 현재 시각을 기준으로 슬라이더를 스냅 위치로 이동시킵니다.
+   * @param {number} intervalMinutes 스냅 간격(분). 3시간=180, 1시간=60
+   * @param {object} options
+   *   mode: 'floor' (기본값) → 현재시각 기준 가장 가까운 "이전" 정시로 스냅 (world/shrt 3시간용)
+   *         'nearestBuffer' → 정시 반올림 후 bufferMinutes만큼 뒤로 미뤄서 스냅 (vsrt 1시간용)
+   *   bufferMinutes: nearestBuffer 모드에서 더해줄 분 (vsrt는 60 = "정시 반올림 +1시간")
+   */
+  moveToCurrentTime(intervalMinutes, { mode = 'ceil', bufferMinutes = 1 } = {}) {
+    const now = new Date();
+    const totalMinutesNow = now.getHours() * 60 + now.getMinutes();
+
+    let targetMinutes;
+    if (mode === 'nearestBuffer') {
+      const nearest = Math.round(totalMinutesNow / intervalMinutes) * intervalMinutes;
+      targetMinutes = nearest + bufferMinutes;
+    } else {
+      // ceil: 예보자료이므로 현재시각을 이미 지난 슬롯으로 보지 않고 다음 슬롯으로 올림
+      targetMinutes = Math.ceil((totalMinutesNow + bufferMinutes) / intervalMinutes) * intervalMinutes;
+    }
+
+    let dayCarry = 0;
+    if (targetMinutes >= 1440) {
+      dayCarry = Math.floor(targetMinutes / 1440);
+      targetMinutes = targetMinutes % 1440;
+    }
+
+    if (this.isCustomRange) {
+      const targetDate = new Date(now);
+      targetDate.setHours(0, 0, 0, 0);
+      targetDate.setDate(targetDate.getDate() + dayCarry);
+      targetDate.setMinutes(targetMinutes);
+      this._setValueByDateTime(targetDate);
+    } else {
+      this._setCurrentDayIndex(dayCarry !== 0 ? this.currentDayIndex + dayCarry : 0);
+      this.setValue(targetMinutes);
+    }
+  }
+
+  configureDataRange(config) {
+    const { startOffset, dataCount, dataInterval, baseDate } = config;
+    const baseMidnight = new Date(`${baseDate}T00:00:00`);
+    const pad = (n) => String(n).padStart(2, '0');
+    const fmt = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:00`;
+
+    const startDT = new Date(baseMidnight.getTime() + startOffset * 60000);
+    const endMinutes = startOffset + (dataCount - 1) * dataInterval;
+    const endDT = new Date(baseMidnight.getTime() + endMinutes * 60000);
+
+    this.updateOptions({
+      rangeType: 'datetime',
+      start: fmt(startDT),
+      end: fmt(endDT),
+      step: dataInterval,
+      point: dataInterval,
+      onChange: this.onChange,
+      playTime: this.playTime,
+    });
+  }
+  /**
+   * relative 모드 시작 시각 계산 (예보자료이므로 과거 슬롯 제외, 다음 슬롯으로 올림)
+   */
+  _calcRelativeStart(stepMinutes) {
+    const now = new Date();
+    const totalMinutes = now.getHours() * 60 + now.getMinutes();
+    const bufferMinutes = 1; // 정각에 걸쳐있어도 다음 슬롯으로 넘어가게 하는 버퍼
+    let ceiledMinutes = Math.ceil((totalMinutes + bufferMinutes) / stepMinutes) * stepMinutes;
+
+    let dayCarry = 0;
+    if (ceiledMinutes >= 1440) {
+      dayCarry = Math.floor(ceiledMinutes / 1440);
+      ceiledMinutes = ceiledMinutes % 1440;
+    }
+
+    const start = new Date(now);
+    start.setHours(0, 0, 0, 0);
+    start.setDate(start.getDate() + dayCarry);
+    start.setMinutes(ceiledMinutes);
+    return start;
   }
 }
