@@ -185,78 +185,148 @@
             </div>
           </div>
           <div data-map="local">
-            <div data-dropdown="localOption1" data-map-type="local">
-              <button type="button" class="btn-map-left" data-dropdown-button="localOption1" data-toggle-object="localOption1" data-radio="w-localOption" data-variable="temperature">
+            <div data-tab="pc_menu_tab" data-tab-style="round-box-text-type">
+              <div role="tablist">
+                <button type="button" role="tab">
+                  <span>예보·예측</span>
+                </button>
+                <button type="button" role="tab">
+                  <span>관측·통계</span>
+                </button>
+              </div>
+            </div>
+            <div data-tab-wrap="pc_menu_tab">
+              <div role="tabpanel">
+                <section class="ui-flex" data-direction="col" data-gap="6">
+                  <div data-dropdown="localOption1" data-map-type="local">
+                    <button type="button" class="btn-map-left" data-dropdown-button="localOption1" data-toggle-object="localOption1" data-radio="w-localOption" data-variable="temperature">
                 <span class="icon-round-box">
                   <i class="icon-aspect-map-nav1" data-size="24"></i>
                 </span>
-                <span class="btn-text">기온</span>
-                <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-              </button>
-            </div>
-            <div data-dropdown="localOption2">
-              <button type="button" class="btn-map-left" data-dropdown-button="localOption2" data-toggle-object="localOption2"
-                data-radio="w-localOption" data-variable="temperature">
+                      <span class="btn-text">기온</span>
+                      <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                    </button>
+                  </div>
+                  <div data-dropdown="localOption2">
+                    <button type="button" class="btn-map-left" data-dropdown-button="localOption2" data-toggle-object="localOption2"
+                            data-radio="w-localOption" data-variable="temperature">
                 <span class="icon-round-box">
                   <i class="icon-aspect-map-nav6" data-size="24"></i>
                 </span>
-                <span class="btn-text">상대습도</span>
-                <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-              </button>
-            </div>
-            <div data-dropdown="localOption3">
-              <button type="button" class="btn-map-left" data-dropdown-button="localOption3" data-toggle-object="localOption3"
-                data-radio="w-localOption" data-variable="temperature">
+                      <span class="btn-text">상대습도</span>
+                      <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                    </button>
+                  </div>
+                  <div data-dropdown="localOption3">
+                    <button type="button" class="btn-map-left" data-dropdown-button="localOption3" data-toggle-object="localOption3"
+                            data-radio="w-localOption" data-variable="temperature">
                 <span class="icon-round-box">
                   <i class="icon-aspect-map-nav4" data-size="24"></i>
                 </span>
-                <span class="btn-text">풍속</span>
-                <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-              </button>
-            </div>
-            <button type="button" class="btn-map-left" data-toggle-object="localOption5" data-radio="w-localOption"
-              data-variable="prec_diff">
+                      <span class="btn-text">풍속</span>
+                      <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                    </button>
+                  </div>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption5" data-radio="w-localOption"
+                          data-variable="prec_diff">
               <span class="icon-round-box">
                 <i class="icon-aspect-map-nav2" data-size="24"></i>
               </span>
-              <span class="btn-text">강수량</span>
-              <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-            </button>
-           
-            <div data-dropdown="localOption4">
-              <button type="button" class="btn-map-left" data-dropdown-button="localOption4" data-toggle-object="localOption4"
-                data-radio="w-localOption" data-variable="temperature">
+                    <span class="btn-text">강수량</span>
+                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                  </button>
+
+                  <div data-dropdown="localOption4">
+                    <button type="button" class="btn-map-left" data-dropdown-button="localOption4" data-toggle-object="localOption4"
+                            data-radio="w-localOption" data-variable="temperature">
                 <span class="icon-round-box">
                   <i class="icon-aspect-map-nav3" data-size="24"></i>
                 </span>
-                <span class="btn-text">하늘상태</span>
-                <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-              </button>
-            </div>
-            <button type="button" class="btn-map-left" data-toggle-object="localOption6" data-radio="w-localOption"
-              data-variable="prec_diff">
+                      <span class="btn-text">하늘상태</span>
+                      <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                    </button>
+                  </div>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption6" data-radio="w-localOption"
+                          data-variable="prec_diff">
               <span class="icon-round-box">
                 <i class="icon-aspect-map-nav2" data-size="24"></i>
               </span>
-              <span class="btn-text">강수형태</span>
-              <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-            </button>
-            <button type="button" class="btn-map-left" data-toggle-object="localOption7" data-radio="w-localOption"
-              data-variable="prec_diff">
+                    <span class="btn-text">강수형태</span>
+                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                  </button>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption7" data-radio="w-localOption"
+                          data-variable="prec_diff">
               <span class="icon-round-box">
                 <i class="icon-aspect-map-nav11" data-size="24"></i>
               </span>
-              <span class="btn-text">레이더</span>
-              <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-            </button>
-            <button type="button" class="btn-map-left" data-toggle-object="localOption8" data-radio="w-localOption"
-              data-variable="prec_diff">
+                    <span class="btn-text">레이더</span>
+                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                  </button>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption8" data-radio="w-localOption"
+                          data-variable="prec_diff">
               <span class="icon-round-box">
                 <i class="icon-aspect-map-nav12" data-size="24"></i>
               </span>
-              <span class="btn-text">위성</span>
-              <i class="icon-aspect-arrow-r-w" data-size="24"></i>
-            </button>
+                    <span class="btn-text">위성</span>
+                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                  </button>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption9" data-radio="w-localOption"
+                          data-variable="prec_diff">
+              <span class="icon-round-box">
+                <i class="icon-aspect-map-nav13" data-size="24"></i>
+              </span>
+                    <span class="btn-text">재생에너지</span>
+                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                  </button>
+                </section>
+              </div>
+              <div role="tabpanel">
+                <section class="ui-flex" data-direction="col" data-gap="6">
+                  <div data-dropdown="localOption4">
+                    <button type="button" class="btn-map-left" data-dropdown-button="localOption4" data-toggle-object="localOption4"
+                            data-radio="w-localOption" data-variable="temperature">
+                <span class="icon-round-box">
+                  <i class="icon-aspect-map-nav3" data-size="24"></i>
+                </span>
+                      <span class="btn-text">하늘상태</span>
+                      <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                    </button>
+                  </div>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption6" data-radio="w-localOption"
+                          data-variable="prec_diff">
+              <span class="icon-round-box">
+                <i class="icon-aspect-map-nav2" data-size="24"></i>
+              </span>
+                    <span class="btn-text">강수형태</span>
+                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                  </button>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption7" data-radio="w-localOption"
+                          data-variable="prec_diff">
+              <span class="icon-round-box">
+                <i class="icon-aspect-map-nav11" data-size="24"></i>
+              </span>
+                    <span class="btn-text">레이더</span>
+                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                  </button>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption8" data-radio="w-localOption"
+                          data-variable="prec_diff">
+              <span class="icon-round-box">
+                <i class="icon-aspect-map-nav12" data-size="24"></i>
+              </span>
+                    <span class="btn-text">위성</span>
+                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                  </button>
+                  <button type="button" class="btn-map-left" data-toggle-object="localOption9" data-radio="w-localOption"
+                          data-variable="prec_diff">
+              <span class="icon-round-box">
+                <i class="icon-aspect-map-nav13" data-size="24"></i>
+              </span>
+                    <span class="btn-text">재생에너지</span>
+                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                  </button>
+                </section>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -513,6 +583,16 @@
         </div>
 
         <div class="full-map-right-group3" data-view="mobile-hidden">
+          <div class="btn-map-toggle">
+            <span class="btn-text">해역표시</span>
+            <div class="form-element-switch" data-size="20">
+              <input type="checkbox" id="btn-switch2" />
+              <label for="btn-switch2">
+                <span class="txt-uncheck for-a11y">꺼짐</span>
+                <span class="txt-checked for-a11y">켜짐</span>
+              </label>
+            </div>
+          </div>
           <div data-dropdown="optionAni">
             <button type="button" class="btn-map-ani-option" data-dropdown-button="optionAni">
               <span class="btn-text">풍향 에니메이션 / 강하게</span>
@@ -534,7 +614,7 @@
 
       <!-- map-bottom -->
       <div class="full-map-bottom-area" data-toggle-target="map-compare">
-        <div class="timeRange" data-time-range="time-range1" style="height: 12rem;"></div>
+        <div class="timeRange" data-time-range="time-range1"></div>
       </div>
 
       <!-- map-layer -->
@@ -1866,12 +1946,21 @@
     /// 하단 시간슬라이더
     UI.exe.timeRangeHistory = new TimeRange({
       id: 'time-range1',
-      rangeType: 'relative',
-      relativeHours: 50, // ◀ 현재시간 기준으로 12시간 설정 (1~240 범위 지정 가능, 미설정 시 기본 24시간)
-      step: 10,
-      playTime: 1000,
-      onChange: (dateStr, timeStr, dateObj) => {
-        console.log(`[Change] 선택 시점: <b>${dateStr}</b> (시간: ${timeStr}) | 타임스탬프: ${dateObj.getTime()}`)
+
+      // rangeType: 'relative',
+      // relativeHours: 50, 
+      // step: 10,
+      // playTime: 1000,
+      // onChange: (dateStr, timeStr, dateObj) => {
+      //   console.log(`[Change] 선택 시점: <b>${dateStr}</b> (시간: ${timeStr}) | 타임스탬프: ${dateObj.getTime()}`)
+      // }
+
+      // day mode sample
+      rangeType: 'day',
+      daysBefore: 5,
+      daysAfter: 0,
+      onChange: (dateStr, dateObj) => {
+        
       }
     });
 
@@ -1902,13 +1991,9 @@
     // 사이드영역
     UI.exe.sideOpenFn = () => {
       console.log('사이드 열림');
-
       // UX.searchHeader(document.querySelector('.side-content .side-content-search-area'));
-
       const btnCompare = document.querySelector('[data-toggle-object="map-compare"]');
       btnCompare.getAttribute('disabled') ? btnCompare.removeAttribute('disabled') : btnCompare.setAttribute('disabled', true);
-
-
     }
 
     //검색
@@ -1922,6 +2007,13 @@
         console.log('modal1 loadCallback')
       },
     });
+
+    UI.exe.pc_menu_tab = new UX.Tab({
+      id: 'pc_menu_tab',
+      renderMode: 'static',
+      selected: 1,
+    });
+    UI.exe.pc_menu_tab.init();
 
     // 메뉴
     UI.exe.modalFilter = new UX.Dialog({
@@ -1938,6 +2030,13 @@
         });
         UI.exe.menu_tab.init();
 
+        UI.exe.menu_tab_sub = new UX.Tab({
+          id: 'menu_tab_sub',
+          renderMode: 'static',
+          selected: 1,
+        });
+        UI.exe.menu_tab_sub.init();
+
         const modalFilterElement = document.querySelector('[data-dialog="modalFilter"]');
 
         // UX.searchHeader(modalFilterElement.querySelector('.side-content-search-area'));
@@ -1951,6 +2050,11 @@
           expanded: 'acco2-0',
         });
         UI.exe.acco2.init();
+        UI.exe.acco3 = new UX.Accordion({
+          id: 'acco3',
+          expanded: 'acco3-0',
+        });
+        UI.exe.acco3.init();
 
         const mapChoiceInfoBox = document.querySelector('.map-choice-info-box');
         const mapChoiceTitleElement = mapChoiceInfoBox?.querySelector('[data-title]');

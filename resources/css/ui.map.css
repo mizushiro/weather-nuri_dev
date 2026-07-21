@@ -31,7 +31,7 @@
 
 /* 좌측 */
 .full-map-left-area {position:absolute;left:2rem;top:10.8rem;display:flex;flex-direction:column;gap:.6rem}
-.btn-map-left {height:3.6rem;border-radius:99em;background-color:rgba(0, 0, 0, .6);padding:.2rem .6rem .2rem .2rem;display:flex;align-items:center;width:12.2rem;box-shadow:0 .1rem .2rem 0 #2F33590D;}
+.btn-map-left {height:3.6rem;border-radius:99em;background-color:rgba(0, 0, 0, .6);padding:.2rem .6rem .2rem .2rem;display:flex;align-items:center;width:16.2rem;box-shadow:0 .1rem .2rem 0 #2F33590D;}
 .btn-map-left .icon-round-box {display:flex;align-items:center;justify-content:center;height:3.2rem;width:3.2rem;background-color:#fff;border-radius:99em}
 .btn-map-left .btn-text {flex:1;margin-left:.6rem;font-size:1.4rem;font-weight:700;color:#fff;justify-content:start;display:flex;}
 .btn-map-left[data-toggle-state="selected"],
