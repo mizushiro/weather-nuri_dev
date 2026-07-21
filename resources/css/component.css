@@ -173,7 +173,7 @@
 
 /* dropdown */
 [data-dropdown] {position:relative;}
-[data-dropdown-button] {text-align:left;position:relative;z-index:1;}
+[data-dropdown-button] {text-align:left;z-index:1;}
 [data-dropdown-panel] {position:revert;top:0;width:100%;z-index:0;pointer-events:none;}
 [data-dropdown-panel] [data-dropdown-section] {top:100%;}
 [data-dropdown-panel][data-ps="bl"] [data-dropdown-section] {top:100%;bottom:auto;left:0;right:auto;}
