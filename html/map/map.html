@@ -811,7 +811,7 @@
           <div class="table-update-content">
             <span class="table-update-content-title">업데이트</span>초단기: 8일(금) 09:40, 동네예보: 8일(금) 08:00
           </div>
-          <div class="weather-table-box scroll-style2">
+          <div class="weather-table-box scroll-style2" style="display: none;">
             <div class="weather-col-group weather-table-sticky" id="detail-table-header">
               <div class="weather-col-group-top">
                 시각
@@ -826,10 +826,13 @@
             </div>
           </div>
 
-          <div class="weather-table-box scroll-style2" style="display: none;">
+          <div class="weather-table-box scroll-style2">
             <div class="weather-col-group weather-table-sticky">
-              <div class="weather-col-group-top">
-                시각check
+              <div class="weather-col-group-top h-56">
+                날짜
+              </div>
+              <div class="weather-col-group-item">
+                시각
               </div>
               <div class="weather-col-group-item h-55">
                 날씨
@@ -860,8 +863,23 @@
               </div>
             </div>
             <div class="weather-col-section">
+              <div class="weather-col-group-top h-56">
+                <div class="weather-col-group-top-inner">
+                  <div class="weather-col-section-day" data-type="today">
+                    <span class="weather-col-section-day-icon">
+                      <i class="icon-aspect-month-b" data-size="20"></i>
+                    </span>
+                    05. 24 목
+                  </div>
+                  <div class="weather-col-section-day-data">
+                    <span class="weather-col-section-day-data-item">최저 <span class="text-18-700" data-text-color="blue">12℃</span></span>
+                    <i class="weather-col-section-day-data-line"></i>
+                    <span class="weather-col-section-day-data-item">최고 <span class="text-18-700" data-text-color="red">26℃</span></span>
+                  </div>
+                </div>
+              </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   18시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -895,7 +913,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   19시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -929,7 +947,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   20시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -964,7 +982,7 @@
               </div>
 
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   21시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -999,7 +1017,7 @@
               </div>
 
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   22시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1034,7 +1052,7 @@
               </div>
 
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   23시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1070,9 +1088,24 @@
             </div>
 
             <div class="weather-col-section">
+              <div class="weather-col-group-top h-56">
+                <div class="weather-col-group-top-inner">
+                  <div class="weather-col-section-day">
+                    <span class="weather-col-section-day-icon">
+                      <i class="icon-aspect-month-b" data-size="20"></i>
+                    </span>
+                    05. 25 금
+                  </div>
+                  <div class="weather-col-section-day-data">
+                    <span class="weather-col-section-day-data-item">최저 <span class="text-18-700" data-text-color="blue">12℃</span></span>
+                    <i class="weather-col-section-day-data-line"></i>
+                    <span class="weather-col-section-day-data-item">최고 <span class="text-18-700" data-text-color="red">26℃</span></span>
+                  </div>
+                </div>
+              </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
-                  <span class="day-start">내일</span>
+                <div class="weather-col-group-item">
+                  00시
                 </div>
                 <div class="weather-col-group-item h-55">
                   <i class="icon-aspect-NB07" data-size="32"><span class="for-a11y">눈 또는 비</span></i>
@@ -1105,7 +1138,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   01시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1139,7 +1172,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   02시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1174,7 +1207,7 @@
               </div>
 
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   03시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1209,7 +1242,7 @@
               </div>
 
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   04시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1244,7 +1277,7 @@
               </div>
 
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   05시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1278,7 +1311,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   06시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1312,7 +1345,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   07시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1346,7 +1379,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   08시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1380,7 +1413,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   09시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1414,7 +1447,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   10시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1448,7 +1481,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   11시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1482,7 +1515,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   12시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1516,7 +1549,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   13시
                 </div>
                 <div class="weather-col-group-item h-55">
@@ -1550,7 +1583,7 @@
                 </div>
               </div>
               <div class="weather-col-group">
-                <div class="weather-col-group-top">
+                <div class="weather-col-group-item">
                   14시
                 </div>
                 <div class="weather-col-group-item h-55">

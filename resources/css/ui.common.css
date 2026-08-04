@@ -259,6 +259,7 @@ body[data-content-bg="F7F8FB"] {background-color:#F7F8FB}
 .icon-aspect-arrow-up {background-image:url("../images/icon/icon-aspect-arrow-up.svg")}
 .icon-aspect-map-pin {background-image:url("../images/icon/icon-aspect-map-pin.svg")}
 .icon-aspect-expand-circle {background-image:url("../images/icon/icon-aspect-expand-circle.svg")}
+.icon-aspect-month-b {background-image:url("../images/icon/icon-aspect-month-b.svg")}
 .icon-aspect-NB01 {background-image:url("../images/weather/NB01.png")}  /* 맑은 */
 .icon-aspect-NB02 {background-image:url("../images/weather/NB02.png")}  /* 구름많은(낮) */
 .icon-aspect-NB03 {background-image:url("../images/weather/NB03.png")}  /* 흐림 */
@@ -750,6 +751,8 @@ select::-ms-expand {display:none}
 [data-text-color="white"] {color:#fff}
 [data-text-color="navy"] {color:#27355A}
 [data-text-color="sora"] {color:#7386B6}
+[data-text-color="blue"] {color:#1787FF}
+[data-text-color="red"] {color:#FF0000}
 [data-text-color="white50"] {color:rgba(255, 255, 255, .5)}
 [data-text-color="414756"] {color:#414756}
 [data-text-color="6D758F"] {color:#6D758F}
