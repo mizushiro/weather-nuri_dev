@@ -218,6 +218,7 @@ body[data-content-bg="F7F8FB"] {background-color:#F7F8FB}
 .icon-aspect-search {background-image:url("../images/icon/icon-aspect-search.svg")}
 .icon-aspect-search-b {background-image:url("../images/icon/icon-aspect-search-b.svg")}
 .icon-aspect-calendar {background-image:url("../images/icon/icon-aspect-calendar.svg")}
+.icon-aspect-calendar2 {background-image:url("../images/icon/icon-aspect-calendar2.svg")}
 .icon-aspect-all-menu {background-image:url("../images/icon/icon-aspect-all-menu.svg")}
 .icon-aspect-arrow-r-w {background-image:url("../images/icon/icon-aspect-arrow-r-w.svg")}
 .icon-aspect-check-circle-w {background-image:url("../images/icon/icon-aspect-check-circle-w.svg")}
@@ -281,6 +282,12 @@ body[data-content-bg="F7F8FB"] {background-color:#F7F8FB}
 .icon-aspect-NB19 {background-image:url("../images/weather/NB19.png")}  /* 빗방울 */
 .icon-aspect-NB20 {background-image:url("../images/weather/NB20.png")}  /* 눈날림 */
 .icon-aspect-NB21 {background-image:url("../images/weather/NB21.png")}  /* 박무 */
+
+.icon-aspect-control-play {background-image:url("../images/icon/icon-aspect-control-play.svg")}
+.icon-aspect-control-stop {background-image:url("../images/icon/icon-aspect-control-stop.svg")}
+.icon-aspect-control-prev {background-image:url("../images/icon/icon-aspect-control-prev.svg")}
+.icon-aspect-control-next {background-image:url("../images/icon/icon-aspect-control-next.svg")}
+
 
 /* img */
 .sh-logo {background:url("../images/common/sh-logo.svg") no-repeat 50% 50%;background-size:contain;width:8.8rem;height:3rem;display:block}

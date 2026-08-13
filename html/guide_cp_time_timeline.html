@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TimeTimeline Component Developer Guide</title>
+
+  <link rel="stylesheet" href="../resources/css/ui.base.css">
+  <style>
+    body {
+      background-color: #f8fafc;
+      color: #334155;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .guide-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+      font-size: 14px;
+    }
+    .guide-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .guide-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .guide-title .version-tag {
+      font-size: 13px;
+      background: #0284c7;
+      color: #fff;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    .guide-desc {
+      font-size: 16px;
+      color: #475569;
+      line-height: 1.7;
+    }
+    .feature-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+    }
+    .badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.4rem 0.85rem;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 6px;
+      background: #e0f2fe;
+      color: #0369a1;
+      border: 1px solid #bae6fd;
+    }
+    .badge-tag.green {
+      background: #dcfce7;
+      color: #15803d;
+      border-color: #bbf7d0;
+    }
+    .badge-tag.purple {
+      background: #f3e8ff;
+      color: #7e22ce;
+      border-color: #e9d5ff;
+    }
+
+    .guide-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 2.5rem;
+      font-size: 14px;
+    }
+    .guide-card p {
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .guide-card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 0.85rem;
+    }
+    .guide-card-title span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* 실시간 선택 콘솔 */
+    .info-display-panel {
+      margin-top: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      background: #0f172a;
+      color: #38bdf8;
+      border-radius: 10px;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .info-display-panel div {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .info-display-panel span {
+      color: #f8fafc;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    .info-display-panel .highlight {
+      color: #facc15;
+      font-size: 15px;
+    }
+
+    /* 데모 컨트롤 버튼 바 */
+    .demo-control-panel {
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      background: #f1f5f9;
+      border-radius: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .demo-control-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #475569;
+      margin-right: 0.5rem;
+    }
+    .btn-demo-action {
+      padding: 0.55rem 1rem;
+      font-size: 14px;
+      font-weight: 600;
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-demo-action:hover {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+    .btn-demo-action.primary {
+      background: #0ea5e9;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+    .btn-demo-action.primary:hover {
+      background: #0284c7;
+    }
+
+    /* 테이블 스타일 */
+    .guide-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 14px;
+    }
+    .guide-table th, .guide-table td {
+      padding: 0.9rem 1.1rem;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 14px;
+    }
+    .guide-table th {
+      background-color: #f8fafc;
+      color: #1e293b;
+      font-weight: 700;
+      font-size: 15px;
+      border-top: 1px solid #cbd5e1;
+    }
+    .guide-table td {
+      color: #334155;
+    }
+    .guide-table code {
+      background: #f1f5f9;
+      color: #091e42;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 14px;
+    }
+    .type-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      font-size: 13px;
+      font-family: monospace;
+      border-radius: 4px;
+      background: #e2e8f0;
+      color: #475569;
+    }
+    .req-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      font-size: 12px;
+      border-radius: 4px;
+      background: #fee2e2;
+      color: #dc2626;
+      font-weight: 600;
+    }
+    .opt-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      font-size: 12px;
+      border-radius: 4px;
+      background: #f1f5f9;
+      color: #64748b;
+    }
+
+    /* 코드 블록 스타일 */
+    .code-block {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 8px;
+      padding: 1.35rem 1.5rem;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+    .code-block .keyword { color: #f472b6; }
+    .code-block .string { color: #a5f3fc; }
+    .code-block .number { color: #fde047; }
+    .code-block .comment { color: #64748b; font-style: italic; }
+    .code-block .function { color: #38bdf8; }
+    .code-block .tag { color: #f43f5e; }
+    .code-block .attr { color: #fb923c; }
+
+    .sub-section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 1.75rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+  </style>
+</head>
+
+<body>
+<div class="base-wrap">
+  <main class="guide-page-content">
+    <div class="guide-container">
+      
+      <!-- 가이드 헤더 -->
+      <header class="guide-header">
+        <h1 class="guide-title">
+          <span>TimeTimeline Component</span>
+          <span class="version-tag">Developer Guide</span>
+        </h1>
+        <p class="guide-desc">
+          기상 및 예측 데이터를 시간대별로 선택하고 탐색할 수 있는 데이터 기반 타임라인 선택기 & 플레이어 컨트롤러 컴포넌트입니다.<br>
+          자동 재생 기능, Sticky 날짜 헤더, 선택 요소 중앙 자동 스크롤, PC 드래그 스크롤 및 동적 데이터 업데이트 API를 지원합니다.
+        </p>
+        <div class="feature-tags">
+          <span class="badge-tag">📅 요일 및 월/일 자동 파싱</span>
+          <span class="badge-tag green">▶️ 자동 재생 & 속도 조절</span>
+          <span class="badge-tag purple">🎯 선택시 중앙 스크롤 정렬</span>
+          <span class="badge-tag">🖱️ PC 마우스 드래그 스크롤</span>
+        </div>
+      </header>
+
+      <!-- 1. 컴포넌트 데모 및 실시간 테스트 -->
+      <section class="guide-card">
+        <h2 class="guide-card-title">
+          <span>📅 1. 타임라인 컴포넌트 데모 (Live Interactive Demo)</span>
+          <span style="font-size:14px; color:#64748b; font-weight:normal;">UI.exe.timeTimelineDemo</span>
+        </h2>
+
+        <!-- 타임라인 컴포넌트 마운트 컨테이너 -->
+        <div data-time-timeline="timeTimelineDemo"></div>
+
+        <!-- 선택 상태 로그 패널 -->
+        <div class="info-display-panel">
+          <div>선택 날짜: <span id="log-day" class="highlight">-</span> (<span id="log-day-label">-</span>)</div>
+          <div>선택 시각: <span id="log-time" class="highlight">-</span></div>
+          <div>인덱스: <span id="log-index">-</span></div>
+        </div>
+
+        <!-- API 실시간 테스트 컨트롤 바 -->
+        <div class="demo-control-panel">
+          <span class="demo-control-label">⚡ API 테스트:</span>
+          <button type="button" class="btn-demo-action primary" id="btn-test-toggle">재생 / 일시정지 (togglePlay)</button>
+          <button type="button" class="btn-demo-action" id="btn-test-speed-fast">속도 0.5초 (setSpeed)</button>
+          <button type="button" class="btn-demo-action" id="btn-test-speed-normal">속도 1초 (setSpeed)</button>
+          <button type="button" class="btn-demo-action" id="btn-test-prev">이전 날짜 (prevDay)</button>
+          <button type="button" class="btn-demo-action" id="btn-test-next">다음 날짜 (nextDay)</button>
+          <button type="button" class="btn-demo-action" id="btn-test-target">지정 선택 (20260703 12시)</button>
+          <button type="button" class="btn-demo-action" id="btn-test-update">데이터 동적 변경 (setData)</button>
+        </div>
+      </section>
+
+      <!-- 2. 설치 및 기본 마크업 -->
+      <section class="guide-card">
+        <h2 class="guide-card-title">
+          <span>⚙️ 2. 설치 및 기본 마크업 (Setup & HTML Markup)</span>
+        </h2>
+        <p>CSS 스타일시트와 ES 모듈 JS 파일(<code>uiuxu.common.js</code>)을 가져온 후 HTML 컨테이너 요소를 작성합니다.</p>
+
+        <h3 class="sub-section-title">1) CSS & JS Import</h3>
+        <div class="code-block">
+<span class="comment">&lt;!-- CSS --&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"../resources/css/ui.base.css"</span><span class="tag">&gt;</span>
+
+<span class="comment">&lt;!-- JS Module --&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">type</span>=<span class="string">"module"</span><span class="tag">&gt;</span>
+  <span class="keyword">import</span> { UX } <span class="keyword">from</span> <span class="string">'../resources/js/uiuxu.common.js'</span>;
+  UX.<span class="function">init</span>();
+<span class="tag">&lt;/script&gt;</span>
+        </div>
+
+        <h3 class="sub-section-title">2) HTML 마크업 컨테이너</h3>
+        <div class="code-block">
+<span class="comment">&lt;!-- 컴포넌트가 동적으로 생성될 영역 --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">data-time-timeline</span>=<span class="string">"timeTimelineDemo"</span><span class="tag">&gt;&lt;/div&gt;</span>
+        </div>
+      </section>
+
+      <!-- 3. 데이터 구조 (Data Schema) -->
+      <section class="guide-card">
+        <h2 class="guide-card-title">
+          <span>📊 3. 데이터 구조 (Data Schema)</span>
+        </h2>
+        <p><code>data</code> 옵션에는 날짜(<code>day</code>) 및 해당 날짜의 시간 문자열 배열(<code>times</code>)을 포함하는 객체 배열을 전달합니다.</p>
+        
+        <div class="code-block">
+<span class="keyword">const</span> timelineData = [
+  { 
+    <span class="attr">day</span>: <span class="string">'20260701'</span>, <span class="comment">// 'YYYYMMDD' 또는 'YYYY-MM-DD' 포맷 지원 (월.일 및 요일 자동 파싱)</span>
+    <span class="attr">times</span>: [<span class="string">'00'</span>, <span class="string">'02'</span>, <span class="string">'06'</span>, <span class="string">'12'</span>, <span class="string">'18'</span>] <span class="comment">// 해당 일자의 시각 목록</span>
+  },
+  { 
+    <span class="attr">day</span>: <span class="string">'20260702'</span>, 
+    <span class="attr">times</span>: [<span class="string">'00'</span>, <span class="string">'03'</span>, <span class="string">'06'</span>, <span class="string">'09'</span>, <span class="string">'12'</span>, <span class="string">'15'</span>, <span class="string">'18'</span>, <span class="string">'21'</span>] 
+  }
+];
+        </div>
+      </section>
+
+      <!-- 4. 인스턴스 생성 옵션 (Constructor Options) -->
+      <section class="guide-card">
+        <h2 class="guide-card-title">
+          <span>🛠️ 4. 생성자 옵션 (Constructor Options)</span>
+        </h2>
+        <p><code>new UX.TimeTimeline(options)</code> 생성자에 사용 가능한 옵션 항목입니다.</p>
+
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>옵션명</th>
+              <th>타입</th>
+              <th>필수여부</th>
+              <th>기본값</th>
+              <th>설명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>id</code></td>
+              <td><span class="type-badge">string</span></td>
+              <td><span class="opt-badge">선택</span></td>
+              <td><code>'timeTimeline_random'</code></td>
+              <td>컴포넌트 식별자 및 <code>data-time-timeline</code> 속성 매칭용 아이디</td>
+            </tr>
+            <tr>
+              <td><code>container</code></td>
+              <td><span class="type-badge">string | HTMLElement</span></td>
+              <td><span class="opt-badge">선택</span></td>
+              <td><code>'[data-time-timeline="{id}"]'</code></td>
+              <td>컴포넌트가 바인딩될 컨테이너 요소를 직접 지정할 때 사용</td>
+            </tr>
+            <tr>
+              <td><code>data</code></td>
+              <td><span class="type-badge">Array&lt;Object&gt;</span></td>
+              <td><span class="req-badge">필수</span></td>
+              <td><code>[]</code></td>
+              <td>타임라인 날짜 및 시간 데이터 배열 (<code>[{ day, times }]</code>)</td>
+            </tr>
+            <tr>
+              <td><code>selectedDayIndex</code></td>
+              <td><span class="type-badge">number</span></td>
+              <td><span class="opt-badge">선택</span></td>
+              <td><code>0</code></td>
+              <td>초기 선택될 날짜 데이터의 배열 인덱스</td>
+            </tr>
+            <tr>
+              <td><code>selectedTimeIndex</code></td>
+              <td><span class="type-badge">number</span></td>
+              <td><span class="opt-badge">선택</span></td>
+              <td><code>0</code></td>
+              <td>초기 선택될 시각 데이터의 배열 인덱스</td>
+            </tr>
+            <tr>
+              <td><code>interval</code></td>
+              <td><span class="type-badge">number</span></td>
+              <td><span class="opt-badge">선택</span></td>
+              <td><code>1000</code></td>
+              <td>자동 재생 시 다음 시각으로 이동하는 시간 간격 (밀리초, ms)</td>
+            </tr>
+            <tr>
+              <td><code>onChange</code></td>
+              <td><span class="type-badge">function</span></td>
+              <td><span class="opt-badge">선택</span></td>
+              <td><code>function(info) {}</code></td>
+              <td>사용자 클릭 또는 플레이어로 인해 시각 선택이 변경되었을 때 실행되는 콜백 함수</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 5. onChange 이벤트 콜백 전달 객체 -->
+      <section class="guide-card">
+        <h2 class="guide-card-title">
+          <span>📡 5. onChange 이벤트 전달 객체 (Event Callback Info)</span>
+        </h2>
+        <p><code>onChange: (info) => { ... }</code> 콜백 실행 시 전달받는 <code>info</code> 객체 명세입니다.</p>
+
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>프로퍼티</th>
+              <th>타입</th>
+              <th>예시 값</th>
+              <th>설명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>info.day</code></td>
+              <td><span class="type-badge">string</span></td>
+              <td><code>"20260702"</code></td>
+              <td>선택된 날짜의 원본 문자열</td>
+            </tr>
+            <tr>
+              <td><code>info.dayLabel</code></td>
+              <td><span class="type-badge">string</span></td>
+              <td><code>"07. 02 목"</code></td>
+              <td>자동 변환된 날짜 및 요일 표시 라벨</td>
+            </tr>
+            <tr>
+              <td><code>info.time</code></td>
+              <td><span class="type-badge">string</span></td>
+              <td><code>"09"</code></td>
+              <td>선택된 시간 원본 문자열</td>
+            </tr>
+            <tr>
+              <td><code>info.timeLabel</code></td>
+              <td><span class="type-badge">string</span></td>
+              <td><code>"09시"</code></td>
+              <td>시간 표시 라벨</td>
+            </tr>
+            <tr>
+              <td><code>info.dayIndex</code></td>
+              <td><span class="type-badge">number</span></td>
+              <td><code>1</code></td>
+              <td>선택된 날짜의 배열 인덱스</td>
+            </tr>
+            <tr>
+              <td><code>info.timeIndex</code></td>
+              <td><span class="type-badge">number</span></td>
+              <td><code>3</code></td>
+              <td>해당 날짜 내 선택된 시간의 인덱스</td>
+            </tr>
+            <tr>
+              <td><code>info.flatIndex</code></td>
+              <td><span class="type-badge">number</span></td>
+              <td><code>11</code></td>
+              <td>전체 타임라인을 1차원 평탄화했을 때의 절대 선택 인덱스</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 6. 인스턴스 메소드 API (Methods API) -->
+      <section class="guide-card">
+        <h2 class="guide-card-title">
+          <span>🔌 6. 주요 메소드 API (Public Methods)</span>
+        </h2>
+
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>메소드명</th>
+              <th>파라미터</th>
+              <th>설명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>selectTime(dayIdx, timeIdx, triggerCallback)</code></td>
+              <td>
+                <code>dayIdx</code> <span class="type-badge">number</span>,<br>
+                <code>timeIdx</code> <span class="type-badge">number</span>,<br>
+                <code>triggerCallback</code> <span class="type-badge">boolean = true</span>
+              </td>
+              <td>지정한 날짜 인덱스 및 시간 인덱스로 선택을 변경하고 UI와 스크롤을 중앙으로 정렬합니다.</td>
+            </tr>
+            <tr>
+              <td><code>selectByFlatIndex(flatIdx, triggerCallback)</code></td>
+              <td>
+                <code>flatIdx</code> <span class="type-badge">number</span>,<br>
+                <code>triggerCallback</code> <span class="type-badge">boolean = true</span>
+              </td>
+              <td>전체 1차원 시각 목록의 절대 인덱스 기준으로 시각을 선택합니다.</td>
+            </tr>
+            <tr>
+              <td><code>play()</code></td>
+              <td>-</td>
+              <td>자동 재생을 시작합니다. (설정된 <code>interval</code>마다 다음 시각으로 이동)</td>
+            </tr>
+            <tr>
+              <td><code>pause()</code></td>
+              <td>-</td>
+              <td>자동 재생을 일시정지합니다.</td>
+            </tr>
+            <tr>
+              <td><code>togglePlay()</code></td>
+              <td>-</td>
+              <td>자동 재생 상태를 반전(재생 ↔ 일시정지)시킵니다.</td>
+            </tr>
+            <tr>
+              <td><code>setSpeed(ms)</code> / <code>setInterval(ms)</code></td>
+              <td><code>ms</code> <span class="type-badge">number</span></td>
+              <td>자동 재생 속도(간격)를 동적으로 변경합니다. (예: 500 = 0.5초)</td>
+            </tr>
+            <tr>
+              <td><code>prevDay()</code></td>
+              <td>-</td>
+              <td>이전 날짜의 첫 번째 시각으로 이동합니다.</td>
+            </tr>
+            <tr>
+              <td><code>nextDay()</code></td>
+              <td>-</td>
+              <td>다음 날짜의 첫 번째 시각으로 이동합니다.</td>
+            </tr>
+            <tr>
+              <td><code>setData(newData)</code></td>
+              <td><code>newData</code> <span class="type-badge">Array&lt;Object&gt;</span></td>
+              <td>새로운 타임라인 데이터로 갱신하고 초기화합니다.</td>
+            </tr>
+            <tr>
+              <td><code>destroy()</code></td>
+              <td>-</td>
+              <td>재생 타이머를 정지하고 바인딩된 DOM 콘텐츠를 삭제합니다.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 7. 전체 개발자 실습 코드 예시 -->
+      <section class="guide-card">
+        <h2 class="guide-card-title">
+          <span>💻 7. 개발자 예제 코드 (Full Example Code)</span>
+        </h2>
+
+        <div class="code-block">
+<span class="keyword">import</span> { UX } <span class="keyword">from</span> <span class="string">'../resources/js/uiuxu.common.js'</span>;
+
+<span class="comment">// 1. 공통 UX 초기화</span>
+UX.<span class="function">init</span>();
+
+<span class="comment">// 2. 데이터 준비</span>
+<span class="keyword">const</span> sampleData = [
+  { <span class="attr">day</span>: <span class="string">'20260701'</span>, <span class="attr">times</span>: [<span class="string">'00'</span>, <span class="string">'06'</span>, <span class="string">'12'</span>, <span class="string">'18'</span>] },
+  { <span class="attr">day</span>: <span class="string">'20260702'</span>, <span class="attr">times</span>: [<span class="string">'00'</span>, <span class="string">'03'</span>, <span class="string">'06'</span>, <span class="string">'09'</span>, <span class="string">'12'</span>, <span class="string">'15'</span>, <span class="string">'18'</span>, <span class="string">'21'</span>] }
+];
+
+<span class="comment">// 3. 컴포넌트 인스턴스 생성 및 바인딩</span>
+UI.exe.myTimeline = <span class="keyword">new</span> UX.<span class="function">TimeTimeline</span>({
+  <span class="attr">id</span>: <span class="string">'timeTimelineDemo'</span>,
+  <span class="attr">data</span>: sampleData,
+  <span class="attr">selectedDayIndex</span>: <span class="number">0</span>,
+  <span class="attr">selectedTimeIndex</span>: <span class="number">2</span>,
+  <span class="attr">interval</span>: <span class="number">1000</span>,
+  <span class="attr">onChange</span>: (<span class="attr">info</span>) =&gt; {
+    console.<span class="function">log</span>(<span class="string">`선택 날짜: ${info.dayLabel}, 선택 시각: ${info.timeLabel}`</span>);
+    <span class="comment">// 사용자 지도 데이터 갱신 또는 차트 조회가 실행되는 영역</span>
+  }
+});
+
+<span class="comment">// 4. 메소드 호출 예시</span>
+<span class="comment">// UI.exe.myTimeline.play(); // 자동 재생 시작</span>
+<span class="comment">// UI.exe.myTimeline.setSpeed(500); // 0.5초 간격으로 변경</span>
+<span class="comment">// UI.exe.myTimeline.selectTime(1, 0); // 2번째 날짜의 첫시각 선택</span>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- 기본 팝업 영역 -->
+<div class="area-dropdown"></div>
+<div class="area-tooltip"></div>
+<div class="area-dialog" data-area="body"></div>
+<div class="area-toast"></div>
+
+<script type="module">
+  import { UX } from '../resources/js/uiuxu.common.js';
+  UX.init();
+
+  // 1. 샘플 데이터 정의
+  const timelineData = [
+    { day: '20260701', times: ['00', '02', '12'] },
+    { day: '20260702', times: ['00', '03', '06', '09', '12', '15', '18', '21'] },
+    { day: '20260703', times: ['00', '06', '12', '18'] },
+    { day: '20260704', times: ['00', '03', '06', '09', '12', '15', '18', '21'] },
+    { day: '20260705', times: ['00', '03', '06', '09', '12'] },
+    { day: '20260706', times: ['00', '03', '06', '09', '12', '15', '18', '21'] },
+    { day: '20260707', times: ['00', '06', '12'] }
+  ];
+
+  // DOM 로그 요소 참조
+  const logDay = document.getElementById('log-day');
+  const logDayLabel = document.getElementById('log-day-label');
+  const logTime = document.getElementById('log-time');
+  const logIndex = document.getElementById('log-index');
+
+  // 2. TimeTimeline 컴포넌트 인스턴스 생성
+  UI.exe.timeTimelineDemo = new UX.TimeTimeline({
+    id: 'timeTimelineDemo',
+    data: timelineData,
+    selectedDayIndex: 1,  // 초기 선택 날짜 인덱스 (20260702)
+    selectedTimeIndex: 3, // 초기 선택 시간 인덱스 (09시)
+    interval: 1000,       // 자동 플레이 간격 (1초)
+    onChange: (info) => {
+      console.log('Time Selected:', info);
+      if (logDay) logDay.textContent = info.day;
+      if (logDayLabel) logDayLabel.textContent = info.dayLabel;
+      if (logTime) logTime.textContent = info.timeLabel;
+      if (logIndex) logIndex.textContent = `날짜 인덱스:${info.dayIndex}, 시각 인덱스:${info.timeIndex} (전체:${info.flatIndex})`;
+    }
+  });
+
+  // 3. 실시간 API 테스트 버튼 이벤트 바인딩
+  document.getElementById('btn-test-toggle')?.addEventListener('click', () => {
+    UI.exe.timeTimelineDemo.togglePlay();
+  });
+
+  document.getElementById('btn-test-speed-fast')?.addEventListener('click', () => {
+    UI.exe.timeTimelineDemo.setSpeed(500);
+    alert('재생 속도가 0.5초 간격으로 설정되었습니다.');
+  });
+
+  document.getElementById('btn-test-speed-normal')?.addEventListener('click', () => {
+    UI.exe.timeTimelineDemo.setSpeed(1000);
+    alert('재생 속도가 1.0초 간격으로 설정되었습니다.');
+  });
+
+  document.getElementById('btn-test-prev')?.addEventListener('click', () => {
+    UI.exe.timeTimelineDemo.prevDay();
+  });
+
+  document.getElementById('btn-test-next')?.addEventListener('click', () => {
+    UI.exe.timeTimelineDemo.nextDay();
+  });
+
+  document.getElementById('btn-test-target')?.addEventListener('click', () => {
+    // 20260703 (dayIndex 2), 12시 (timeIndex 2)
+    UI.exe.timeTimelineDemo.selectTime(2, 2);
+  });
+
+  document.getElementById('btn-test-update')?.addEventListener('click', () => {
+    const updatedData = [
+      { day: '20260810', times: ['03', '09', '15', '21'] },
+      { day: '20260811', times: ['00', '06', '12', '18'] },
+      { day: '20260812', times: ['00', '12'] }
+    ];
+    UI.exe.timeTimelineDemo.setData(updatedData);
+    alert('새로운 8월 기상 타임라인 데이터로 갱신되었습니다.');
+  });
+
+</script>
+</body>
+
+</html>
+
