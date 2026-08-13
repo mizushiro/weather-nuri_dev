@@ -562,7 +562,7 @@
 
       <!-- map-bottom -->
       <div class="full-map-bottom-area" data-toggle-target="map-compare">
-        <div class="timeRange" data-time-range="time-range1"></div>
+        <div data-time-timeline="timeTimelineDemo"></div>
       </div>
 
       <!-- map-layer -->
@@ -1924,24 +1924,35 @@
     });
 
 
-    /// 하단 시간슬라이더
-    UI.exe.timeRangeHistory = new TimeRange({
-      id: 'time-range1',
+    const timelineData = [
+      { day: '20260701', times: ['00', '02', '12'] },
+      { day: '20260702', times: ['00', '03', '06', '09', '12', '15', '18', '21'] },
+      { day: '20260703', times: ['00', '06', '12', '18'] },
+      { day: '20260704', times: ['00', '03', '06', '09', '12', '15', '18', '21'] },
+      { day: '20260705', times: ['00', '03', '06', '09', '12'] },
+      { day: '20260706', times: ['00', '03', '06', '09', '12', '15', '18', '21'] },
+      { day: '20260707', times: ['00', '06', '12'] }
+    ];
 
-      // rangeType: 'relative',
-      // relativeHours: 50, 
-      // step: 10,
-      // playTime: 1000,
-      // onChange: (dateStr, timeStr, dateObj) => {
-      //   console.log(`[Change] 선택 시점: <b>${dateStr}</b> (시간: ${timeStr}) | 타임스탬프: ${dateObj.getTime()}`)
-      // }
+    // DOM 로그 요소
+    const logDay = document.getElementById('log-day');
+    const logDayLabel = document.getElementById('log-day-label');
+    const logTime = document.getElementById('log-time');
+    const logIndex = document.getElementById('log-index');
 
-      // day mode sample
-      rangeType: 'day',
-      daysBefore: 5,
-      daysAfter: 0,
-      onChange: (dateStr, dateObj) => {
-        
+    // 2. TimeTimeline 컴포넌트 생성
+    UI.exe.timeTimelineDemo = new UX.TimeTimeline({
+      id: 'timeTimelineDemo',
+      data: timelineData,
+      selectedDayIndex: 1,  // 초기 선택 날짜 인덱스
+      selectedTimeIndex: 3, // 초기 선택 시간 인덱스 (09시)
+      interval: 3000,       // 자동 플레이 간격 (1초)
+      onChange: (info) => {
+        console.log('Time Selected:', info);
+        if (logDay) logDay.textContent = info.day;
+        if (logDayLabel) logDayLabel.textContent = info.dayLabel;
+        if (logTime) logTime.textContent = info.timeLabel;
+        if (logIndex) logIndex.textContent = `날짜:${info.dayIndex}, 시각:${info.timeIndex} (전체:${info.flatIndex})`;
       }
     });
 

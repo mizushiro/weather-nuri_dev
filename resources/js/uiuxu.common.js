@@ -7,6 +7,7 @@ import RangeSliderDual from './component/rangeDual.js';
 import Tab from './component/tab.js';
 import Tooltip from './component/tooltip.js';
 import ToggleController from './component/toggleController.js';
+import TimeTimeline from './component/timeTimeline.js';
 import SplitSlider from '../../resources/js/utils/splitSlider.js';
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.mjs'
 
@@ -29,6 +30,7 @@ export const UX = {
 	RangeSlider,
 	RangeSliderDual,
 	ToggleController,
+	TimeTimeline,
 	
 	RadioAllcheck,
 	HoverMenu,
