@@ -222,19 +222,27 @@ body[data-content-bg="F7F8FB"] {background-color:#F7F8FB}
 .icon-aspect-all-menu {background-image:url("../images/icon/icon-aspect-all-menu.svg")}
 .icon-aspect-arrow-r-w {background-image:url("../images/icon/icon-aspect-arrow-r-w.svg")}
 .icon-aspect-check-circle-w {background-image:url("../images/icon/icon-aspect-check-circle-w.svg")}
-.icon-aspect-map-nav1 {background-image:url("../images/icon/icon-aspect-map-nav1.svg")}
-.icon-aspect-map-nav2 {background-image:url("../images/icon/icon-aspect-map-nav2.svg")}
-.icon-aspect-map-nav3 {background-image:url("../images/icon/icon-aspect-map-nav3.svg")}
-.icon-aspect-map-nav4 {background-image:url("../images/icon/icon-aspect-map-nav4.svg")}
-.icon-aspect-map-nav5 {background-image:url("../images/icon/icon-aspect-map-nav5.svg")}
-.icon-aspect-map-nav6 {background-image:url("../images/icon/icon-aspect-map-nav6.svg")}
-.icon-aspect-map-nav7 {background-image:url("../images/icon/icon-aspect-map-nav7.svg")}
-.icon-aspect-map-nav8 {background-image:url("../images/icon/icon-aspect-map-nav8.svg")}
-.icon-aspect-map-nav9 {background-image:url("../images/icon/icon-aspect-map-nav9.svg")}
-.icon-aspect-map-nav10 {background-image:url("../images/icon/icon-aspect-map-nav10.svg")}
-.icon-aspect-map-nav11 {background-image:url("../images/icon/icon-aspect-map-nav11.svg")}
-.icon-aspect-map-nav12 {background-image:url("../images/icon/icon-aspect-map-nav12.svg")}
-.icon-aspect-map-nav13 {background-image:url("../images/icon/icon-aspect-map-nav13.svg")}
+.icon-aspect-map-nav1 {background-image:url("../images/icon/icon-aspect-map-nav1.svg")} /* 기온 */
+.icon-aspect-map-nav2 {background-image:url("../images/icon/icon-aspect-map-nav2.svg")} /* 강수량 */
+.icon-aspect-map-nav3 {background-image:url("../images/icon/icon-aspect-map-nav3.svg")} /* 구름량 */
+.icon-aspect-map-nav4 {background-image:url("../images/icon/icon-aspect-map-nav4.svg")} /* 풍속 */
+.icon-aspect-map-nav5 {background-image:url("../images/icon/icon-aspect-map-nav5.svg")} /* 기압 */
+.icon-aspect-map-nav6 {background-image:url("../images/icon/icon-aspect-map-nav6.svg")} /* 습도 */
+.icon-aspect-map-nav7 {background-image:url("../images/icon/icon-aspect-map-nav7.svg")} /* 해빙 */
+.icon-aspect-map-nav8 {background-image:url("../images/icon/icon-aspect-map-nav8.svg")} /* 적설량 */
+.icon-aspect-map-nav9 {background-image:url("../images/icon/icon-aspect-map-nav9.svg")} /* GTS */
+.icon-aspect-map-nav10 {background-image:url("../images/icon/icon-aspect-map-nav10.svg")} /*  */
+.icon-aspect-map-nav11 {background-image:url("../images/icon/icon-aspect-map-nav11.svg")} /* 레이더 */
+.icon-aspect-map-nav12 {background-image:url("../images/icon/icon-aspect-map-nav12.svg")} /* 위성 */
+.icon-aspect-map-nav13 {background-image:url("../images/icon/icon-aspect-map-nav13.svg")} /* 재생에너지 */
+.icon-aspect-map-nav14 {background-image:url("../images/icon/icon-aspect-map-nav14.svg")} /* 특보 */
+.icon-aspect-map-nav15 {background-image:url("../images/icon/icon-aspect-map-nav15.svg")} /* 동네예보 */
+.icon-aspect-map-nav16 {background-image:url("../images/icon/icon-aspect-map-nav16.svg")} /* 해상 예측 */
+.icon-aspect-map-nav17 {background-image:url("../images/icon/icon-aspect-map-nav17.svg")} /* 수치예보 */
+.icon-aspect-map-nav18 {background-image:url("../images/icon/icon-aspect-map-nav18.svg")} /* 영향예보 */
+.icon-aspect-map-nav19 {background-image:url("../images/icon/icon-aspect-map-nav19.svg")} /* 관측 */
+.icon-aspect-map-nav20 {background-image:url("../images/icon/icon-aspect-map-nav20.svg")} /* 일 통계 */
+.icon-aspect-map-nav21 {background-image:url("../images/icon/icon-aspect-map-nav21.svg")} /* 해수면 */
 .icon-aspect-map-control1 {background-image:url("../images/icon/icon-aspect-map-control1.svg")}
 .icon-aspect-map-control2 {background-image:url("../images/icon/icon-aspect-map-control2.svg")}
 .icon-aspect-map-control3 {background-image:url("../images/icon/icon-aspect-map-control3.svg")}

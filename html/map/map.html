@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 
 <head>
@@ -86,7 +86,7 @@
             <div class="form-fake-button">
               <input type="radio" id="mapTypeSelect-2" name="mapTypeSelect" value="korea" class="form-fake-input">
               <label for="mapTypeSelect-2" class="form-fake-label">
-                동네예보
+                대한민국
               </label>
             </div>
           </div>
@@ -201,52 +201,44 @@
                   <button type="button" class="btn-map-left" data-toggle-object="localOption1" data-radio="w-localOption"
                     data-variable="TMP" data-listener-added="true" data-toggle-state="selected">
                     <span class="icon-round-box">
-                      <i class="icon-aspect-map-nav1" data-size="24"></i>
+                      <i class="icon-aspect-map-nav14" data-size="24"></i>
                     </span>
-                    <span class="btn-text">기온</span>
+                    <span class="btn-text">특보</span>
                   </button>
                   <button type="button" class="btn-map-left" data-toggle-object="localOption2" data-radio="w-localOption"
                     data-variable="REH">
                     <span class="icon-round-box">
-                      <i class="icon-aspect-map-nav6" data-size="24"></i>
+                      <i class="icon-aspect-map-nav15" data-size="24"></i>
                     </span>
-                    <span class="btn-text">상대습도</span>
+                    <span class="btn-text">동네예보</span>
                   </button>
                   <button type="button" class="btn-map-left" data-toggle-object="localOption3" data-radio="w-localOption"
                     data-variable="WSP">
                     <span class="icon-round-box">
-                      <i class="icon-aspect-map-nav4" data-size="24"></i>
+                      <i class="icon-aspect-map-nav16" data-size="24"></i>
                     </span>
-                    <span class="btn-text">풍속</span>
+                    <span class="btn-text">해상 예측</span>
                   </button>
                   <button type="button" class="btn-map-left" data-toggle-object="localOption4" data-radio="w-localOption"
                     data-variable="RN01H">
                     <span class="icon-round-box">
-                      <i class="icon-aspect-map-nav2" data-size="24"></i>
+                      <i class="icon-aspect-map-nav17" data-size="24"></i>
                     </span>
-                    <span class="btn-text">강수량</span>
+                    <span class="btn-text">수치예보</span>
                   </button>
                   <button type="button" class="btn-map-left" data-toggle-object="localOption5" data-radio="w-localOption"
                     data-variable="SKY">
                     <span class="icon-round-box">
-                      <i class="icon-aspect-map-nav3" data-size="24"></i>
+                      <i class="icon-aspect-map-nav13" data-size="24"></i>
                     </span>
-                    <span class="btn-text">하늘상태</span>
+                    <span class="btn-text">재생에너지</span>
                   </button>
                   <button type="button" class="btn-map-left" data-toggle-object="localOption6" data-radio="w-localOption"
                     data-variable="PTY">
                     <span class="icon-round-box">
-                      <i class="icon-aspect-map-nav2" data-size="24"></i>
+                      <i class="icon-aspect-map-nav18" data-size="24"></i>
                     </span>
-                    <span class="btn-text">강수형태</span>
-                  </button>
-                  <button type="button" class="btn-map-left" data-toggle-object="localOption9" data-radio="w-localOption"
-                    data-variable="prec_diff">
-                    <span class="icon-round-box">
-                      <i class="icon-aspect-map-nav13" data-size="24"></i>
-                    </span>
-                    <span class="btn-text">재생에너지</span>
-                    <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                    <span class="btn-text">영향예보</span>
                   </button>
                 </section>
               </div>
@@ -269,6 +261,26 @@
                         <i class="icon-aspect-map-nav12" data-size="24"></i>
                       </span>
                       <span class="btn-text">위성</span>
+                      <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                    </button>
+                  </div>
+                  <div data-dropdown="localOption9">
+                    <button type="button" class="btn-map-left" data-dropdown-button="localOption9"
+                            data-toggle-object="localOption9" data-radio="w-localOption" data-variable="">
+                      <span class="icon-round-box">
+                        <i class="icon-aspect-map-nav19" data-size="24"></i>
+                      </span>
+                      <span class="btn-text">관측</span>
+                      <i class="icon-aspect-arrow-r-w" data-size="24"></i>
+                    </button>
+                  </div>
+                  <div data-dropdown="localOption10">
+                    <button type="button" class="btn-map-left" data-dropdown-button="localOption10"
+                            data-toggle-object="localOption10" data-radio="w-localOption" data-variable="">
+                      <span class="icon-round-box">
+                        <i class="icon-aspect-map-nav20" data-size="24"></i>
+                      </span>
+                      <span class="btn-text">일 통계</span>
                       <i class="icon-aspect-arrow-r-w" data-size="24"></i>
                     </button>
                   </div>
@@ -620,6 +632,19 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- map label -->
+      <div class="ui-map-label ui-map-label-white" style="top:30%;left:30%">
+        <strong>울진</strong>
+        <span>24.5°C</span>
+        <em>0.5m/s</em>
+      </div>
+
+      <div class="ui-map-label ui-map-label-blue" style="top:30%;left:60%">
+        <strong>울진</strong>
+        <span>4.7m/s</span>
+        <em>0.5m</em>
       </div>
 
       <!-- map : 싱글 & 듀얼 -->
@@ -1960,10 +1985,6 @@
     const mapOptions = document.querySelectorAll('[data-map-select]');
     const applyPointByMapType = (selectedValue) => {
       const isWorld = selectedValue === 'world';
-      const step = isWorld ? 10 : 60;
-      const hours = isWorld ? 50 : 6;
-      UI.exe.timeRangeHistory.setStep(step);
-      UI.exe.timeRangeHistory.setRelativeHours(hours);
       mapOptions.forEach(item => {
         item.dataset.mapSelect = isWorld ? 'world' : 'local';
       });
@@ -1978,7 +1999,6 @@
     if (checkedMapType) {
       applyPointByMapType(checkedMapType.value);
     }
-    UI.exe.timeRangeHistory.init();
 
     // 사이드영역
     UI.exe.sideOpenFn = () => {
@@ -2030,6 +2050,18 @@
         UI.exe.menu_tab_sub.init();
 
         const modalFilterElement = document.querySelector('[data-dialog="modalFilter"]');
+
+        const mobileMapTypeTabs = modalFilterElement?.querySelectorAll('[data-tab="menu_tab"] [role="tab"]');
+        mobileMapTypeTabs?.forEach(tab => {
+          tab.addEventListener('click', () => {
+            const val = tab.getAttribute('value');
+            if (val) {
+              applyPointByMapType(val);
+              const pcRadio = document.querySelector(`input[name="mapTypeSelect"][value="${val}"]`);
+              if (pcRadio) pcRadio.checked = true;
+            }
+          });
+        });
 
         // UX.searchHeader(modalFilterElement.querySelector('.side-content-search-area'));
         UI.exe.acco1 = new UX.Accordion({

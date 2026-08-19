@@ -168,7 +168,7 @@
 [data-level-type="legend_09"] {background:linear-gradient(#54278f, #562c91, #583094, #5b3596, #5d3998, #5f3e9b, #61439d, #64479f, #664ca1, #6850a4, #6a55a6, #6d5aa8, #6f5eab, #7163ad, #7368af, #766cb1, #786fb3, #7b72b5, #7e75b6, #8179b8, #847cb9, #867fbb, #8982bc, #8c85be, #8f88bf, #918cc1, #948fc3, #9792c4, #9a95c6, #9d98c7, #a09cc9, #a39fcb, #a6a2cc, #a9a5ce, #aca8d0, #afacd2, #b2afd3, #b5b2d5, #b8b5d7, #bbb8d9, #bebbdb, #c1bfdc, #c4c2de, #c7c5e0, #cac8e2, #cdcbe3, #d0cee4, #d2d0e6, #d5d3e7, #d8d6e9, #dad8ea, #dddbec, #dfdded, #e2e0ee, #e5e3f0, #e7e5f1, #eae8f3, #edebf4, #efedf6, #f2f0f7);}
 [data-level-type="legend_10"] {background:linear-gradient(rgb(16, 16, 16), rgb(20, 20, 20), rgb(24, 24, 24), rgb(28, 28, 28), rgb(32, 32, 32), rgb(36, 36, 36), rgb(40, 40, 40), rgb(44, 44, 44), rgb(48, 48, 48), rgb(52, 52, 52), rgb(56, 56, 56), rgb(60, 60, 60), rgb(64, 64, 64), rgb(68, 68, 68), rgb(72, 72, 72), rgb(76, 76, 76), rgb(80, 80, 80), rgb(84, 84, 84), rgb(88, 88, 88), rgb(92, 92, 92), rgb(96, 96, 96), rgb(100, 100, 100), rgb(104, 104, 104), rgb(108, 108, 108), rgb(112, 112, 112), rgb(116, 116, 116), rgb(120, 120, 120), rgb(124, 124, 124), rgb(128, 128, 128), rgb(132, 132, 132), rgb(136, 136, 136), rgb(140, 140, 140), rgb(144, 144, 144), rgb(148, 148, 148), rgb(152, 152, 152), rgb(156, 156, 156), rgb(160, 160, 160), rgb(164, 164, 164), rgb(168, 168, 168), rgb(172, 172, 172), rgb(176, 176, 176), rgb(180, 180, 180), rgb(184, 184, 184), rgb(188, 188, 188), rgb(192, 192, 192), rgb(196, 196, 196), rgb(200, 200, 200), rgb(204, 204, 204), rgb(208, 208, 208), rgb(212, 212, 212), rgb(216, 216, 216), rgb(220, 220, 220), rgb(224, 224, 224), rgb(228, 228, 228), rgb(232, 232, 232), rgb(236, 236, 236), rgb(240, 240, 240), rgb(244, 244, 244), rgb(248, 248, 248), rgb(252, 252, 252))}
 [data-level-type="legend_11"] {background:linear-gradient(#8b0000 10%, #ff0000 10%, #ff0000 20%, #ff4500 20%, #ff4500 30%, #ffb90f 30%, #ffb90f 40%, #ffd700 40%, #ffd700 50%, #ffff00 50%, #ffff00 60%, #99ff99 60%, #99ff99 70%, #00cc00 70%, #00cc00 80%, #008000 80%, #008000 90%, #006400 90%, #006400);}
-[data-level-type="legend-block-01"] {background: linear-gradient(
+[data-level-type="legend-block-01"] {background:linear-gradient(
   to bottom,
   #B40000 0% 6.666%,
   #D20000 6.666% 13.333%,
@@ -244,3 +244,17 @@
 /* 모바일 메뉴 */
 .mobile-menu-tab {padding:2rem 0;background-color:#fff;position:sticky;top:0;z-index:2}
 .mobile-menu-tab [data-tab-style="round-box-type"] {max-width:30rem;margin:0 auto}
+
+/* map label */
+.ui-map-label {position:absolute;width:5.6rem;padding:.8rem .8rem .6rem;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:.4rem;text-align:center;line-height:1.1;}
+.ui-map-label strong {font-size:1.2rem;font-weight:700;line-height:1;margin-bottom:.4rem}
+.ui-map-label span {font-size:1.2rem;font-weight:600;}
+.ui-map-label em {font-size:1.1rem;font-style:normal;font-weight:600;}
+
+.ui-map-label-white {color:#020618;background:#fff;box-shadow:0 .4rem .3rem rgba(0, 0, 0, 0.2);}
+.ui-map-label-white em {color:#6D758F}
+.ui-map-label-white::after {content:"";position:absolute;left:50%;bottom:-.5rem;width:1.2rem;height:.6rem;transform:translateX(-50%);background:#fff;clip-path:polygon(0 0, 100% 0, 50% 100%);}
+
+.ui-map-label-blue {color:#fff;background:#0475F4B2;;border:1px solid #0475F4;box-shadow:0 .4rem .6rem rgba(0, 0, 0, 0.2);}
+.ui-map-label-blue em {color:#AED4FF}
+.ui-map-label-blue::after {content:"";position:absolute;left:50%;bottom:-.5rem;width:1.2rem;height:.6rem;transform:translateX(-50%);background:#0475F4B2;clip-path:polygon(0 0, 100% 0, 50% 100%);}
