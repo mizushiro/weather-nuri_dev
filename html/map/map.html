@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ko">
 
 <head>
@@ -639,6 +639,7 @@
         <strong>울진</strong>
         <span>24.5°C</span>
         <em>0.5m/s</em>
+        <em>0.5㎜</em>
       </div>
 
       <div class="ui-map-label ui-map-label-blue" style="top:30%;left:60%">
@@ -1968,6 +1969,7 @@
     // 2. TimeTimeline 컴포넌트 생성
     UI.exe.timeTimelineDemo = new UX.TimeTimeline({
       id: 'timeTimelineDemo',
+      type: 'range',
       data: timelineData,
       selectedDayIndex: 1,  // 초기 선택 날짜 인덱스
       selectedTimeIndex: 3, // 초기 선택 시간 인덱스 (09시)

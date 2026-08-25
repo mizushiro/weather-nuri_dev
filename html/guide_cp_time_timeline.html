@@ -297,29 +297,70 @@
       <section class="guide-card">
         <h2 class="guide-card-title">
           <span>📅 1. 타임라인 컴포넌트 데모 (Live Interactive Demo)</span>
-          <span style="font-size:14px; color:#64748b; font-weight:normal;">UI.exe.timeTimelineDemo</span>
         </h2>
 
-        <!-- 타임라인 컴포넌트 마운트 컨테이너 -->
-        <div data-time-timeline="timeTimelineDemo"></div>
+        <!-- [데모 1] 기본 타임라인 (Default Mode) -->
+        <div style="margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px dashed #e2e8f0;">
+          <h3 class="sub-section-title">
+            1) 기본 타임라인 (Default Mode)
+            <span style="font-size:13px; color:#64748b; font-weight:normal;">UI.exe.timeTimelineDemo</span>
+          </h3>
+          <p style="font-size:13px; color:#64748b; margin-bottom:0.75rem;">
+            모든 날짜의 시각(00시 포함)이 정상적으로 선택 및 재생되는 기본 일반 타임라인입니다.
+          </p>
 
-        <!-- 선택 상태 로그 패널 -->
-        <div class="info-display-panel">
-          <div>선택 날짜: <span id="log-day" class="highlight">-</span> (<span id="log-day-label">-</span>)</div>
-          <div>선택 시각: <span id="log-time" class="highlight">-</span></div>
-          <div>인덱스: <span id="log-index">-</span></div>
+          <!-- 타임라인 컴포넌트 마운트 컨테이너 -->
+          <div data-time-timeline="timeTimelineDemo"></div>
+
+          <!-- 선택 상태 로그 패널 -->
+          <div class="info-display-panel">
+            <div>선택 날짜: <span id="log-day" class="highlight">-</span> (<span id="log-day-label">-</span>)</div>
+            <div>선택 시각: <span id="log-time" class="highlight">-</span></div>
+            <div>인덱스: <span id="log-index">-</span></div>
+          </div>
+
+          <!-- API 실시간 테스트 컨트롤 바 -->
+          <div class="demo-control-panel">
+            <span class="demo-control-label">⚡ API 테스트:</span>
+            <button type="button" class="btn-demo-action primary" id="btn-test-toggle">재생 / 일시정지 (togglePlay)</button>
+            <button type="button" class="btn-demo-action" id="btn-test-speed-fast">속도 0.5초 (setSpeed)</button>
+            <button type="button" class="btn-demo-action" id="btn-test-speed-normal">속도 1초 (setSpeed)</button>
+            <button type="button" class="btn-demo-action" id="btn-test-prev">이전 날짜 (prevDay)</button>
+            <button type="button" class="btn-demo-action" id="btn-test-next">다음 날짜 (nextDay)</button>
+            <button type="button" class="btn-demo-action" id="btn-test-target">지정 선택 (20260703 12시)</button>
+            <button type="button" class="btn-demo-action" id="btn-test-update">데이터 동적 변경 (setData)</button>
+          </div>
         </div>
 
-        <!-- API 실시간 테스트 컨트롤 바 -->
-        <div class="demo-control-panel">
-          <span class="demo-control-label">⚡ API 테스트:</span>
-          <button type="button" class="btn-demo-action primary" id="btn-test-toggle">재생 / 일시정지 (togglePlay)</button>
-          <button type="button" class="btn-demo-action" id="btn-test-speed-fast">속도 0.5초 (setSpeed)</button>
-          <button type="button" class="btn-demo-action" id="btn-test-speed-normal">속도 1초 (setSpeed)</button>
-          <button type="button" class="btn-demo-action" id="btn-test-prev">이전 날짜 (prevDay)</button>
-          <button type="button" class="btn-demo-action" id="btn-test-next">다음 날짜 (nextDay)</button>
-          <button type="button" class="btn-demo-action" id="btn-test-target">지정 선택 (20260703 12시)</button>
-          <button type="button" class="btn-demo-action" id="btn-test-update">데이터 동적 변경 (setData)</button>
+        <!-- [데모 2] Range 타입 타임라인 (Range Mode) -->
+        <div>
+          <h3 class="sub-section-title">
+            2) Range 타입 타임라인 (Range Mode - <code style="color:#e11d48; background:#ffe4e6; padding:2px 6px; border-radius:4px;">data-type="range"</code>)
+            <span style="font-size:13px; color:#64748b; font-weight:normal;">UI.exe.timeTimelineRangeDemo</span>
+          </h3>
+          <p style="font-size:13px; color:#64748b; margin-bottom: 0.75rem;">
+            ⚡ <code>data-type="range"</code> 속성 또는 <code>type: 'range'</code> 설정 시, <strong>날짜별 첫번째 시각(예: 00시)은 건너뛰고 두번째 시각(예: 03시)부터 선택 및 자동 플레이</strong>가 진행됩니다.
+          </p>
+
+          <!-- Range 타임라인 컴포넌트 마운트 컨테이너 -->
+          <div data-time-timeline="timeTimelineRangeDemo" data-type="range"></div>
+
+          <!-- Range 선택 상태 로그 패널 -->
+          <div class="info-display-panel">
+            <div>선택 날짜: <span id="log-range-day" class="highlight">-</span> (<span id="log-range-day-label">-</span>)</div>
+            <div>선택 시각: <span id="log-range-time" class="highlight">-</span></div>
+            <div>인덱스: <span id="log-range-index">-</span></div>
+          </div>
+
+          <!-- Range API 실시간 테스트 컨트롤 바 -->
+          <div class="demo-control-panel">
+            <span class="demo-control-label">⚡ API 테스트:</span>
+            <button type="button" class="btn-demo-action primary" id="btn-range-test-toggle">재생 / 일시정지 (togglePlay)</button>
+            <button type="button" class="btn-demo-action" id="btn-range-test-speed-fast">속도 0.5초</button>
+            <button type="button" class="btn-demo-action" id="btn-range-test-speed-normal">속도 1초</button>
+            <button type="button" class="btn-demo-action" id="btn-range-test-prev">이전 날짜 (prevDay)</button>
+            <button type="button" class="btn-demo-action" id="btn-range-test-next">다음 날짜 (nextDay)</button>
+          </div>
         </div>
       </section>
 
@@ -342,10 +383,13 @@
 <span class="tag">&lt;/script&gt;</span>
         </div>
 
-        <h3 class="sub-section-title">2) HTML 마크업 컨테이너</h3>
+        <h3 class="sub-section-title">2) HTML 마크업 컨테이너 & type 속성</h3>
         <div class="code-block">
-<span class="comment">&lt;!-- 컴포넌트가 동적으로 생성될 영역 --&gt;</span>
+<span class="comment">&lt;!-- 1. 기본 일반 타임라인 (Default Mode) --&gt;</span>
 <span class="tag">&lt;div</span> <span class="attr">data-time-timeline</span>=<span class="string">"timeTimelineDemo"</span><span class="tag">&gt;&lt;/div&gt;</span>
+
+<span class="comment">&lt;!-- 2. Range 타입 타임라인 (Range Mode - 날짜별 첫시간 스킵) --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">data-time-timeline</span>=<span class="string">"timeTimelineRangeDemo"</span> <span class="attr">data-type</span>=<span class="string">"range"</span><span class="tag">&gt;&lt;/div&gt;</span>
         </div>
       </section>
 
@@ -436,6 +480,13 @@
               <td><span class="opt-badge">선택</span></td>
               <td><code>function(info) {}</code></td>
               <td>사용자 클릭 또는 플레이어로 인해 시각 선택이 변경되었을 때 실행되는 콜백 함수</td>
+            </tr>
+            <tr>
+              <td><code>type</code></td>
+              <td><span class="type-badge">string</span></td>
+              <td><span class="opt-badge">선택</span></td>
+              <td><code>null</code></td>
+              <td>타임라인 타입 지정 (예: <code>'range'</code>). <code>'range'</code> 설정 시 <code>data-type="range"</code> 속성이 추가되며 자동 플레이 시 날짜의 첫날 첫시간은 건너뛰고 그다음 시간부터 선택되어 진행됩니다.</td>
             </tr>
           </tbody>
         </table>
@@ -643,13 +694,14 @@ UI.exe.myTimeline = <span class="keyword">new</span> UX.<span class="function">T
     { day: '20260707', times: ['00', '06', '12'] }
   ];
 
-  // DOM 로그 요소 참조
+  // ----------------------------------------------------
+  // [데모 1] 기본 타임라인 (Default Mode)
+  // ----------------------------------------------------
   const logDay = document.getElementById('log-day');
   const logDayLabel = document.getElementById('log-day-label');
   const logTime = document.getElementById('log-time');
   const logIndex = document.getElementById('log-index');
 
-  // 2. TimeTimeline 컴포넌트 인스턴스 생성
   UI.exe.timeTimelineDemo = new UX.TimeTimeline({
     id: 'timeTimelineDemo',
     data: timelineData,
@@ -657,7 +709,7 @@ UI.exe.myTimeline = <span class="keyword">new</span> UX.<span class="function">T
     selectedTimeIndex: 3, // 초기 선택 시간 인덱스 (09시)
     interval: 1000,       // 자동 플레이 간격 (1초)
     onChange: (info) => {
-      console.log('Time Selected:', info);
+      console.log('Default Time Selected:', info);
       if (logDay) logDay.textContent = info.day;
       if (logDayLabel) logDayLabel.textContent = info.dayLabel;
       if (logTime) logTime.textContent = info.timeLabel;
@@ -665,34 +717,26 @@ UI.exe.myTimeline = <span class="keyword">new</span> UX.<span class="function">T
     }
   });
 
-  // 3. 실시간 API 테스트 버튼 이벤트 바인딩
   document.getElementById('btn-test-toggle')?.addEventListener('click', () => {
     UI.exe.timeTimelineDemo.togglePlay();
   });
-
   document.getElementById('btn-test-speed-fast')?.addEventListener('click', () => {
     UI.exe.timeTimelineDemo.setSpeed(500);
-    alert('재생 속도가 0.5초 간격으로 설정되었습니다.');
+    alert('기본 타임라인: 재생 속도가 0.5초 간격으로 설정되었습니다.');
   });
-
   document.getElementById('btn-test-speed-normal')?.addEventListener('click', () => {
     UI.exe.timeTimelineDemo.setSpeed(1000);
-    alert('재생 속도가 1.0초 간격으로 설정되었습니다.');
+    alert('기본 타임라인: 재생 속도가 1.0초 간격으로 설정되었습니다.');
   });
-
   document.getElementById('btn-test-prev')?.addEventListener('click', () => {
     UI.exe.timeTimelineDemo.prevDay();
   });
-
   document.getElementById('btn-test-next')?.addEventListener('click', () => {
     UI.exe.timeTimelineDemo.nextDay();
   });
-
   document.getElementById('btn-test-target')?.addEventListener('click', () => {
-    // 20260703 (dayIndex 2), 12시 (timeIndex 2)
     UI.exe.timeTimelineDemo.selectTime(2, 2);
   });
-
   document.getElementById('btn-test-update')?.addEventListener('click', () => {
     const updatedData = [
       { day: '20260810', times: ['03', '09', '15', '21'] },
@@ -701,6 +745,48 @@ UI.exe.myTimeline = <span class="keyword">new</span> UX.<span class="function">T
     ];
     UI.exe.timeTimelineDemo.setData(updatedData);
     alert('새로운 8월 기상 타임라인 데이터로 갱신되었습니다.');
+  });
+
+  // ----------------------------------------------------
+  // [데모 2] Range 타입 타임라인 (Range Mode - 날짜별 첫시간 스킵)
+  // ----------------------------------------------------
+  const logRangeDay = document.getElementById('log-range-day');
+  const logRangeDayLabel = document.getElementById('log-range-day-label');
+  const logRangeTime = document.getElementById('log-range-time');
+  const logRangeIndex = document.getElementById('log-range-index');
+
+  UI.exe.timeTimelineRangeDemo = new UX.TimeTimeline({
+    id: 'timeTimelineRangeDemo',
+    type: 'range',        // Range 타입 명시
+    data: timelineData,
+    selectedDayIndex: 1,
+    selectedTimeIndex: 1, // Range 모드는 00시 건너뛰고 03시 선택
+    interval: 1000,
+    onChange: (info) => {
+      console.log('Range Time Selected:', info);
+      if (logRangeDay) logRangeDay.textContent = info.day;
+      if (logRangeDayLabel) logRangeDayLabel.textContent = info.dayLabel;
+      if (logRangeTime) logRangeTime.textContent = info.timeLabel;
+      if (logRangeIndex) logRangeIndex.textContent = `날짜 인덱스:${info.dayIndex}, 시각 인덱스:${info.timeIndex} (전체:${info.flatIndex})`;
+    }
+  });
+
+  document.getElementById('btn-range-test-toggle')?.addEventListener('click', () => {
+    UI.exe.timeTimelineRangeDemo.togglePlay();
+  });
+  document.getElementById('btn-range-test-speed-fast')?.addEventListener('click', () => {
+    UI.exe.timeTimelineRangeDemo.setSpeed(500);
+    alert('Range 타임라인: 재생 속도가 0.5초 간격으로 설정되었습니다.');
+  });
+  document.getElementById('btn-range-test-speed-normal')?.addEventListener('click', () => {
+    UI.exe.timeTimelineRangeDemo.setSpeed(1000);
+    alert('Range 타임라인: 재생 속도가 1.0초 간격으로 설정되었습니다.');
+  });
+  document.getElementById('btn-range-test-prev')?.addEventListener('click', () => {
+    UI.exe.timeTimelineRangeDemo.prevDay();
+  });
+  document.getElementById('btn-range-test-next')?.addEventListener('click', () => {
+    UI.exe.timeTimelineRangeDemo.nextDay();
   });
 
 </script>

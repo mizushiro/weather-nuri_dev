@@ -40,6 +40,7 @@ export default class TimeTimeline {
       ? document.querySelector(this.containerSelector) 
       : this.containerSelector;
 
+    this.type = options.type || (this.wrap ? this.wrap.getAttribute('data-type') : null);
     this.data = options.data || [];
     this.autoPlayInterval = options.interval || 1000;
     this.onChange = options.onChange || function() {};
@@ -62,6 +63,11 @@ export default class TimeTimeline {
     this.dragDistance = 0;
 
     if (this.wrap) {
+      // type 지정 시 미리 data-type 속성을 세팅하고 렌더링 전 opacity 0 설정하여 깜빡임 방지
+      if (this.type) {
+        this.wrap.setAttribute('data-type', this.type);
+      }
+      this.wrap.style.opacity = '0';
       this.init();
     }
   }
@@ -73,9 +79,23 @@ export default class TimeTimeline {
     
     // 초기 선택 항목 활성화 및 스크롤
     if (this.flatItems.length > 0) {
-      const initialFlatIndex = this._getFlatIndex(this.selectedDayIndex, this.selectedTimeIndex);
+      let initialFlatIndex = this._getFlatIndex(this.selectedDayIndex, this.selectedTimeIndex);
+      if (initialFlatIndex < 0) initialFlatIndex = 0;
+
+      // range 타입인 경우 초기 선택 항목이 날짜의 첫시간(timeIndex 0)이면 그다음 시간으로 자동 조정
+      if (this.type === 'range' && this.flatItems[initialFlatIndex] && this.flatItems[initialFlatIndex].timeIndex === 0) {
+        initialFlatIndex = this._getNextPlayIndex(initialFlatIndex - 1);
+      }
+
       this.selectByFlatIndex(initialFlatIndex >= 0 ? initialFlatIndex : 0, false);
     }
+
+    // 렌더링 및 초기 스타일 설정 완료 후 opacity 1로 전환하여 깜빡임 제거
+    requestAnimationFrame(() => {
+      if (this.wrap) {
+        this.wrap.style.opacity = '1';
+      }
+    });
   }
 
   /**
@@ -109,6 +129,9 @@ export default class TimeTimeline {
 
     this.wrap.classList.add('time-timeline');
     this.wrap.setAttribute('data-time-timeline', this.id);
+    if (this.type) {
+      this.wrap.setAttribute('data-type', this.type);
+    }
 
     let html = `
       <!-- 상단 컨트롤러 바 -->
@@ -287,6 +310,31 @@ export default class TimeTimeline {
   }
 
   /**
+   * 다음 플레이 순회 인덱스 계산 (range 타입일 경우 각 날짜의 첫시간 timeIndex === 0 은 건너뀀)
+   */
+  _getNextPlayIndex(currentIdx) {
+    if (this.flatItems.length === 0) return 0;
+
+    let nextIdx = currentIdx + 1;
+    if (nextIdx >= this.flatItems.length) {
+      nextIdx = 0;
+    }
+
+    if (this.type === 'range') {
+      let loopCount = 0;
+      while (this.flatItems[nextIdx] && this.flatItems[nextIdx].timeIndex === 0 && loopCount < this.flatItems.length) {
+        nextIdx++;
+        if (nextIdx >= this.flatItems.length) {
+          nextIdx = 0;
+        }
+        loopCount++;
+      }
+    }
+
+    return nextIdx;
+  }
+
+  /**
    * 날짜/시각 선택 실행
    */
   selectTime(dayIdx, timeIdx, triggerCallback = true) {
@@ -402,11 +450,14 @@ export default class TimeTimeline {
     if (this.iconPause) this.iconPause.style.display = 'inline-block';
     if (this.playBtn) this.playBtn.classList.add('is-playing');
 
+    // range 타입인 경우 현재 위치가 해당 날짜의 첫시간(timeIndex 0)이면 그다음 시간으로 선택 조정
+    if (this.type === 'range' && this.flatItems[this.currentFlatIndex] && this.flatItems[this.currentFlatIndex].timeIndex === 0) {
+      const nextValidIdx = this._getNextPlayIndex(this.currentFlatIndex - 1);
+      this.selectByFlatIndex(nextValidIdx);
+    }
+
     this.playTimer = setInterval(() => {
-      let nextFlatIdx = this.currentFlatIndex + 1;
-      if (nextFlatIdx >= this.flatItems.length) {
-        nextFlatIdx = 0; // 끝에 다다르면 처음으로 순환
-      }
+      const nextFlatIdx = this._getNextPlayIndex(this.currentFlatIndex);
       this.selectByFlatIndex(nextFlatIdx);
     }, this.autoPlayInterval);
   }
@@ -451,20 +502,22 @@ export default class TimeTimeline {
   }
 
   /**
-   * 이전 날짜 첫 시각 선택
+   * 이전 날짜 첫 시각 선택 (range 타입일 경우 첫시간을 건너뛰고 그다음 시간 선택)
    */
   prevDay() {
     const prevDayIdx = Math.max(0, this.selectedDayIndex - 1);
-    this.selectTime(prevDayIdx, 0);
+    const targetTimeIdx = (this.type === 'range') ? 1 : 0;
+    this.selectTime(prevDayIdx, targetTimeIdx);
   }
 
   /**
-   * 다음 날짜 첫 시각 선택
+   * 다음 날짜 첫 시각 선택 (range 타입일 경우 첫시간을 건너뛰고 그다음 시간 선택)
    */
   nextDay() {
     const maxDayIdx = this.data.length - 1;
     const nextDayIdx = Math.min(maxDayIdx, this.selectedDayIndex + 1);
-    this.selectTime(nextDayIdx, 0);
+    const targetTimeIdx = (this.type === 'range') ? 1 : 0;
+    this.selectTime(nextDayIdx, targetTimeIdx);
   }
 
   /**
