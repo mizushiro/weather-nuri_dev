@@ -6,7 +6,7 @@
 /* 상단 */
 .full-map-top-area {position:absolute;top:2rem;left:2rem;right:2rem;pointer-events:none;display:flex;align-items:flex-start}
 .full-map-top-area .btn-base {pointer-events:auto}
-.full-map-sh-box {width:52rem;min-height:4.8rem;border-radius:2.4rem;background-color:#fff;box-shadow:0 .1rem .2rem 0 #2F33590D;pointer-events:auto;position:relative;}
+.full-map-sh-box {max-width:52rem;flex:1;min-height:4.8rem;border-radius:2.4rem;background-color:#fff;box-shadow:0 .1rem .2rem 0 #2F33590D;pointer-events:auto;position:relative;}
 .full-map-sh-box .btn-sh-del {position:absolute;right:5.6rem;top:1.2rem}
 .full-map-sh-box .sh-logo {margin-right:1rem}
 .full-map-sh-box .form-element-input {padding-right:4rem}
