@@ -791,6 +791,7 @@ select::-ms-expand {display:none}
   .m-text-12-700 {font-size:1.2rem !important;font-weight:700 !important;line-height:1.4rem !important;}
   .m-text-14-700 {font-size:1.4rem !important;font-weight:700 !important;line-height:1.8rem !important;}
   .m-text-14-800 {font-size:1.4rem !important;font-weight:800 !important;line-height:1.8rem !important;}
+  .m-text-15-700 {font-size:1.5rem !important;font-weight:700 !important;}
   .m-text-15-800 {font-size:1.5rem !important;font-weight:800 !important;}
   .m-text-16-800 {font-size:1.6rem !important;font-weight:800 !important;}
   .m-text-18-800 {font-size:1.8rem !important;font-weight:800 !important;}

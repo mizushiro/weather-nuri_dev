@@ -26,7 +26,7 @@
 @media (max-width:1023px) {
   .full-map-top-area {top:1.5rem;right:6.9rem;left:1.5rem;bottom:10rem;flex-direction:column;gap:2rem;align-items:flex-start}
   .full-map-sh-box {width:100%}
-  .map-choice-info-box {position:absolute;top:0;left:5.5rem;margin-left:0;width:calc(100vw - 8.5rem)}
+  .map-choice-info-box {position:absolute;top:0;left:5.5rem;margin-left:0;width:calc(100vw - 8.5rem);padding-left:2rem}
   .full-map-setting-area {position:absolute;right:-5.4rem;top:0}
 }
 
