@@ -159,6 +159,7 @@ body[data-content-bg="F7F8FB"] {background-color:#F7F8FB}
 [data-gap="20"] {gap:2rem}
 [data-gap="24"] {gap:2.4rem}
 [data-gap="30"] {gap:3rem}
+[data-gap="34"] {gap:3.4rem}
 [data-gap="40"] {gap:4rem}
 
 .ui-flex-1 {flex:1}
@@ -266,9 +267,11 @@ body[data-content-bg="F7F8FB"] {background-color:#F7F8FB}
 .icon-aspect-calendar-b {background-image:url("../images/icon/icon-aspect-calendar-b.svg")}
 .icon-aspect-link {background-image:url("../images/icon/icon-aspect-link.svg")}
 .icon-aspect-arrow-up {background-image:url("../images/icon/icon-aspect-arrow-up.svg")}
+.icon-aspect-arrow-down {background-image:url("../images/icon/icon-aspect-arrow-down.svg")}
 .icon-aspect-map-pin {background-image:url("../images/icon/icon-aspect-map-pin.svg")}
 .icon-aspect-expand-circle {background-image:url("../images/icon/icon-aspect-expand-circle.svg")}
 .icon-aspect-month-b {background-image:url("../images/icon/icon-aspect-month-b.svg")}
+.icon-aspect-position {background-image:url("../images/icon/icon-aspect-position.svg")}
 .icon-aspect-NB01 {background-image:url("../images/weather/NB01.png")}  /* 맑은 */
 .icon-aspect-NB02 {background-image:url("../images/weather/NB02.png")}  /* 구름많은(낮) */
 .icon-aspect-NB03 {background-image:url("../images/weather/NB03.png")}  /* 흐림 */
@@ -792,4 +795,19 @@ select::-ms-expand {display:none}
   .m-text-16-800 {font-size:1.6rem !important;font-weight:800 !important;}
   .m-text-18-800 {font-size:1.8rem !important;font-weight:800 !important;}
   .m-text-22-800 {font-size:2.2rem !important}
+}
+
+[data-dropdown="languageSelect"] {
+  width: 8rem;
+}
+.dropdown-btn{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem 0 2rem;
+  gap: 0.4rem;
+  background-color: #fff;
+  border-radius: 99em;
+  padding: 0 1rem 0 2rem;
+  box-shadow: 0 .1rem .2rem 0 #2F33590D;
 }

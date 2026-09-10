@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 
 <head>
@@ -63,7 +63,7 @@
         <button type="button" class="btn-base" data-type="icon" data-size="48" data-color="white" data-round="full" aria-label="검색" data-view="pc-hidden" onclick="UI.exe.modalSearch.show()">
           <i class="icon-aspect-search" data-size="24"></i>
         </button>
-        <div class="map-choice-info-box">
+        <div class="map-choice-info-box" onclick="UI.exe.modalFilter.show()">
           <span class="icon-round-box">
             <i class="icon-aspect-map-nav1" data-size="24"></i>
           </span>
@@ -71,6 +71,8 @@
             <span class="text-16-700" data-text-color="white50" data-title>기온</span>
             <i class="icon-aspect-arrow-right" data-size="24"></i>
             <span class="text-16-700" data-text-color="white" data-value>850 hPa, 1500m</span>
+            <i class="map-choice-info-box-line"></i>
+            <span class="text-16-700" data-text-color="white">24km/h</span>
           </div>
         </div>
         <div class="full-map-setting-area">
@@ -90,13 +92,19 @@
               </label>
             </div>
           </div>
-          <button type="button" class="btn-base" data-size="48" data-round="full" data-type="icon" data-shadow data-color="white" data-view="pc-hidden" onclick="UI.exe.modalFilter.show()" aria-label="전체메뉴">
+          <!--<button type="button" class="btn-base" data-size="48" data-round="full" data-type="icon" data-shadow data-color="white" data-view="pc-hidden" onclick="UI.exe.modalFilter.show()" aria-label="전체메뉴">
             <i class="icon-aspect-all-menu" data-size="24"></i>
-          </button>
-          <button type="button" class="btn-base" data-size="48" data-round="full" data-type="icon" aria-label="설정"
+          </button>-->
+          <div data-dropdown="languageSelect" data-view="mobile-hidden">
+            <button type="button" class="dropdown-btn" data-dropdown-button="languageSelect" data-toggle-object="languageSelect" data-form-h="48">
+              <span class="btn-text">KR</span>
+              <i class="icon-aspect-arrow-down" data-size="20"></i>
+            </button>
+          </div>
+          <!-- <button type="button" class="btn-base" data-size="48" data-round="full" data-type="icon" aria-label="설정"
             data-shadow data-color="white" data-toggle-object="side-content" onclick="UI.exe.sideOpenFn();">
             <i class="icon-aspect-setting" data-size="24"></i>
-          </button>
+          </button> -->
         </div>
       </div>
 
@@ -451,7 +459,7 @@
             <i class="icon-aspect-map-control4" data-size="24"></i>
           </button>-->
           <button type="button" class="btn-base mt-14" data-color="white" data-shadow data-size="38" data-round="4"
-            data-type="icon" data-toggle-object="tool-legend" aria-label="범례">
+            data-type="icon" data-toggle-object="tool-legend" aria-label="범례" data-view="mobile-hidden">
             <i class="icon-aspect-map-control8" data-size="24"></i>
           </button>
 
@@ -542,7 +550,7 @@
 
         </div>
 
-        <div class="full-map-right-group3" data-view="mobile-hidden">
+        <div class="full-map-right-group3">
           <div class="btn-map-toggle">
             <span class="btn-text">해역표시</span>
             <div class="form-element-switch" data-size="20">
@@ -553,13 +561,13 @@
               </label>
             </div>
           </div>
-          <div data-dropdown="optionAni">
+          <div data-dropdown="optionAni" data-view="mobile-hidden">
             <button type="button" class="btn-map-ani-option" data-dropdown-button="optionAni">
               <span class="btn-text">풍향 에니메이션 / 강하게</span>
               <i class="icon-aspect-arrow-up" data-size="24"></i>
             </button>
           </div>
-          <div class="btn-map-toggle">
+          <div class="btn-map-toggle" data-view="mobile-hidden">
             <span class="btn-text">전선 (기상학)</span>
             <div class="form-element-switch" data-size="20">
               <input type="checkbox" id="btn-switch1" />
@@ -633,6 +641,11 @@
           </div>
         </div>
       </div>
+
+      <!-- map 위치버튼 추가 -->
+      <button type="button" style="position:absolute;top:20%;left:15%" aria-label="위치">
+        <i class="icon-aspect-position" data-size="48"></i>
+      </button>
 
       <!-- map label -->
       <div class="ui-map-label ui-map-label-white" style="top:30%;left:30%">
@@ -1868,6 +1881,27 @@
           console.log('localTimeSelect load');
         },
       }),
+
+      languageSelect: new UX.Dropdown({
+        id: 'languageSelect',
+        ps: 'bc',
+        src: '../dropdown/languageSelect.html',
+        srcCallback: () => {
+          const panel = document.querySelector('[data-dropdown-panel="languageSelect"]');
+          const btnText = document.querySelector('[data-dropdown-button="languageSelect"] .btn-text');
+          if (panel && btnText) {
+            panel.querySelectorAll('input[name="radio-languageSelect"]').forEach(radio => {
+              radio.addEventListener('change', (e) => {
+                const label = panel.querySelector(`label[for="${e.target.id}"]`);
+                if (label) {
+                  btnText.textContent = label.textContent.trim();
+                }
+                UI.map.control.languageSelect.hide();
+              });
+            });
+          }
+        }
+      }),
     }
     UI.map.control.option1.init();
     UI.map.control.option2.init();
@@ -1883,6 +1917,7 @@
     UI.map.control.localOption3.init();
     UI.map.control.localOption4.init();
     UI.map.control.localTimeSelect.init();
+    UI.map.control.languageSelect.init();
 
     // 좌우측 색상표 드래그 영역 사용여부???
     // UI.exe.rangeDual = {
