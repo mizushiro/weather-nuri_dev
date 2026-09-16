@@ -40,7 +40,8 @@ export default class TimeTimeline {
       ? document.querySelector(this.containerSelector) 
       : this.containerSelector;
 
-    this.type = options.type || (this.wrap ? this.wrap.getAttribute('data-type') : null);
+    this.rawType = options.type || (this.wrap ? this.wrap.getAttribute('data-type') : null);
+    this.type = this.rawType;
     this.data = options.data || [];
     this.autoPlayInterval = options.interval || 1000;
     this.onChange = options.onChange || function() {};
@@ -56,26 +57,65 @@ export default class TimeTimeline {
     this.playTimer = null;
     this.isPlaying = false;
 
-    // 드래그 스크롤 상태
+    // 드래그 및 터치 스크롤 상태
     this.isMouseDown = false;
+    this.isTouching = false;
     this.startX = 0;
     this.scrollLeftPos = 0;
     this.dragDistance = 0;
+    this.scrollEndTimer = null;
+
+    // 프로그래밍 방식 스크롤 중 스크롤 이벤트 간섭 방지 플래그
+    this._isProgrammaticScrolling = false;
+    this._programmaticScrollTimer = null;
+
+    // 이벤트 바인딩 핸들러 참조
+    this._boundResizeHandler = this._handleResize.bind(this);
+    this._boundScrollHandler = this._handleScroll.bind(this);
 
     if (this.wrap) {
       // type 지정 시 미리 data-type 속성을 세팅하고 렌더링 전 opacity 0 설정하여 깜빡임 방지
-      if (this.type) {
-        this.wrap.setAttribute('data-type', this.type);
-      }
+      this._applyTypeAttribute();
       this.wrap.style.opacity = '0';
       this.init();
     }
   }
 
+  /**
+   * 모바일 여부 판별 (1024px 미만일 때 모바일 모드)
+   */
+  isMobile() {
+    return typeof window !== 'undefined' && window.innerWidth < 1024;
+  }
+
+  /**
+   * range 모드 여부 반환 (모바일에서는 range 모드를 사용하지 않고 기본 모드로 동작)
+   */
+  isRange() {
+    if (this.isMobile()) return false;
+    return this.type === 'range';
+  }
+
+  /**
+   * DOM data-type 속성 갱신
+   */
+  _applyTypeAttribute() {
+    if (!this.wrap) return;
+    if (this.isRange()) {
+      this.wrap.setAttribute('data-type', 'range');
+    } else if (!this.isMobile() && this.rawType) {
+      this.wrap.setAttribute('data-type', this.rawType);
+    } else {
+      this.wrap.removeAttribute('data-type');
+    }
+  }
+
   init() {
+    this._applyTypeAttribute();
     this._buildFlatItems();
     this.render();
     this._bindEvents();
+    this._updateMobilePadding();
     
     // 초기 선택 항목 활성화 및 스크롤
     if (this.flatItems.length > 0) {
@@ -83,15 +123,16 @@ export default class TimeTimeline {
       if (initialFlatIndex < 0) initialFlatIndex = 0;
 
       // range 타입인 경우 초기 선택 항목이 날짜의 첫시간(timeIndex 0)이면 그다음 시간으로 자동 조정
-      if (this.type === 'range' && this.flatItems[initialFlatIndex] && this.flatItems[initialFlatIndex].timeIndex === 0) {
+      if (this.isRange() && this.flatItems[initialFlatIndex] && this.flatItems[initialFlatIndex].timeIndex === 0) {
         initialFlatIndex = this._getNextPlayIndex(initialFlatIndex - 1);
       }
 
-      this.selectByFlatIndex(initialFlatIndex >= 0 ? initialFlatIndex : 0, false);
+      this.selectByFlatIndex(initialFlatIndex >= 0 ? initialFlatIndex : 0, false, true, false);
     }
 
     // 렌더링 및 초기 스타일 설정 완료 후 opacity 1로 전환하여 깜빡임 제거
     requestAnimationFrame(() => {
+      this._updateMobilePadding();
       if (this.wrap) {
         this.wrap.style.opacity = '1';
       }
@@ -115,7 +156,7 @@ export default class TimeTimeline {
           day: dayData.day,
           dayLabel: formattedLabel,
           time: timeStr,
-          timeLabel: `${timeStr}시`
+          timeLabel: `${timeStr}${this.isMobile() ? ':00' : '시'}`
         });
       });
     });
@@ -129,11 +170,15 @@ export default class TimeTimeline {
 
     this.wrap.classList.add('time-timeline');
     this.wrap.setAttribute('data-time-timeline', this.id);
-    if (this.type) {
-      this.wrap.setAttribute('data-type', this.type);
-    }
+    this._applyTypeAttribute();
 
     let html = `
+      <!-- 모바일 중앙 선택 표시 인디케이터 (파란색 박스 & 가이드 라인) -->
+      <div class="timeline-center-indicator" aria-hidden="true">
+        <div class="timeline-selected-bubble">00:00</div>
+        <div class="timeline-center-line"></div>
+      </div>
+
       <!-- 상단 컨트롤러 바 -->
       <div class="timeline-control-bar">
         <div class="timeline-player-group">
@@ -147,6 +192,7 @@ export default class TimeTimeline {
           <button type="button" class="btn-timeline-control btn-next-day" aria-label="다음 날짜" title="다음 날짜 이동">
             <i class="icon-aspect-control-next" data-size="20"></i>
           </button>
+          <span class="timeline-current-date-text"></span>
         </div>
       </div>
 
@@ -197,11 +243,11 @@ export default class TimeTimeline {
       times.forEach((timeStr, timeIdx) => {
         html += `
           <button type="button" 
-                  class="timeline-time-btn" 
-                  data-day-index="${dayIdx}" 
-                  data-time-index="${timeIdx}" 
-                  data-time="${timeStr}">
-            <span class="time-text">${timeStr}시</span>
+          class="timeline-time-btn" 
+          data-day-index="${dayIdx}" 
+          data-time-index="${timeIdx}" 
+          data-time="${timeStr}">
+            <span class="time-text">${timeStr}${this.isMobile() ? ':00' : '시'}</span>
           </button>
         `;
       });
@@ -222,6 +268,10 @@ export default class TimeTimeline {
 
     // 주요 요소 참조
     this.scrollArea = this.wrap.querySelector('.timeline-scroll-area');
+    this.track = this.wrap.querySelector('.timeline-track');
+    this.centerIndicator = this.wrap.querySelector('.timeline-center-indicator');
+    this.selectedBubble = this.wrap.querySelector('.timeline-selected-bubble');
+    this.currentDateText = this.wrap.querySelector('.timeline-current-date-text');
     this.playBtn = this.wrap.querySelector('.btn-play-toggle');
     this.iconPlay = this.wrap.querySelector('.icon-play');
     this.iconPause = this.wrap.querySelector('.icon-pause');
@@ -240,7 +290,8 @@ export default class TimeTimeline {
     // 1. 시간 버튼 클릭 이벤트
     const timeBtns = this.wrap.querySelectorAll('.timeline-time-btn');
     timeBtns.forEach((btn) => {
-      btn.addEventListener('click', (e) => {
+      btn.addEventListener('click', () => {
+        if (this.isMobile()) return; // 모바일에서는 클릭 이벤트 차단
         if (this.dragDistance > 5) return; // 드래그 시 클릭 무시
         const dayIdx = parseInt(btn.getAttribute('data-day-index'), 10);
         const timeIdx = parseInt(btn.getAttribute('data-time-index'), 10);
@@ -283,6 +334,7 @@ export default class TimeTimeline {
         this.scrollArea.classList.add('is-dragging');
         this.startX = e.pageX - this.scrollArea.offsetLeft;
         this.scrollLeftPos = this.scrollArea.scrollLeft;
+        clearTimeout(this.scrollEndTimer);
       });
 
       window.addEventListener('mousemove', (e) => {
@@ -297,8 +349,175 @@ export default class TimeTimeline {
         if (this.isMouseDown) {
           this.isMouseDown = false;
           this.scrollArea.classList.remove('is-dragging');
+
+          if (this.isMobile()) {
+            clearTimeout(this.scrollEndTimer);
+            this.scrollEndTimer = setTimeout(() => {
+              this._snapToNearestTime();
+            }, 80);
+          }
         }
       });
+
+      // 6. 모바일 터치 이벤트 핸들링
+      this.scrollArea.addEventListener('touchstart', () => {
+        this.isTouching = true;
+        clearTimeout(this.scrollEndTimer);
+      }, { passive: true });
+
+      this.scrollArea.addEventListener('touchend', () => {
+        this.isTouching = false;
+        if (this.isMobile()) {
+          clearTimeout(this.scrollEndTimer);
+          this.scrollEndTimer = setTimeout(() => {
+            this._snapToNearestTime();
+          }, 80);
+        }
+      }, { passive: true });
+
+      this.scrollArea.addEventListener('touchcancel', () => {
+        this.isTouching = false;
+        if (this.isMobile()) {
+          clearTimeout(this.scrollEndTimer);
+          this.scrollEndTimer = setTimeout(() => {
+            this._snapToNearestTime();
+          }, 80);
+        }
+      }, { passive: true });
+
+      // 7. 스크롤 영역 scroll 이벤트 리스너 (모바일 실시간 중앙 선택 및 스냅)
+      this.scrollArea.addEventListener('scroll', this._boundScrollHandler, { passive: true });
+    }
+
+    // 8. 윈도우 리사이즈 이벤트 (모바일/데스크톱 전환 대응)
+    window.addEventListener('resize', this._boundResizeHandler);
+  }
+
+  /**
+   * 스크롤 이벤트 핸들러 (모바일 화면 중앙 기준 선택 및 스냅 타이머)
+   */
+  _handleScroll() {
+    if (!this.isMobile()) return;
+    if (this._isProgrammaticScrolling) return;
+
+    // 1. 현재 화면 중앙에 가장 가까운 시각 항목을 실시간 선택
+    const closestIdx = this._getClosestFlatIndexToCenter();
+    if (closestIdx >= 0 && closestIdx !== this.currentFlatIndex) {
+      this.selectByFlatIndex(closestIdx, true, false);
+    }
+
+    // 2. 스크롤 멈춤 감지 후 가까운 위치값으로 부드럽게 스냅(정렬)
+    clearTimeout(this.scrollEndTimer);
+    this.scrollEndTimer = setTimeout(() => {
+      if (this.isMobile() && !this.isMouseDown && !this.isTouching) {
+        this._snapToNearestTime();
+      }
+    }, 100);
+  }
+
+  /**
+   * 화면/스크롤 컨테이너의 중앙 지점에 가장 가까운 flatItems 인덱스 반환
+   */
+  _getClosestFlatIndexToCenter() {
+    if (!this.scrollArea || this.flatItems.length === 0) return 0;
+
+    const containerRect = this.scrollArea.getBoundingClientRect();
+    const centerPoint = containerRect.left + (containerRect.width / 2);
+
+    const timeBtns = this.wrap.querySelectorAll('.timeline-time-btn');
+    let closestIndex = -1;
+    let minDistance = Infinity;
+
+    timeBtns.forEach((btn) => {
+      const dayIdx = parseInt(btn.getAttribute('data-day-index'), 10);
+      const timeIdx = parseInt(btn.getAttribute('data-time-index'), 10);
+      const flatIdx = this._getFlatIndex(dayIdx, timeIdx);
+      if (flatIdx < 0) return;
+
+      // Range 타입인 경우 각 날짜의 첫 시간(timeIndex 0)은 선택 대상에서 제외
+      if (this.isRange() && timeIdx === 0) return;
+
+      const btnRect = btn.getBoundingClientRect();
+      const btnCenter = btnRect.left + (btnRect.width / 2);
+      const dist = Math.abs(btnCenter - centerPoint);
+
+      if (dist < minDistance) {
+        minDistance = dist;
+        closestIndex = flatIdx;
+      }
+    });
+
+    return closestIndex >= 0 ? closestIndex : (this.currentFlatIndex || 0);
+  }
+
+  /**
+   * 애매한 위치에 멈췄을 때 가장 가까운 설정된 시간 위치로 스냅(자동 정렬)
+   */
+  _snapToNearestTime() {
+    if (!this.isMobile() || !this.scrollArea || this.flatItems.length === 0) return;
+    if (this._isProgrammaticScrolling || this.isMouseDown || this.isTouching) return;
+
+    const closestIdx = this._getClosestFlatIndexToCenter();
+    if (closestIdx >= 0) {
+      const targetItem = this.flatItems[closestIdx];
+      const targetBtn = this.wrap.querySelector(
+        `.timeline-time-btn[data-day-index="${targetItem.dayIndex}"][data-time-index="${targetItem.timeIndex}"]`
+      );
+
+      if (targetBtn) {
+        const containerRect = this.scrollArea.getBoundingClientRect();
+        const btnRect = targetBtn.getBoundingClientRect();
+        const containerCenter = containerRect.left + (containerRect.width / 2);
+        const btnCenter = btnRect.left + (btnRect.width / 2);
+        const diff = Math.abs(btnCenter - containerCenter);
+
+        // 애매한 위치(중앙 오차 1.5px 초과)인 경우 가까운 위치값으로 스냅 이동
+        if (diff > 1.5) {
+          this.selectByFlatIndex(closestIdx, true, true, true);
+        } else if (closestIdx !== this.currentFlatIndex) {
+          this.selectByFlatIndex(closestIdx, true, false);
+        }
+      }
+    }
+  }
+
+  /**
+   * 모바일 모드일 때 첫 항목과 마지막 항목도 화면 중앙에 위치할 수 있도록 트랙 좌우 여백 계산
+   */
+  _updateMobilePadding() {
+    if (!this.track || !this.scrollArea) return;
+    if (this.isMobile()) {
+      const firstBtn = this.wrap.querySelector('.timeline-time-btn');
+      const btnWidth = firstBtn ? firstBtn.getBoundingClientRect().width : 56;
+      const pad = Math.max(0, (this.scrollArea.clientWidth / 2) - (btnWidth / 2));
+      this.track.style.paddingLeft = `${pad}px`;
+      this.track.style.paddingRight = `${pad}px`;
+    } else {
+      this.track.style.paddingLeft = '';
+      this.track.style.paddingRight = '';
+    }
+  }
+
+  /**
+   * 화면 리사이즈 핸들러
+   */
+  _handleResize() {
+    const mobile = this.isMobile();
+    if (this.wrap) {
+      this.wrap.classList.toggle('is-mobile-timeline', mobile);
+    }
+    this._applyTypeAttribute();
+    this._updateMobilePadding();
+
+    // 현재 선택된 요소를 다시 중앙 정렬
+    if (mobile && typeof this.currentFlatIndex === 'number' && this.flatItems[this.currentFlatIndex]) {
+      const item = this.flatItems[this.currentFlatIndex];
+      const targetBtn = this.wrap.querySelector(
+        `.timeline-time-btn[data-day-index="${item.dayIndex}"][data-time-index="${item.timeIndex}"]`
+      );
+      if (targetBtn) {
+        this.scrollCenter(targetBtn, false);
+      }
     }
   }
 
@@ -320,7 +539,7 @@ export default class TimeTimeline {
       nextIdx = 0;
     }
 
-    if (this.type === 'range') {
+    if (this.isRange()) {
       let loopCount = 0;
       while (this.flatItems[nextIdx] && this.flatItems[nextIdx].timeIndex === 0 && loopCount < this.flatItems.length) {
         nextIdx++;
@@ -340,20 +559,37 @@ export default class TimeTimeline {
   selectTime(dayIdx, timeIdx, triggerCallback = true) {
     const flatIdx = this._getFlatIndex(dayIdx, timeIdx);
     if (flatIdx >= 0) {
-      this.selectByFlatIndex(flatIdx, triggerCallback);
+      this.selectByFlatIndex(flatIdx, triggerCallback, true, true);
     }
   }
 
   /**
    * 플랫 인덱스 기반으로 선택 및 UI 업데이트
+   * @param {number} flatIdx - 선택할 flat index
+   * @param {boolean} triggerCallback - onChange 콜백 호출 여부
+   * @param {boolean} shouldScroll - 선택 항목을 중앙으로 스크롤할지 여부 (수동 스크롤 중에는 false)
+   * @param {boolean} smooth - 부드러운 스크롤 애니메이션 여부
    */
-  selectByFlatIndex(flatIdx, triggerCallback = true) {
+  selectByFlatIndex(flatIdx, triggerCallback = true, shouldScroll = true, smooth = true) {
     if (flatIdx < 0 || flatIdx >= this.flatItems.length) return;
 
     this.currentFlatIndex = flatIdx;
     const targetItem = this.flatItems[flatIdx];
     this.selectedDayIndex = targetItem.dayIndex;
     this.selectedTimeIndex = targetItem.timeIndex;
+
+    // 모바일 파란색 박스 시간 표시 업데이트 (예: 15:00)
+    if (this.selectedBubble) {
+      const displayTime = targetItem.time.includes(':')
+        ? targetItem.time
+        : `${String(targetItem.time).padStart(2, '0')}:00`;
+      this.selectedBubble.textContent = displayTime;
+    }
+
+    // 모바일 컨트롤바 날짜 텍스트 업데이트 (예: 09. 22 일)
+    if (this.currentDateText) {
+      this.currentDateText.textContent = targetItem.dayLabel;
+    }
 
     // 모든 시각 버튼 스타일 업데이트 (is-selected, is-past)
     const timeBtns = this.wrap.querySelectorAll('.timeline-time-btn');
@@ -386,8 +622,8 @@ export default class TimeTimeline {
     });
 
     // 선택된 버튼을 스크롤 영역의 중앙으로 이동
-    if (targetBtnEl) {
-      this.scrollCenter(targetBtnEl);
+    if (shouldScroll && targetBtnEl) {
+      this.scrollCenter(targetBtnEl, smooth);
     }
 
     // onChange 콜백 실행
@@ -407,8 +643,14 @@ export default class TimeTimeline {
   /**
    * 지정된 버튼 요소를 스크롤 컨테이너의 중앙에 위치하도록 스크롤
    */
-  scrollCenter(btnEl) {
+  scrollCenter(btnEl, smooth = true) {
     if (!btnEl || !this.scrollArea) return;
+
+    this._isProgrammaticScrolling = true;
+    clearTimeout(this._programmaticScrollTimer);
+    this._programmaticScrollTimer = setTimeout(() => {
+      this._isProgrammaticScrolling = false;
+    }, smooth ? 350 : 50);
 
     requestAnimationFrame(() => {
       const containerRect = this.scrollArea.getBoundingClientRect();
@@ -423,7 +665,7 @@ export default class TimeTimeline {
 
       this.scrollArea.scrollTo({
         left: Math.max(0, targetScrollLeft),
-        behavior: 'smooth'
+        behavior: smooth ? 'smooth' : 'auto'
       });
     });
   }
@@ -451,14 +693,14 @@ export default class TimeTimeline {
     if (this.playBtn) this.playBtn.classList.add('is-playing');
 
     // range 타입인 경우 현재 위치가 해당 날짜의 첫시간(timeIndex 0)이면 그다음 시간으로 선택 조정
-    if (this.type === 'range' && this.flatItems[this.currentFlatIndex] && this.flatItems[this.currentFlatIndex].timeIndex === 0) {
+    if (this.isRange() && this.flatItems[this.currentFlatIndex] && this.flatItems[this.currentFlatIndex].timeIndex === 0) {
       const nextValidIdx = this._getNextPlayIndex(this.currentFlatIndex - 1);
-      this.selectByFlatIndex(nextValidIdx);
+      this.selectByFlatIndex(nextValidIdx, true, true, true);
     }
 
     this.playTimer = setInterval(() => {
       const nextFlatIdx = this._getNextPlayIndex(this.currentFlatIndex);
-      this.selectByFlatIndex(nextFlatIdx);
+      this.selectByFlatIndex(nextFlatIdx, true, true, true);
     }, this.autoPlayInterval);
   }
 
@@ -506,7 +748,7 @@ export default class TimeTimeline {
    */
   prevDay() {
     const prevDayIdx = Math.max(0, this.selectedDayIndex - 1);
-    const targetTimeIdx = (this.type === 'range') ? 1 : 0;
+    const targetTimeIdx = this.isRange() ? 1 : 0;
     this.selectTime(prevDayIdx, targetTimeIdx);
   }
 
@@ -516,7 +758,7 @@ export default class TimeTimeline {
   nextDay() {
     const maxDayIdx = this.data.length - 1;
     const nextDayIdx = Math.min(maxDayIdx, this.selectedDayIndex + 1);
-    const targetTimeIdx = (this.type === 'range') ? 1 : 0;
+    const targetTimeIdx = this.isRange() ? 1 : 0;
     this.selectTime(nextDayIdx, targetTimeIdx);
   }
 
@@ -536,6 +778,14 @@ export default class TimeTimeline {
    */
   destroy() {
     this.pause();
+    clearTimeout(this.scrollEndTimer);
+    clearTimeout(this._programmaticScrollTimer);
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this._boundResizeHandler);
+    }
+    if (this.scrollArea) {
+      this.scrollArea.removeEventListener('scroll', this._boundScrollHandler);
+    }
     if (this.wrap) {
       this.wrap.innerHTML = '';
     }
