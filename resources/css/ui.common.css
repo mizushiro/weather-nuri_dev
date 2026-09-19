@@ -487,7 +487,7 @@ input:-moz-placeholder {color:#949494}
 [data-item-size="58"] .form-fake-label {min-width:5.8rem}
 [data-item-size="42"] .form-fake-label {min-width:4.2rem}
 [data-item-size="46"] .form-fake-label {min-width:4.6rem}
-[data-form-style="round-box"] .form-fake-label {border-radius:99em;height:100%;color:#6D758F;font-weight:700}
+[data-form-style="round-box"] .form-fake-label {border-radius:99em;height:100%;color:#6D758F;font-weight:700;padding:0 1.6rem;}
 [data-form-h="48"] [data-form-style="round-box"] .form-fake-label {font-size:1.6rem}
 [data-form-style="round-box"] .form-fake-input:checked + .form-fake-label {background-color:var(--primary);color:#fff}
 [data-form-style="round-box"] .form-fake-input:disabled + .form-fake-label {color:#545F7D}

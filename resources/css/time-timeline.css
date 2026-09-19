@@ -27,6 +27,7 @@
   border-bottom: 1px solid #0f172a;
   height: 4.3rem;
   padding: 0 2rem;
+  gap:2.4rem;
 }
 
 .time-timeline .timeline-player-group {
@@ -346,6 +347,10 @@
 .time-timeline .timeline-current-date-text {
   display: none;
 }
+/* 
+.time-timeline .timeline-info-text {
+  display: none;
+} */
 
 @media (max-width:1023px) {
   .time-timeline {
@@ -368,7 +373,23 @@
     vertical-align: middle;
     padding-top: 0.3rem;
     border-left: 0.2rem dotted #000;
+  }
 
+  .time-timeline .timeline-info-text {
+    display: flex;
+    color: #ffffff;
+    font-size: 1.2rem;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    padding-right: 1.4rem;
+    text-align: left;
+    word-break: keep-all;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+    /* white-space: nowrap; */
+    pointer-events: auto;
+    max-width: 50%;
   }
 
   .time-timeline .btn-prev-day,
@@ -561,6 +582,7 @@
   .time-timeline .timeline-player-group {
     gap: 0.6rem;
     padding-left:0.4rem;
+    flex-shrink: 0;
   }
   .time-timeline .btn-timeline-control:hover {
     background-color: transparent;
@@ -582,6 +604,315 @@
     justify-content: center;
     min-width: 7.4rem;
     border-radius: 0.8rem 0.8rem 0 0;
-   
+  }
+}
+
+/* ==========================================================================
+   Programmatic / Container-based Mobile Mode (.is-mobile-timeline)
+   - 디바이스 미리보기 프레임 및 컨테이너 반응형 지원
+   ========================================================================== */
+.time-timeline.is-mobile-timeline {
+  overflow: visible;
+}
+.time-timeline.is-mobile-timeline .timeline-center-indicator {
+  display: flex;
+  top: -3.2rem;
+  height: calc(100% + 3.2rem);
+}
+.time-timeline.is-mobile-timeline .timeline-selected-bubble {
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 7.4rem;
+  border-radius: 0.8rem 0.8rem 0 0;
+}
+.time-timeline.is-mobile-timeline .timeline-current-date-text {
+  display: inline-flex;
+  align-items: center;
+  color: #ffffff;
+  font-size: 1.8rem;
+  height: 4.6rem;
+  font-weight: 700;
+  padding-left: 1.4rem;
+  letter-spacing: -0.02em;
+  vertical-align: middle;
+  padding-top: 0.3rem;
+  border-left: 0.2rem dotted #000;
+}
+.time-timeline.is-mobile-timeline .timeline-info-text {
+  display: flex;
+  color: #ffffff;
+  font-size: 1.2rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  padding-right: 1.4rem;
+  text-align: left;
+  word-break: keep-all;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+  pointer-events: none;
+  max-width: 50%;
+}
+.time-timeline.is-mobile-timeline .btn-prev-day,
+.time-timeline.is-mobile-timeline .btn-next-day {
+  display: none;
+}
+.time-timeline.is-mobile-timeline .timeline-control-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5rem;
+  border-bottom: 0.4rem solid #000;
+  padding: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+.time-timeline.is-mobile-timeline .timeline-main-body {
+  padding: 0;
+  background: rgba(24, 29, 43, 0.9);
+}
+.time-timeline.is-mobile-timeline .timeline-scroll-area {
+  padding-top: 5rem;
+}
+.time-timeline.is-mobile-timeline .timeline-fixed-header,
+.time-timeline.is-mobile-timeline .timeline-day-header,
+.time-timeline.is-mobile-timeline .timeline-scroll-nav {
+  display: none;
+}
+.time-timeline.is-mobile-timeline .timeline-day-group {
+  background: transparent;
+  border-right: 0.2rem dotted #000;
+}
+.time-timeline.is-mobile-timeline .timeline-time-row {
+  height: 3.2rem;
+  padding: 0;
+}
+.time-timeline.is-mobile-timeline .timeline-time-btn {
+  background: transparent;
+  color: #ffffff;
+  min-width: 5.6rem;
+  flex: 0 0 5.6rem;
+  pointer-events: none;
+}
+.time-timeline.is-mobile-timeline .timeline-time-btn .time-text {
+  font-weight: 400 !important;
+  font-size: 1.2rem !important;
+  color: #fff !important;
+}
+.time-timeline.is-mobile-timeline .timeline-time-btn.is-selected {
+  background: transparent !important;
+}
+.time-timeline.is-mobile-timeline .timeline-time-btn.is-selected .time-text {
+  color: #0475F4;
+  font-weight: 800;
+}
+.time-timeline.is-mobile-timeline .timeline-time-btn.is-past,
+.time-timeline.is-mobile-timeline .timeline-time-btn.is-past:hover,
+.time-timeline.is-mobile-timeline .timeline-time-btn:hover {
+  background-color: transparent !important;
+  color: #ffffff;
+}
+.time-timeline.is-mobile-timeline .btn-timeline-control {
+  width: 4.6rem;
+  height: 4rem;
+  pointer-events: auto;
+}
+.time-timeline.is-mobile-timeline .timeline-player-group {
+  gap: 0.6rem;
+  padding-left: 0.4rem;
+  flex-shrink: 0;
+}
+.time-timeline.is-mobile-timeline .btn-timeline-control:hover {
+  background-color: transparent;
+}
+[data-unit="day"].time-timeline.is-mobile-timeline .btn-prev-day,
+[data-unit="day"].time-timeline.is-mobile-timeline .btn-next-day,
+[data-type="day"].time-timeline.is-mobile-timeline .btn-prev-day,
+[data-type="day"].time-timeline.is-mobile-timeline .btn-next-day {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Day Unit Timeline (data-unit="day" / data-type="day")
+   - 날짜 단위 표시 및 최대 3일치 균등 분할
+   - 클릭 이벤트로 선택 지원
+   - 상단 컨트롤바 & 하단 날짜 버튼 행 레이아웃
+   ========================================================================== */
+
+[data-unit="day"].time-timeline,
+[data-type="day"].time-timeline {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 1. 상단 컨트롤러 바 */
+[data-unit="day"].time-timeline .timeline-control-bar,
+[data-type="day"].time-timeline .timeline-control-bar {
+  display: flex !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(24, 29, 43, 0.9);
+  color: #f8fafc;
+  border-bottom: 0.4rem solid #000;
+  height: 5rem;
+  padding: 0 1.4rem 0 0.8rem;
+  gap: 1.2rem;
+  z-index: 10;
+  pointer-events: auto !important;
+}
+
+[data-unit="day"].time-timeline .timeline-player-group,
+[data-type="day"].time-timeline .timeline-player-group {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+[data-unit="day"].time-timeline .btn-timeline-control,
+[data-type="day"].time-timeline .btn-timeline-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.6rem;
+  height: 4rem;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  pointer-events: auto !important;
+}
+
+[data-unit="day"].time-timeline .btn-timeline-control:hover,
+[data-type="day"].time-timeline .btn-timeline-control:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+[data-unit="day"].time-timeline .timeline-info-text,
+[data-type="day"].time-timeline .timeline-info-text {
+  display: flex !important;
+  color: #ffffff;
+  font-size: 1.2rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  padding-right: 0.6rem;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: right;
+  word-break: keep-all;
+  max-width: 65%;
+  pointer-events: auto !important;
+}
+
+/* 2. 하단 메인 바디 & 날짜 행 */
+[data-unit="day"].time-timeline .timeline-main-body,
+[data-type="day"].time-timeline .timeline-main-body,
+[data-unit="day"].time-timeline .timeline-day-unit-body,
+[data-type="day"].time-timeline .timeline-day-unit-body {
+  width: 100%;
+  background: rgba(24, 29, 43, 0.9);
+  padding: 0 !important;
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+[data-unit="day"].time-timeline .timeline-day-row,
+[data-type="day"].time-timeline .timeline-day-row {
+  display: flex;
+  width: 100%;
+  height: 4.8rem;
+  align-items: stretch;
+}
+
+/* 3. 날짜 버튼 (최대 3일치 균등 분할 및 점선 구분선) */
+[data-unit="day"].time-timeline .timeline-day-btn,
+[data-type="day"].time-timeline .timeline-day-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-right: 0.2rem dotted #000;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto !important;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+[data-unit="day"].time-timeline .timeline-day-btn:last-child,
+[data-type="day"].time-timeline .timeline-day-btn:last-child {
+  border-right: none;
+}
+
+[data-unit="day"].time-timeline .timeline-day-btn:hover,
+[data-type="day"].time-timeline .timeline-day-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* 날짜 텍스트 (기본 흰색) */
+[data-unit="day"].time-timeline .timeline-day-btn .day-btn-text,
+[data-type="day"].time-timeline .timeline-day-btn .day-btn-text {
+  color: #ffffff;
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  transition: color 0.15s ease, font-weight 0.15s ease;
+}
+
+/* 선택된 날짜 (파란색 하이라이트 & 굵은 글씨) */
+[data-unit="day"].time-timeline .timeline-day-btn.is-selected,
+[data-type="day"].time-timeline .timeline-day-btn.is-selected {
+  background: transparent;
+}
+
+[data-unit="day"].time-timeline .timeline-day-btn.is-selected .day-btn-text,
+[data-type="day"].time-timeline .timeline-day-btn.is-selected .day-btn-text {
+  color: #0475F4;
+  font-weight: 700;
+}
+
+/* 4. 불필요한 요소 숨김 처리 */
+[data-unit="day"].time-timeline .timeline-center-indicator,
+[data-type="day"].time-timeline .timeline-center-indicator,
+[data-unit="day"].time-timeline .timeline-fixed-header,
+[data-type="day"].time-timeline .timeline-fixed-header,
+[data-unit="day"].time-timeline .timeline-scroll-nav,
+[data-type="day"].time-timeline .timeline-scroll-nav,
+[data-unit="day"].time-timeline .timeline-current-date-text,
+[data-type="day"].time-timeline .timeline-current-date-text {
+  display: none !important;
+}
+
+/* 5. 모바일/작은 화면 반응형 미세 조정 */
+@media (max-width: 1023px) {
+  [data-unit="day"].time-timeline .btn-prev-day,
+  [data-unit="day"].time-timeline .btn-next-day,
+  [data-type="day"].time-timeline .btn-prev-day,
+  [data-type="day"].time-timeline .btn-next-day {
+    display: none !important;
+  }
+}
+
+@media (max-width: 380px) {
+  [data-unit="day"].time-timeline .timeline-day-btn .day-btn-text,
+  [data-type="day"].time-timeline .timeline-day-btn .day-btn-text {
+    font-size: 1.5rem;
   }
 }

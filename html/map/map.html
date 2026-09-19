@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ko">
 
 <head>
@@ -76,19 +76,26 @@
           </div>
         </div>
         <div class="full-map-setting-area">
-          <div class="form-fake-group-flex" data-form-style="round-box" data-form-h="48" data-item-size="88"
+          <div class="form-fake-group-flex" data-form-style="round-box" data-form-h="48" 
             data-view="mobile-hidden">
             <div class="form-fake-button">
               <input type="radio" id="mapTypeSelect-1" name="mapTypeSelect" value="world" class="form-fake-input"
                 checked>
               <label for="mapTypeSelect-1" class="form-fake-label">
-                전지구
+                수치모델
               </label>
             </div>
             <div class="form-fake-button">
-              <input type="radio" id="mapTypeSelect-2" name="mapTypeSelect" value="korea" class="form-fake-input">
+              <input type="radio" id="mapTypeSelect-2" name="mapTypeSelect" value="world" class="form-fake-input"
+                checked>
               <label for="mapTypeSelect-2" class="form-fake-label">
-                대한민국
+                관측
+              </label>
+            </div>
+            <div class="form-fake-button">
+              <input type="radio" id="mapTypeSelect-3" name="mapTypeSelect" value="korea" class="form-fake-input">
+              <label for="mapTypeSelect-3" class="form-fake-label">
+                예보
               </label>
             </div>
           </div>
@@ -309,7 +316,7 @@
           </button>
         </div>-->
           <button type="button" class="btn-base mt-14" data-color="white" data-shadow data-size="38" data-round="4"
-            data-type="icon" data-toggle-object="tool-legend2" aria-label="범례">
+            data-type="icon" data-toggle-object="tool-legend2" aria-label="범례" data-view="mobile-hidden">
             <i class="icon-aspect-map-control8" data-size="24"></i>
           </button>
 
@@ -397,6 +404,42 @@
               </div>
               <span class="legend-unit">°C</span>
             </div>
+            <!-- <div class="legend-gauge small" id="compare-legend">
+              <div class="legend-gauge-group">
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#FFFFFF"></i>
+                  <span class="legend-gauge-num">강수현상없음</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#7FD186"></i>
+                  <span class="legend-gauge-num">비</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#67C1E2"></i>
+                  <span class="legend-gauge-num">비 · 눈</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#8D8EE3"></i>
+                  <span class="legend-gauge-num">눈</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#F5C242"></i>
+                  <span class="legend-gauge-num">소나기</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#C6F089"></i>
+                  <span class="legend-gauge-num">빗방울</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#A5D8D6"></i>
+                  <span class="legend-gauge-num">빗방울 · 눈날림</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#A5D8D6"></i>
+                  <span class="legend-gauge-num">눈날림</span>
+                </div>
+              </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -481,7 +524,7 @@
               </div>
             </div>
 
-            <div class="legend-gauge" id="main-legend">
+            <!-- <div class="legend-gauge" id="main-legend">
               <div class="legend-gauge-group">
                 <div class="legend-gauge-item">
                   <i class="legend-gauge-color" style="background-color:#371415"></i>
@@ -545,6 +588,42 @@
                 </div>
               </div>
               <span class="legend-unit">°C</span>
+            </div> -->
+            <div class="legend-gauge small" id="compare-legend">
+              <div class="legend-gauge-group">
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#FFFFFF"></i>
+                  <span class="legend-gauge-num">강수현상없음</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#7FD186"></i>
+                  <span class="legend-gauge-num">비</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#67C1E2"></i>
+                  <span class="legend-gauge-num">비 · 눈</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#8D8EE3"></i>
+                  <span class="legend-gauge-num">눈</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#F5C242"></i>
+                  <span class="legend-gauge-num">소나기</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#C6F089"></i>
+                  <span class="legend-gauge-num">빗방울</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#A5D8D6"></i>
+                  <span class="legend-gauge-num">빗방울 · 눈날림</span>
+                </div>
+                <div class="legend-gauge-item">
+                  <i class="legend-gauge-color" style="background-color:#A5D8D6"></i>
+                  <span class="legend-gauge-num">눈날림</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1976,6 +2055,7 @@
       selectedDayIndex: 1,  // 초기 선택 날짜 인덱스
       selectedTimeIndex: 3, // 초기 선택 시간 인덱스 (09시)
       interval: 3000,       // 자동 플레이 간격 (1초)
+      text: '초단기예보:9월 18일 13시 20분, 단기예보: 9월 18일 11시',
       onChange: (info) => {
         console.log('Time Selected:', info);
         if (logDay) logDay.textContent = info.day;

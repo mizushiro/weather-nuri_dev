@@ -10,7 +10,7 @@
 .full-map-right-area,
 .full-map-bottom {z-index:2;}
 .full-map-area {width:100%;height:100%;}
-[data-toggle-target="map-compare"][data-toggle-state="selected"].full-map-left-area {top:auto;bottom:2rem}
+/* [data-toggle-target="map-compare"][data-toggle-state="selected"].full-map-left-area {top:auto;bottom:2rem} */
 [data-toggle-target="map-compare"][data-toggle-state="selected"] .map-options {display:none}
 .map-options [data-map]{flex-direction:column;gap:.6rem;}
 [data-map-select] [data-map="world"],
@@ -18,14 +18,13 @@
 [data-map-select="world"] [data-map="world"] {display:flex;}
 [data-map-select="local"] [data-map="local"] {display:flex;}
 .full-map-left-area .full-map-right-group2 {align-items:start;}
-.full-map-left-area .legend-gauge .legend-unit {left:auto;right:1.2rem}
 .ui-range.is-vertical .ui-range-txt {width:3.2rem;}
 .full-map-left-area .ui-range.is-vertical .ui-range-txt {top:calc(100% + 2.2rem);text-align:center;bottom:auto;}
 .full-map-left-area .ui-range.is-vertical .ui-range-txt::after {left:-.3rem;right:auto;transform:rotate(-45deg);}
 .full-map-left-area .legend-gauge,
 .full-map-left-area .rangedual-box,
 .full-map-left-area .legend-gauge-item {flex-direction:row-reverse;}
-.full-map-left-area .rangedual-box .legend-gauge-num {text-align:left;width:1.6rem}
+.full-map-left-area .rangedual-box .legend-gauge-num {text-align:left;margin:0 0.4rem 0 0}
 .full-map-left-area .full-map-right-group2,
 .full-map-top-area[data-toggle-target="map-compare"][data-toggle-state="selected"],
 .full-map-bottom-area[data-toggle-target="map-compare"][data-toggle-state="selected"],
@@ -119,7 +118,7 @@
 .time-range-day-item .day-today-badge {font-size:1rem;background-color:#FE5639;color:#fff;padding:0.1rem 0.5rem;border-radius:0.4rem;margin-top:0.2rem;font-weight:700;line-height:1.2;}
 
 @media (max-width:1023px) {
-  .full-map-bottom-area {padding-bottom:5rem;background-color:rgba(0, 0, 0, 0.9);}
+  .full-map-bottom-area {padding-bottom:5rem;}
   .timeRange{grid-template-columns:1fr;gap:0;width:100%;padding:0 2.6rem;align-items:start;border-radius:0;}
   .timeRange:before{content:"";position:absolute;top:0;left:0;right:0;height:0.6rem;background-color:#000;z-index:0;pointer-events:none;}
   .timeRange:after{content:"";position:absolute;top:0;left:0;width:1rem;height:0.6rem;background-color:#0475F4;z-index:0;pointer-events:none;}

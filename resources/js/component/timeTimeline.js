@@ -41,14 +41,19 @@ export default class TimeTimeline {
       : this.containerSelector;
 
     this.rawType = options.type || (this.wrap ? this.wrap.getAttribute('data-type') : null);
+    this.rawUnit = options.unit || (this.wrap ? this.wrap.getAttribute('data-unit') : null);
     this.type = this.rawType;
-    this.data = options.data || [];
+    this.unit = this.rawUnit || (this.rawType === 'day' ? 'day' : 'time');
+    this.data = this.isDayUnit() ? (options.data || []).slice(0, 3) : (options.data || []);
     this.autoPlayInterval = options.interval || 1000;
     this.onChange = options.onChange || function() {};
 
     // 선택 상태 관리
     this.selectedDayIndex = typeof options.selectedDayIndex === 'number' ? options.selectedDayIndex : 0;
     this.selectedTimeIndex = typeof options.selectedTimeIndex === 'number' ? options.selectedTimeIndex : 0;
+
+    // 안내/예보 텍스트 (모바일 버전 우측 표시 옵션)
+    this.text = this._formatText(options.text ?? options.infoText ?? (this.wrap ? this.wrap.getAttribute('data-text') : '') ?? '');
 
     // 플랫 항목 목록 (전체 시각 리스트)
     this.flatItems = [];
@@ -82,25 +87,61 @@ export default class TimeTimeline {
   }
 
   /**
-   * 모바일 여부 판별 (1024px 미만일 때 모바일 모드)
+   * 날짜 단위(day) 모드 여부 반환 (unit: 'day' 또는 type: 'day')
+   */
+  isDayUnit() {
+    return this.unit === 'day' || this.type === 'day' || this.rawType === 'day';
+  }
+
+  /**
+   * 모바일 여부 판별 (1024px 미만, 컨테이너 너비 1024px 미만, 또는 .is-mobile-timeline 지정 시 모바일 모드)
    */
   isMobile() {
+    if (this.wrap) {
+      if (this.wrap.classList.contains('is-mobile-timeline')) return true;
+      const previewWrapper = this.wrap.closest('.device-preview-frame, [data-device="mobile"]');
+      if (previewWrapper) return true;
+      if (this.wrap.clientWidth > 0 && this.wrap.clientWidth < 1024) return true;
+    }
     return typeof window !== 'undefined' && window.innerWidth < 1024;
+  }
+
+  /**
+   * 안내 텍스트 포맷팅 (문자열 줄바꿈 또는 배열을 <br>로 변환)
+   */
+  _formatText(text) {
+    if (text === null || text === undefined) return '';
+    if (Array.isArray(text)) {
+      return text.filter(item => item !== null && item !== undefined && item !== '').join('<br>');
+    }
+    if (typeof text === 'string') {
+      if (!text.includes('<br>') && !text.includes('<br/>') && text.includes('\n')) {
+        return text.trim().replace(/\r?\n/g, '<br>');
+      }
+      return text;
+    }
+    return String(text);
   }
 
   /**
    * range 모드 여부 반환 (모바일에서는 range 모드를 사용하지 않고 기본 모드로 동작)
    */
   isRange() {
+    if (this.isDayUnit()) return false;
     if (this.isMobile()) return false;
     return this.type === 'range';
   }
 
   /**
-   * DOM data-type 속성 갱신
+   * DOM data-type 및 data-unit 속성 갱신
    */
   _applyTypeAttribute() {
     if (!this.wrap) return;
+    if (this.isDayUnit()) {
+      this.wrap.setAttribute('data-unit', 'day');
+      this.wrap.setAttribute('data-type', 'day');
+      return;
+    }
     if (this.isRange()) {
       this.wrap.setAttribute('data-type', 'range');
     } else if (!this.isMobile() && this.rawType) {
@@ -115,7 +156,9 @@ export default class TimeTimeline {
     this._buildFlatItems();
     this.render();
     this._bindEvents();
-    this._updateMobilePadding();
+    if (!this.isDayUnit()) {
+      this._updateMobilePadding();
+    }
     
     // 초기 선택 항목 활성화 및 스크롤
     if (this.flatItems.length > 0) {
@@ -127,12 +170,14 @@ export default class TimeTimeline {
         initialFlatIndex = this._getNextPlayIndex(initialFlatIndex - 1);
       }
 
-      this.selectByFlatIndex(initialFlatIndex >= 0 ? initialFlatIndex : 0, false, true, false);
+      this.selectByFlatIndex(initialFlatIndex >= 0 ? initialFlatIndex : 0, false, !this.isDayUnit(), false);
     }
 
     // 렌더링 및 초기 스타일 설정 완료 후 opacity 1로 전환하여 깜빡임 제거
     requestAnimationFrame(() => {
-      this._updateMobilePadding();
+      if (!this.isDayUnit()) {
+        this._updateMobilePadding();
+      }
       if (this.wrap) {
         this.wrap.style.opacity = '1';
       }
@@ -140,10 +185,41 @@ export default class TimeTimeline {
   }
 
   /**
-   * 입력 데이터로부터 평탄화된 시각 리스트 생성
+   * 입력 데이터로부터 평탄화된 시각/날짜 리스트 생성 (날짜 단위 시 최대 3일치만 구성)
    */
   _buildFlatItems() {
     this.flatItems = [];
+
+    // 날짜 단위(day) 모드인 경우
+    if (this.isDayUnit()) {
+      const dayList = (this.data || []).slice(0, 3);
+      dayList.forEach((dayData, dayIdx) => {
+        let dayStr = '';
+        let customLabel = '';
+        if (typeof dayData === 'string' || typeof dayData === 'number') {
+          dayStr = String(dayData);
+        } else if (typeof dayData === 'object' && dayData !== null) {
+          dayStr = String(dayData.day || '');
+          customLabel = dayData.label || '';
+        }
+        const formattedLabel = customLabel || parseDayLabel(dayStr);
+        if (typeof dayData === 'object' && dayData !== null) {
+          dayData.formattedLabel = formattedLabel;
+        }
+
+        this.flatItems.push({
+          dayIndex: dayIdx,
+          timeIndex: 0,
+          day: dayStr,
+          dayLabel: formattedLabel,
+          time: '',
+          timeLabel: formattedLabel
+        });
+      });
+      return;
+    }
+
+    // 기존 시간 단위 타임라인 데이터 구성
     this.data.forEach((dayData, dayIdx) => {
       const formattedLabel = parseDayLabel(dayData.day);
       dayData.formattedLabel = formattedLabel; // 캐싱
@@ -172,6 +248,65 @@ export default class TimeTimeline {
     this.wrap.setAttribute('data-time-timeline', this.id);
     this._applyTypeAttribute();
 
+    // 날짜 단위(day) 모드인 경우
+    if (this.isDayUnit()) {
+      let dayButtonsHtml = '';
+      this.flatItems.forEach((item, idx) => {
+        const isSelected = idx === this.selectedDayIndex;
+        dayButtonsHtml += `
+          <button type="button" 
+            class="timeline-day-btn${isSelected ? ' is-selected' : ''}" 
+            data-day-index="${idx}" 
+            data-day="${item.day}"
+            aria-pressed="${isSelected ? 'true' : 'false'}">
+            <span class="day-btn-text">${item.dayLabel}</span>
+          </button>
+        `;
+      });
+
+      this.wrap.innerHTML = `
+        <!-- 상단 컨트롤러 바 -->
+        <div class="timeline-control-bar">
+          <div class="timeline-player-group">
+            <button type="button" class="btn-timeline-control btn-prev-day" aria-label="이전 날짜" title="이전 날짜 이동">
+              <i class="icon-aspect-control-prev" data-size="20"></i>
+            </button>
+            <button type="button" class="btn-timeline-control btn-play-toggle" aria-label="재생" title="자동 재생">
+              <i class="icon-aspect-control-play icon-play" data-size="20"></i>
+              <i class="icon-aspect-control-stop icon-pause" data-size="20" style="display:none;"></i>
+            </button>
+            <button type="button" class="btn-timeline-control btn-next-day" aria-label="다음 날짜" title="다음 날짜 이동">
+              <i class="icon-aspect-control-next" data-size="20"></i>
+            </button>
+          </div>
+          <div class="timeline-info-text"${!this.text ? ' style="display:none;"' : ''}>${this.text || ''}</div>
+        </div>
+
+        <!-- 메인 타임라인 바디 (날짜 단위) -->
+        <div class="timeline-main-body timeline-day-unit-body">
+          <div class="timeline-day-row">
+            ${dayButtonsHtml}
+          </div>
+        </div>
+      `;
+
+      // 주요 요소 참조
+      this.playBtn = this.wrap.querySelector('.btn-play-toggle');
+      this.iconPlay = this.wrap.querySelector('.icon-play');
+      this.iconPause = this.wrap.querySelector('.icon-pause');
+      this.prevDayBtn = this.wrap.querySelector('.btn-prev-day');
+      this.nextDayBtn = this.wrap.querySelector('.btn-next-day');
+      this.infoTextEl = this.wrap.querySelector('.timeline-info-text');
+      this.scrollArea = null;
+      this.track = null;
+      this.centerIndicator = null;
+      this.selectedBubble = null;
+      this.currentDateText = null;
+      this.scrollLeftBtn = null;
+      this.scrollRightBtn = null;
+      return;
+    }
+
     let html = `
       <!-- 모바일 중앙 선택 표시 인디케이터 (파란색 박스 & 가이드 라인) -->
       <div class="timeline-center-indicator" aria-hidden="true">
@@ -194,6 +329,7 @@ export default class TimeTimeline {
           </button>
           <span class="timeline-current-date-text"></span>
         </div>
+        <div class="timeline-info-text"${!this.text ? ' style="display:none;"' : ''}>${this.text || ''}</div>
       </div>
 
       <div class="timeline-scroll-nav">
@@ -272,6 +408,7 @@ export default class TimeTimeline {
     this.centerIndicator = this.wrap.querySelector('.timeline-center-indicator');
     this.selectedBubble = this.wrap.querySelector('.timeline-selected-bubble');
     this.currentDateText = this.wrap.querySelector('.timeline-current-date-text');
+    this.infoTextEl = this.wrap.querySelector('.timeline-info-text');
     this.playBtn = this.wrap.querySelector('.btn-play-toggle');
     this.iconPlay = this.wrap.querySelector('.icon-play');
     this.iconPause = this.wrap.querySelector('.icon-pause');
@@ -286,6 +423,31 @@ export default class TimeTimeline {
    */
   _bindEvents() {
     if (!this.wrap) return;
+
+    // 날짜 단위(day) 모드일 때의 이벤트 바인딩 (클릭 이벤트로 선택)
+    if (this.isDayUnit()) {
+      const dayBtns = this.wrap.querySelectorAll('.timeline-day-btn');
+      dayBtns.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const dayIdx = parseInt(btn.getAttribute('data-day-index'), 10);
+          this.selectDay(dayIdx);
+        });
+      });
+
+      if (this.playBtn) {
+        this.playBtn.addEventListener('click', () => this.togglePlay());
+      }
+      if (this.prevDayBtn) {
+        this.prevDayBtn.addEventListener('click', () => this.prevDay());
+      }
+      if (this.nextDayBtn) {
+        this.nextDayBtn.addEventListener('click', () => this.nextDay());
+      }
+
+      window.addEventListener('resize', this._boundResizeHandler);
+      return;
+    }
 
     // 1. 시간 버튼 클릭 이벤트
     const timeBtns = this.wrap.querySelectorAll('.timeline-time-btn');
@@ -454,7 +616,7 @@ export default class TimeTimeline {
    * 애매한 위치에 멈췄을 때 가장 가까운 설정된 시간 위치로 스냅(자동 정렬)
    */
   _snapToNearestTime() {
-    if (!this.isMobile() || !this.scrollArea || this.flatItems.length === 0) return;
+    if (this.isDayUnit() || !this.isMobile() || !this.scrollArea || this.flatItems.length === 0) return;
     if (this._isProgrammaticScrolling || this.isMouseDown || this.isTouching) return;
 
     const closestIdx = this._getClosestFlatIndexToCenter();
@@ -485,7 +647,7 @@ export default class TimeTimeline {
    * 모바일 모드일 때 첫 항목과 마지막 항목도 화면 중앙에 위치할 수 있도록 트랙 좌우 여백 계산
    */
   _updateMobilePadding() {
-    if (!this.track || !this.scrollArea) return;
+    if (this.isDayUnit() || !this.track || !this.scrollArea) return;
     if (this.isMobile()) {
       const firstBtn = this.wrap.querySelector('.timeline-time-btn');
       const btnWidth = firstBtn ? firstBtn.getBoundingClientRect().width : 56;
@@ -507,10 +669,12 @@ export default class TimeTimeline {
       this.wrap.classList.toggle('is-mobile-timeline', mobile);
     }
     this._applyTypeAttribute();
-    this._updateMobilePadding();
+    if (!this.isDayUnit()) {
+      this._updateMobilePadding();
+    }
 
-    // 현재 선택된 요소를 다시 중앙 정렬
-    if (mobile && typeof this.currentFlatIndex === 'number' && this.flatItems[this.currentFlatIndex]) {
+    // 현재 선택된 요소를 다시 중앙 정렬 (시간 모드일 때만)
+    if (!this.isDayUnit() && mobile && typeof this.currentFlatIndex === 'number' && this.flatItems[this.currentFlatIndex]) {
       const item = this.flatItems[this.currentFlatIndex];
       const targetBtn = this.wrap.querySelector(
         `.timeline-time-btn[data-day-index="${item.dayIndex}"][data-time-index="${item.timeIndex}"]`
@@ -539,6 +703,10 @@ export default class TimeTimeline {
       nextIdx = 0;
     }
 
+    if (this.isDayUnit()) {
+      return nextIdx;
+    }
+
     if (this.isRange()) {
       let loopCount = 0;
       while (this.flatItems[nextIdx] && this.flatItems[nextIdx].timeIndex === 0 && loopCount < this.flatItems.length) {
@@ -554,9 +722,24 @@ export default class TimeTimeline {
   }
 
   /**
+   * 날짜 선택 실행 (날짜 단위 모드 또는 날짜 이동용)
+   */
+  selectDay(dayIdx, triggerCallback = true) {
+    if (this.isDayUnit()) {
+      this.selectByFlatIndex(dayIdx, triggerCallback, false, false);
+    } else {
+      this.selectTime(dayIdx, 0, triggerCallback);
+    }
+  }
+
+  /**
    * 날짜/시각 선택 실행
    */
   selectTime(dayIdx, timeIdx, triggerCallback = true) {
+    if (this.isDayUnit()) {
+      this.selectDay(dayIdx, triggerCallback);
+      return;
+    }
     const flatIdx = this._getFlatIndex(dayIdx, timeIdx);
     if (flatIdx >= 0) {
       this.selectByFlatIndex(flatIdx, triggerCallback, true, true);
@@ -577,6 +760,30 @@ export default class TimeTimeline {
     const targetItem = this.flatItems[flatIdx];
     this.selectedDayIndex = targetItem.dayIndex;
     this.selectedTimeIndex = targetItem.timeIndex;
+
+    // 날짜 단위(day) 모드일 때
+    if (this.isDayUnit()) {
+      const dayBtns = this.wrap.querySelectorAll('.timeline-day-btn');
+      dayBtns.forEach((btn, idx) => {
+        const isSelected = (idx === flatIdx);
+        btn.classList.toggle('is-selected', isSelected);
+        btn.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+      });
+
+      // onChange 콜백 실행
+      if (triggerCallback && typeof this.onChange === 'function') {
+        this.onChange({
+          day: targetItem.day,
+          dayLabel: targetItem.dayLabel,
+          time: '',
+          timeLabel: targetItem.dayLabel,
+          dayIndex: targetItem.dayIndex,
+          timeIndex: 0,
+          flatIndex: flatIdx
+        });
+      }
+      return;
+    }
 
     // 모바일 파란색 박스 시간 표시 업데이트 (예: 15:00)
     if (this.selectedBubble) {
@@ -700,7 +907,7 @@ export default class TimeTimeline {
 
     this.playTimer = setInterval(() => {
       const nextFlatIdx = this._getNextPlayIndex(this.currentFlatIndex);
-      this.selectByFlatIndex(nextFlatIdx, true, true, true);
+      this.selectByFlatIndex(nextFlatIdx, true, !this.isDayUnit(), true);
     }, this.autoPlayInterval);
   }
 
@@ -747,6 +954,11 @@ export default class TimeTimeline {
    * 이전 날짜 첫 시각 선택 (range 타입일 경우 첫시간을 건너뛰고 그다음 시간 선택)
    */
   prevDay() {
+    if (this.isDayUnit()) {
+      const prevIdx = (this.currentFlatIndex > 0) ? this.currentFlatIndex - 1 : (this.flatItems.length - 1);
+      this.selectDay(prevIdx);
+      return;
+    }
     const prevDayIdx = Math.max(0, this.selectedDayIndex - 1);
     const targetTimeIdx = this.isRange() ? 1 : 0;
     this.selectTime(prevDayIdx, targetTimeIdx);
@@ -756,6 +968,11 @@ export default class TimeTimeline {
    * 다음 날짜 첫 시각 선택 (range 타입일 경우 첫시간을 건너뛰고 그다음 시간 선택)
    */
   nextDay() {
+    if (this.isDayUnit()) {
+      const nextIdx = (this.currentFlatIndex < this.flatItems.length - 1) ? this.currentFlatIndex + 1 : 0;
+      this.selectDay(nextIdx);
+      return;
+    }
     const maxDayIdx = this.data.length - 1;
     const nextDayIdx = Math.min(maxDayIdx, this.selectedDayIndex + 1);
     const targetTimeIdx = this.isRange() ? 1 : 0;
@@ -767,10 +984,30 @@ export default class TimeTimeline {
    */
   setData(newData) {
     this.pause();
-    this.data = newData || [];
+    this.data = this.isDayUnit() ? (newData || []).slice(0, 3) : (newData || []);
     this.selectedDayIndex = 0;
     this.selectedTimeIndex = 0;
     this.init();
+  }
+
+  /**
+   * 상단 안내/예보 텍스트 설정 (모바일 버전 표시 텍스트 동적 업데이트)
+   * @param {string|string[]} text - 표시할 텍스트
+   */
+  setText(text) {
+    this.text = this._formatText(text);
+    if (this.infoTextEl) {
+      this.infoTextEl.innerHTML = this.text;
+      this.infoTextEl.style.display = this.text ? '' : 'none';
+    }
+  }
+
+  /**
+   * 상단 안내/예보 텍스트 반환
+   * @returns {string}
+   */
+  getText() {
+    return this.text;
   }
 
   /**
