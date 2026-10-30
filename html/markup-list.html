@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 
 <head>
@@ -37,6 +37,8 @@
     .markup-stats-item[data-stats="markup"]:before {content:'마크업완료';}
     .markup-stats-item[data-stats="update"] {background-color:#FF5C00;}
     .markup-stats-item[data-stats="update"]:before {content:'업데이트진행';}
+    html[data-lang="en"] .markup-stats-item[data-stats="markup"]:before {content:'Completed';}
+    html[data-lang="en"] .markup-stats-item[data-stats="update"]:before {content:'In Progress';}
     [data-hidden="true"] {display:none}
     .markup-update-day {font-size:1.3rem;margin-right:1.2rem;color:#888;}
     .info-dot-list-item .modify-day {position:relative;top:-.2rem}
@@ -131,6 +133,10 @@
     });
   });
 </script>
+  <script type="module">
+    import { i18n } from '../resources/js/utils/i18n.js';
+    i18n.init();
+  </script>
 </body>
 
 </html>

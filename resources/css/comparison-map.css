@@ -4,12 +4,12 @@
 .comparisonMap-handle-btn:hover {background-color:#006DE6;}
 .comparisonMap-handle-btn:active {background-color:#002249;}
 .comparisonMap-handle-btn {width:4.2rem;height:4.2rem;background-color:#0475F4;border:.3rem solid #FFF;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);cursor:pointer;background-image:url("../images/icon/icon-aspect-link.svg");background-size:2rem 2rem;background-position:50% 50%;background-repeat:no-repeat;}
-.map-options {display:flex;flex-direction:column;gap:.6rem;}
+.map-options {display:flex;flex-direction:column;gap:.6rem;pointer-events:auto;}
 .full-map-top-area {z-index:3;}
 .full-map-left-area,
 .full-map-right-area,
-.full-map-bottom {z-index:2;}
-.full-map-area {width:100%;height:100%;}
+.full-map-bottom-area {z-index:2;}
+.full-map-area {position: relative;width:100%;height:100%;z-index: 0;}
 /* [data-toggle-target="map-compare"][data-toggle-state="selected"].full-map-left-area {top:auto;bottom:2rem} */
 [data-toggle-target="map-compare"][data-toggle-state="selected"] .map-options {display:none}
 .map-options [data-map]{flex-direction:column;gap:.6rem;}

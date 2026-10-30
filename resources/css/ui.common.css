@@ -462,7 +462,7 @@ input:-moz-placeholder {color:#949494}
 
 /* checkbox & radio [button type] */
 .form-fake-button {position:relative;}
-.form-fake-button label {cursor:pointer;display:flex;align-items:center;justify-content:center}
+.form-fake-button label {cursor:pointer;display:flex;align-items:center;justify-content:center; pointer-events: visible;}
 .form-fake-input {position:absolute;opacity:0;left:0;}
 .form-fake-button-line {height:1.4rem;width:.1rem;background-color:#E4E8EF;display:block}
 .form-fake-group-grid {display:grid;}
@@ -498,7 +498,7 @@ input:-moz-placeholder {color:#949494}
 [data-form-style="square-list-type"] .form-fake-input:checked + .form-fake-label {background-color:rgba(46, 126, 246, .06);color:#1E222F;border-color:#2978ED;font-weight:800}
 [data-form-style="round-list-type"] .form-fake-label {border:.1rem solid #D5DCE8;border-radius:99rem;color:#1E222F;font-weight:700;font-size:1.1rem}
 [data-form-style="round-list-type"] .form-fake-input:checked + .form-fake-label {background-color:#2978ED;color:#fff;border-color:#2978ED;font-weight:800}
-[data-form-style="round-list-type2"] .form-fake-label {border:.1rem solid #E2E8F0;border-radius:99rem;color:#6D758F;font-weight:500;font-size:1.2rem}
+[data-form-style="round-list-type2"] .form-fake-label {border:.1rem solid #E2E8F0;border-radius:99rem;color:#6D758F;font-weight:500;font-size:1.2rem;line-height: 1;text-align: center;}
 [data-form-style="round-list-type2"] .form-fake-input:checked + .form-fake-label {background-color:#0475F41A;color:#0475F4;font-weight:700;border-color:#0475F4;}
 [data-form-style="line-list-type"] .form-fake-label {border-bottom:.1rem solid #F0F0F5;justify-content:flex-start;gap:.7rem;padding:0 1.2rem}
 [data-form-style="line-list-type"] .form-fake-input:checked + .form-fake-label {color:#fff;background-color:#0475F4;border-color:#006DE6}

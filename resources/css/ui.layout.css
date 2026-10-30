@@ -104,6 +104,7 @@
 [data-dropdown-section^="setting"] .form-cont .btn-base {padding:0;min-width:4.8rem;}
 [data-dropdown-section^="setting"] .form-cont .btn-base .btn-text{font-size: 1.2rem;}
 
+[data-tab-wrap="menu_tab"] [data-dropdown-panel] {position: relative !important;}
 
 .sub-content-layout {display:flex;flex-direction:column;min-height:100vh}
 .sub-content-layout header {flex-shrink:0}

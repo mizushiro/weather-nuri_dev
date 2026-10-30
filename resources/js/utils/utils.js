@@ -17,6 +17,7 @@
 		})
 		.catch(err => console.error('Error loading header content:', err));
 */
+import { i18n } from './i18n.js';
 export const loadContent = ({ area, src, insert = false, callback = null }) => {
 	return new Promise((resolve, reject) => {
 		if (!(area instanceof Element)) {
@@ -36,6 +37,7 @@ export const loadContent = ({ area, src, insert = false, callback = null }) => {
 			})
 			.then(result => {
 				insert ? area.insertAdjacentHTML('afterbegin', result) : area.innerHTML = result;
+				if (i18n) { i18n.translateRoot(area); i18n.syncLanguageControls(area); }
 				if (callback) callback();
 				resolve(result);
 			})

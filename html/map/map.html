@@ -79,10 +79,22 @@
           <div class="form-fake-group-flex" data-form-style="round-box" data-form-h="48" 
             data-view="mobile-hidden">
             <div class="form-fake-button">
-              <input type="radio" id="mapTypeSelect-1" name="mapTypeSelect" value="world" class="form-fake-input"
+              <input type="radio" id="mapTypeSelect-1" name="mapTypeSelect" value="model" class="form-fake-input"
                 checked>
               <label for="mapTypeSelect-1" class="form-fake-label">
                 수치모델
+              </label>
+            </div>
+            <div class="form-fake-button">
+              <input type="radio" id="mapTypeSelect-3" name="mapTypeSelect" value="korea" class="form-fake-input">
+              <label for="mapTypeSelect-3" class="form-fake-label">
+                예보
+              </label>
+            </div>
+            <div class="form-fake-button">
+              <input type="radio" id="mapTypeSelect-4" name="mapTypeSelect" value="korea" class="form-fake-input">
+              <label for="mapTypeSelect-4" class="form-fake-label">
+                특보
               </label>
             </div>
             <div class="form-fake-button">
@@ -92,12 +104,7 @@
                 관측
               </label>
             </div>
-            <div class="form-fake-button">
-              <input type="radio" id="mapTypeSelect-3" name="mapTypeSelect" value="korea" class="form-fake-input">
-              <label for="mapTypeSelect-3" class="form-fake-label">
-                예보
-              </label>
-            </div>
+            
           </div>
           <!--<button type="button" class="btn-base" data-size="48" data-round="full" data-type="icon" data-shadow data-color="white" data-view="pc-hidden" onclick="UI.exe.modalFilter.show()" aria-label="전체메뉴">
             <i class="icon-aspect-all-menu" data-size="24"></i>
@@ -722,7 +729,7 @@
       </div>
 
       <!-- map 위치버튼 추가 -->
-      <button type="button" style="position:absolute;top:20%;left:15%" aria-label="위치">
+      <button type="button" style="position:absolute;top:20%;left:15%;z-index:1;" aria-label="위치">
         <i class="icon-aspect-position" data-size="48"></i>
       </button>
 
@@ -2195,7 +2202,7 @@
           }
 
           if (selectedValue === undefined || selectedValue === null || selectedValue === '') {
-            const checkedInput = modalFilterElement?.querySelector('input.form-fake-input[type="radio"]:checked');
+            const checkedInput = modalFilterElement?.querySelector('input.form-fake-input[type="radio"]:not([name="filter-radio-language"]):not([data-lang-switch]):checked');
             if (checkedInput) {
               const selectedLabel = modalFilterElement
                 ?.querySelector(`label[for="${checkedInput.id}"]`)
@@ -2215,14 +2222,14 @@
 
           const nextTitle = selectedTitle || selectedValue || '';
           const nextValue = selectedValue || selectedTitle || '';
-          const iconIndex = mapNavTitleOrder.indexOf(nextTitle) + 1;
+          const iconIndex = mapNavTitleOrder.indexOf(UX.i18n ? UX.i18n.toKorean(nextTitle) : nextTitle) + 1;
 
           if (mapChoiceTitleElement) {
-            mapChoiceTitleElement.textContent = nextTitle;
+            mapChoiceTitleElement.textContent = UX.i18n ? UX.i18n.t(UX.i18n.toKorean(nextTitle)) : nextTitle;
           }
 
           if (mapChoiceValueElement) {
-            mapChoiceValueElement.textContent = nextValue;
+            mapChoiceValueElement.textContent = UX.i18n ? UX.i18n.t(UX.i18n.toKorean(nextValue)) : nextValue;
           }
 
           if (mapChoiceIconElement && iconIndex > 0) {
@@ -2236,7 +2243,7 @@
 
         }
 
-        const filterRadioInputs = modalFilterElement?.querySelectorAll('input.form-fake-input[type="radio"]');
+        const filterRadioInputs = modalFilterElement?.querySelectorAll('input.form-fake-input[type="radio"]:not([name="filter-radio-language"]):not([data-lang-switch])');
         filterRadioInputs?.forEach((input) => {
           const labelText = modalFilterElement
             ?.querySelector(`label[for="${input.id}"]`)
@@ -2252,9 +2259,10 @@
             if (!selectedInput.checked) return;
 
             const selectedTitle = getAccordionTitleByInput(selectedInput);
+            const currentLabelText = modalFilterElement?.querySelector(`label[for="${selectedInput.id}"]`)?.textContent?.trim();
             UI.exe.modalFilter.selected({
               title: selectedTitle,
-              value: selectedInput.value,
+              value: currentLabelText || selectedInput.value,
               inputId: selectedInput.id,
             });
           });

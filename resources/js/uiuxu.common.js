@@ -19,6 +19,7 @@ import {
 	getUrlParameter,
 	ScrollTrigger,
 } from './utils/utils.js';
+import { i18n } from './utils/i18n.js';
 
 export const UX = {
 	Accordion,
@@ -37,6 +38,7 @@ export const UX = {
 	FakeRadio,
 	ScrollTrigger,
 	getUrlParameter,
+	i18n,
 
 	init: (type) => {
 		const global = 'UI';
@@ -55,6 +57,8 @@ export const UX = {
 		Global.dev = {} //개발용
 		Global.pub = {} //퍼블용
 		Global.map = {} //퍼블용
+		Global.i18n = i18n;
+		i18n.init();
 
 		UX._loadCommonLayout(type);
 
@@ -352,6 +356,7 @@ export const UX = {
 	utils: {
 		loadContent,
 		getUrlParameter,
+	i18n,
 	},
 	searchHeader: ( selector ) => {
 		console.log('load search header:', selector);
